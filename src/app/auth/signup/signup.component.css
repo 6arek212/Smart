@@ -1,0 +1,48 @@
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field{
+  display: block;
+  margin:1rem 0;
+}
+
+
+button{
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+mat-radio-button{
+  margin-left: 1rem;
+}
+
+
+mat-divider{
+  display: block;
+}
+
+button , mat-form-field,.container{
+  width: 50%;
+}
+
+.container{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+mat-spinner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}

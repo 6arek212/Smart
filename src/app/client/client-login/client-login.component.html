@@ -1,0 +1,51 @@
+<div class="box align">
+
+  <div class="login-container">
+    <header>
+      <h1>تسجيل الدخول</h1>
+    </header>
+
+    <div class="form-containe">
+
+
+      <form (submit)="onLogin()" [formGroup]="form">
+
+        <div class="align-inputs">
+          <div class="input-container">
+            <p>رقم الهاتف</p>
+            <input placeholder="000-0000000" formControlName="phone" name="phoneNumber" type="tel">
+            <app-normal-input-error *ngIf="form.touched ||form.get('phone').touched" name="phone number"
+              [errors]="form.get('phone').errors"></app-normal-input-error>
+          </div>
+          <div class="input-container">
+            <p>كلمة السر</p>
+            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" formControlName="password"
+              type="password">
+            <app-normal-input-error *ngIf="form.touched || form.get('password').touched" name="password"
+              [errors]="form.get('password').errors"></app-normal-input-error>
+          </div>
+
+
+          <mat-checkbox formControlName="keepMeLogedIn">ابقني متصل</mat-checkbox>
+        </div>
+        <div class="form-links">
+          <p>نسيت كلمة السر؟</p>
+          <a routerLink="/client/signup" routerLinkActive="router-link-active">
+            <p>انشاء حساب</p>
+          </a>
+        </div>
+
+
+
+        <button *ngIf="!isLoading" class="green-button">دخول</button>
+
+      </form>
+
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+
+    </div>
+
+  </div>
+
+</div>

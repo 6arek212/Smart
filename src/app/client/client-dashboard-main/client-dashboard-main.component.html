@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
+  <div class="nav-header">
+    <div class="user">
+      <h3> مرحبا بك , <b></b></h3>
+      <h3>{{user.lastName}} {{user.firstName}}</h3>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a routerLink="/client" class="nav-item nav-link" [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active">
+        <li>الرئيسية</li>
+      </a>
+      <a routerLink="/client/addRequest" class="nav-item nav-link" routerLinkActive="active">
+        <li>اضافة طلب</li>
+      </a>
+      <a routerLink="/client/profile" class="nav-item nav-link" routerLinkActive="active">
+        <li>ملف شخصي</li>
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+<div class="dashborad-container">
+
+  <div class="side-nav">
+    <div class="nav-inner">
+
+
+      <div class="user">
+        <h3> مرحبا بك , <b></b></h3>
+        <h3>{{user.lastName}} {{user.firstName}}</h3>
+      </div>
+
+
+      <ul>
+        <a routerLink="/client" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-link">
+          <li>الرئيسية</li>
+        </a>
+        <a routerLink="/client/addRequest" routerLinkActive="active-link">
+          <li>اضافة طلب </li>
+        </a>
+        <a routerLink="/client/profile" routerLinkActive="active-link">
+          <li>ملف شخصي</li>
+        </a>
+
+
+      </ul>
+
+      <div class="divider-vertical"></div>
+
+
+      <div class="logout">
+        <h4 (click)="onLogOut()">خروج</h4>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="center-container">
+
+    <router-outlet></router-outlet>
+
+
+
+  </div>
+
+
+  <!-- <div class="right-container">
+
+    <div class="notification-container">
+      <header class="dash-board-header"><h1>اشعارات</h1></header>
+
+
+
+    </div>
+
+  </div> -->
+
+
+</div>

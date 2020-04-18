@@ -1,0 +1,35 @@
+.dash-board-header{
+  text-align: right;
+}
+
+.dashboard-card .card-header {
+  text-align: right;
+}
+
+.dashboard-card form{
+  padding: 1rem;
+}
+
+.dashboard-card form .input-container{
+  margin-bottom: 1rem;
+}
+
+.dashboard-card form .input-container p{
+  margin: 0;
+}
+
+.dashboard-card .input-container .inner-input-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dashboard-card .input-container .inner-input-container p {
+  margin-inline-start: 1rem;
+}
+
+.spinner{
+
+}
+
+

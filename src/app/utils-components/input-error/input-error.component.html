@@ -1,0 +1,8 @@
+<mat-error *ngIf="getError()==='required'" >this field is <b>required</b></mat-error>
+<mat-error *ngIf="getError()==='email' ">please enter a valid email</mat-error>
+<mat-error *ngIf="getError()==='minlength'" >{{controller.name}} must be at least {{controller.errors.minlength.requiredLength}} charachters</mat-error>
+<mat-error *ngIf="getError()==='maxlength'" >{{controller.name}} must be no longer than {{controller.errors.maxlength.requiredLength}} charachters</mat-error>
+<mat-error *ngIf="getError()==='passwordNotMatch'" >passwords dosent <b>match</b></mat-error>
+<mat-error *ngIf="getError()=== 'phoneNumber'" >enter a valid phone <b>number</b></mat-error>
+
+

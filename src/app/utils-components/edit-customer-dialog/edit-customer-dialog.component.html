@@ -1,0 +1,46 @@
+<div class="dialog-container">
+
+  <h2 mat-dialog-title>تعديل معلومات الزبون</h2>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="form"  class="card">
+      <mat-form-field appearance="fill">
+        <mat-label>الاسم الشخصي</mat-label>
+        <input formControlName="firstName" matInput>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>العائلة</mat-label>
+        <input formControlName="lastName" matInput>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>الهاتف</mat-label>
+        <input formControlName="phone" matInput>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
+        <mat-select formControlName="city" >
+          <mat-option value="-1">اختر المدينة</mat-option>
+          <mat-option *ngFor="let city of cities" [value]="city._id">{{city.name}}</mat-option>
+        </mat-select>
+        <mat-label>
+        </mat-label>
+      </mat-form-field>
+
+
+    </form>
+
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button mat-dialog-close color="warn">الغاء</button>
+    <button class="white" mat-raised-button (click)="onUpdate()" color="primary" cdkFocusInitial>تعديل</button>
+  </mat-dialog-actions>
+
+</div>

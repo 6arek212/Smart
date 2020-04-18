@@ -1,0 +1,37 @@
+.action-buttons button{
+  margin-left: 1rem;
+}
+
+
+.cards-container .search-box{
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cards-container .search-box button{
+  margin-right: 1rem;
+}
+
+
+
+
+.cards-container .search-box mat-form-field{
+  width: 50%;
+  text-align: right;
+}
+
+
+
+
+.cards-container{
+  height: 100%;
+}
+
+.dashboard-card{
+  height: 100%;
+}
+

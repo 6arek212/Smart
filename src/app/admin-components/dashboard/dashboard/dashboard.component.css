@@ -1,0 +1,20 @@
+
+
+ngx-charts-number-card{
+  max-height: 20vh;
+}
+
+.main-container .dashboard-card .chart {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+ngx-charts-line-chart {
+  padding-top: 3rem;
+}

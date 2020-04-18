@@ -1,0 +1,174 @@
+<div class="main-page-container">
+  <section  class="header fadeIn" #header id="header"  >
+
+
+
+    <div class="main-box fadeOut">
+      <div class="brand-logo"></div>
+
+      <div class="main-body">
+        <h1>مرحبا بك في سمارت فون باقة الغربية</h1>
+
+
+        <h3>لاضافة طلب</h3>
+        <a mat-raised-button routerLink="client" color="accent">اضغط هنا</a>
+      </div>
+
+    </div>
+
+
+
+    <div class="dash-container">
+      <div class="dash"></div>
+    </div>
+
+
+    <div class="scroll-btn" (click)="smoothScrolling(aboutUs)">
+      <div class="scroll-bar">
+        <a><span></span></a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section-2" id="about-us" #aboutUs>
+    <div class="social-icons">
+      <ul>
+        <a href="https://www.facebook.com/smart.phone.baqa.new/?eid=ARDr6ApK4jSINdF5A09_JJyRLjMOuJ5tNm0LBH1xtvoiP005R5IcyVBkOg_LcYLivB62G_gx9q79kWqM"
+          target="blanck">
+          <li><img src="/assets/img/facebook-2.png" alt=""></li>
+        </a>
+        <a href="https://www.instagram.com/smart_phonebaqa/" target="blanck">
+          <li><img src="/assets/img/instagram-2.png" alt=""></li>
+        </a>
+        <a (click)="showContactInfo()">
+          <li><img src="/assets/img/whatsapp.png" alt=""></li>
+        </a>
+      </ul>
+    </div>
+    <div class="group">
+
+
+      <div class="main">
+
+
+        <div class="title">
+          <div class="logo"></div>
+          <h1>اهلا وسهلا بكم في سمارت فون</h1>
+        </div>
+
+        <h3>هون تفكرش مرتين</h3>
+        <h1>في سمارت فون نوفر لكم</h1>
+      </div>
+
+
+
+      <div class="container">
+        <div class="card-showcase">
+          <div class="face face1">
+            <div class="content">
+              <img src="assets/img/online-support.png" alt="">
+              <h3>خدمة مساعدة محوسبة</h3>
+            </div>
+          </div>
+
+          <div class="face face2">
+            <div class="content">
+              <p>نقدم خدمة التواصل على مدار الساعة عن طريق الهاتف او زيارة مركزنا في باقة الغربية</p>
+              <a href="#">Read More</a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="card-showcase move-up">
+          <div class="face face1">
+            <div class="content">
+              <img src="assets/img/repair.png" alt="">
+              <h3>تصليح سريع ومهني</h3>
+            </div>
+          </div>
+
+          <div class="face face2">
+            <div class="content">
+              <p>تصليح جميع الاجهزة والحواسيب على يد التقني عمر حسين صاحب الخبرة الطويلة في المجال</p>
+              <a href="#">Read More</a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="card-showcase">
+          <div class="face face1">
+            <div class="content">
+              <img src="assets/img/delivery-truck.png" alt="">
+              <h3>سمارت فون لعندك</h3>
+            </div>
+          </div>
+
+          <div class="face face2">
+            <div class="content">
+              <p>خدمة سمارت فون لعندك للتسهيل على الزبائن وفي ظل الوضع القائم نعمل على تقديم خدماتنا الى بيت الزبون كل
+                ما عليك فعلة اما الاتصال مباشرة ل 0522784070 او اضافة الطلب في الموقع</p>
+              <a href="#">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="video-container">
+      <video id="video" muted={{true}} autoplay loop>
+        <source src="../../../assets/videos/smart-phone.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="navigate-back" (click)="smoothScrolling(header)">
+    </div>
+
+  </section>
+
+
+
+  <footer>
+    <div class="footer-container">
+
+      <div class="box">
+        <img src="./assets/img/location.png" alt="">
+        <p>باقة الغربية - الشارع الرئيسي</p>
+      </div>
+
+      <div class="box">
+        <img src="./assets/img/email.png" alt="">
+        <p>smart-phone-baqa@hotmail.com</p>
+      </div>
+
+      <div class="box">
+        <img src="./assets/img/phone.png" alt="">
+        <p>052-2784070</p>
+      </div>
+
+    </div>
+
+    <div class="footer-social">
+      <div class="box-social">
+        <img src="./assets/img/facebook.png" alt="">
+        <p>سمارت فون باقة</p>
+      </div>
+
+      <div class="box-social">
+        <img src="./assets/img/instagram.png" alt="">
+        <p>smart-phone</p>
+      </div>
+
+    </div>
+  </footer>
+</div>

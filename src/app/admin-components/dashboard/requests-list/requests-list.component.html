@@ -1,0 +1,126 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>الرئيسة</h1>
+  </header>
+
+  <div class="cards-container">
+
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>طلباتي</h3>
+      </div>
+
+      <div *ngIf="requests && requests.length==0" class="center-container">
+        <p>لا يوجد طلبات </p>
+      </div>
+
+      <div *ngIf="isLoading" class="center-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <div *ngIf="!isLoading">
+
+
+
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let request of requests">
+
+            <mat-expansion-panel-header>
+
+              <div class="expansion-header">
+
+                <div class="header">
+                  <p>عنوان الطلب :</p>
+                  <p>{{request.title}}</p>
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="status-box">
+                  <div class="status"
+                    [ngStyle]="statusHandler(request.status)">
+                  </div>
+                  <div>
+                    <span *ngIf="request.status=='DONE'">تم</span>
+                    <span *ngIf="request.status=='IN-PROGRESS'">قيد التنفيذ</span>
+                    <span *ngIf="request.status=='CANCEL'">تم الالغاء</span>
+                  </div>
+                </div>
+              </div>
+
+            </mat-expansion-panel-header>
+
+
+
+            <div class="panel-data">
+
+              <div class="panel-info">
+                <p>البلدة</p>
+                <p>{{request.city.name}}</p>
+              </div>
+
+              <div class="panel-info">
+                <p>المشكلة</p>
+                <p>{{request.issue?.name}}</p>
+              </div>
+
+              <div class="panel-info">
+                <p>مشكلة اخرى</p>
+                <p>{{request.otherIssue}}</p>
+              </div>
+
+              <div class="panel-info">
+                <p>نوع الجهاز</p>
+                <p>{{request.device.model}}</p>
+              </div>
+
+              <div class="panel-info">
+                <p>الشركة</p>
+                <p>{{request.company.name}}</p>
+
+              </div>
+              <div class="panel-info">
+                <p>مكان التواجد</p>
+                <p>{{request.whereAbout}}</p>
+              </div>
+            </div>
+
+            <div class="panel-date">
+              <p>{{dateFormat(request.createdAt)}}</p>
+              <p>{{fullDateFormat(request.createdAt)}}</p>
+            </div>
+
+
+            <h3 mat-button>تفاصيل</h3>
+
+            <mat-action-row>
+              <a mat-raised-button color="primary" (click)="onUpdatingStatus(request)">تم</a>
+              <button mat-raised-button color="warn" (click)="onDeletingRequest(request)">حذف</button>
+
+            </mat-action-row>
+
+
+
+
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+      </div>
+
+      <div class="spacer"></div>
+
+      <mat-paginator [length]="totalRequests" [pageSize]="pageSize" (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+
+
+
+  </div>
+</div>

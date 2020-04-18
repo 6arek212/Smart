@@ -1,0 +1,15 @@
+.content h1,.content p{
+  font-family: "Cairo";
+
+}
+
+.content p{
+  padding: 1rem;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+
+.dialog-container{
+
+}

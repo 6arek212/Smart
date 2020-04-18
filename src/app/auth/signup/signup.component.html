@@ -1,0 +1,102 @@
+
+<mat-card *ngIf="!isLoading">
+  <form (submit)="onSingUp(signupForm)" #signupForm="ngForm" >
+
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="example@gmail.com" type="email" name="email" ngModel required email
+        #emailInput="ngModel">
+
+      <mat-error *ngIf="emailInput.invalid">
+        <app-input-error [controller]="emailInput" [errors]="emailInput.errors"></app-input-error>
+      </mat-error>
+
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="my name" type="text" name="firstName" ngModel required #firstNameInput="ngModel">
+
+      <mat-error *ngIf="firstNameInput.invalid">
+        <app-input-error [controller]="firstNameInput" [errors]="firstNameInput.errors"></app-input-error>
+      </mat-error>
+
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="my name" type="text" name="lastName" ngModel required #lastNameInput="ngModel">
+
+      <mat-error *ngIf="lastNameInput.invalid">
+        <app-input-error [controller]="lastNameInput" [errors]="lastNameInput.errors"></app-input-error>
+      </mat-error>
+
+    </mat-form-field>
+
+
+
+
+    <div class="center container wid" >
+      <h3>Gender</h3>
+      <mat-radio-group class="center"   #gender="ngModel" name="gender" required [(ngModel)]="selectedItem">
+        <mat-radio-button value="male" >Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+
+        <mat-error *ngIf="gender.invalid">
+          <app-input-error [controller]='gender' [errors]="gender.errors">
+          </app-input-error>
+        </mat-error>
+
+      </mat-radio-group>
+    </div>
+
+
+
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" type="password" name="password" ngModel required maxlength="16"
+        minlength="6" #passwordInput="ngModel">
+
+      <div class="input-counter">
+        {{passwordInput.value?.length+"/16"}}
+      </div>
+
+      <mat-error *ngIf="passwordInput.invalid">
+        <app-input-error [controller]='passwordInput' [errors]="passwordInput.errors">
+        </app-input-error>
+      </mat-error>
+
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <mat-label>Validate Password</mat-label>
+      <input matInput placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"  type="password" name="validate_password" ngModel required maxlength="16"
+        minlength="6" #password2Input="ngModel"
+        (input)="onValidatePassword(signupForm)">
+
+      <div class="input-counter">
+        {{password2Input.value?.length+"/16"}}
+      </div>
+
+      <mat-error *ngIf="password2Input.invalid">
+        <app-input-error [controller]='password2Input' [errors]="password2Input.errors">
+        </app-input-error>
+      </mat-error>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Signup</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  </form>
+
+
+
+</mat-card>

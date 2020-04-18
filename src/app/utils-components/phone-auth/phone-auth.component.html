@@ -1,0 +1,73 @@
+<div class="box-container">
+
+  <div *ngIf="step==1" class="phone-number-container box">
+    <div class="box-header">
+      <h1>رقم الهاتف</h1>
+    </div>
+
+    <form [formGroup]="formNumberValidate" (submit)="onSendingSMS()">
+      <div>
+        <div class="one-line">
+
+          <!-- <select formControlName="countryCode" (change)="onSelect(formNumberValidate.get('countryCode'))">
+            <option value="-1">select...</option>
+            <option value="+972">+972</option>
+          </select> -->
+
+
+          <input matInput name="phone number" formControlName="phoneNumber" maxlength="20" placeholder="052-0000000"
+            type="text">
+
+        </div>
+
+        <div class="errors">
+          <app-normal-input-error *ngIf="formNumberValidate.get('phoneNumber').touched" name="phone number"
+            [errors]="formNumberValidate.get('phoneNumber').errors">
+          </app-normal-input-error>
+          <!-- <app-normal-input-error *ngIf="formNumberValidate.get('countryCode').touched" name="country code"
+            [errors]="formNumberValidate.get('countryCode').errors">
+          </app-normal-input-error> -->
+        </div>
+
+
+
+      </div>
+
+      <mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+
+      <div *ngIf="!isLoading" class="button">
+        <button>ارسل</button>
+      </div>
+    </form>
+  </div>
+
+
+
+  <div *ngIf="step==2" class="verify-container box">
+    <div class="box-header">
+      <h1>ادخل الكود</h1>
+    </div>
+
+    <p>ستصلك رسالة الى الرقم الذي ادخلتة عليك ادخال الكود المرفق في الرسالة</p>
+
+    <form *ngIf="!authSuccess" [formGroup]="formNumberVerify">
+      <tr>
+        <td *ngFor="let num of numberArr; let i=index">
+          <input type="text" [id]="'input'+num" placeholder="&#9679;"  size="1" [formControlName]="'input'+num" maxlength="1"
+            (keyup)="nextFocus(num+1,$event)">
+        </td>
+      </tr>
+
+      <p>لارسال رسالة مرة اخرى   <span class="click" (click)="onSendingSMS(true)"> اضغط هنا </span></p>
+
+    </form>
+    <p class="error" *ngIf="authError">الرقم الذي ادخلتة خاطئ حاول مرة اخرى</p>
+    <p class="success" *ngIf="authSuccess">تم التوثيق</p>
+    <p class="success click"  (click)="resetForm()">للاعادة</p>
+    <mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+
+  </div>
+
+
+
+</div>

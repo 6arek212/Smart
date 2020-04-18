@@ -1,0 +1,237 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>معلومات</h1>
+  </header>
+
+
+
+  <div class="cards-container">
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>اضافة مدينة</h3>
+      </div>
+
+      <div class="card-content">
+
+
+
+        <div *ngIf="isLoading" class="center-container">
+          <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+
+
+
+        <form #cityForm="ngForm" (submit)="onAddingCity(cityForm)">
+          <mat-form-field appearance="fill">
+            <mat-label>اسم الدينة</mat-label>
+            <input name="city" ngModel matInput>
+          </mat-form-field>
+
+
+
+          <button class="btn btn-success">أضف</button>
+
+
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let city of cities" [value]="city._id">{{city.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </form>
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>اضافة مشكلة</h3>
+      </div>
+
+      <div class="card-content">
+
+
+
+        <div *ngIf="isLoading" class="center-container">
+          <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <form #issueForm="ngForm" (submit)="onAddingIssue(issueForm)">
+          <mat-form-field appearance="fill">
+            <mat-label>عنوان المشكلة</mat-label>
+            <input name="issue" ngModel matInput>
+          </mat-form-field>
+
+
+
+          <button class="btn btn-success">أضف</button>
+
+
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let issue of issues" [value]="issue._id">{{issue.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>اضافة شركة</h3>
+      </div>
+
+
+      <div class="card-content">
+
+
+        <div *ngIf="isLoading" class="center-container">
+          <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <form #companyForm="ngForm" (submit)="onAddingCompany(companyForm)">
+          <mat-form-field appearance="fill">
+            <mat-label>اسم الشركة</mat-label>
+            <input name="company" ngModel matInput>
+          </mat-form-field>
+
+
+
+          <button class="btn btn-success">أضف</button>
+
+
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let company of companies" [value]="company._id">{{company.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>اضافة جهاز</h3>
+      </div>
+
+      <div class="card-content">
+
+
+
+        <div *ngIf="isLoading" class="center-container">
+          <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <form #deviceForm="ngForm" (submit)="onAddingDevice(deviceForm)">
+          <mat-form-field appearance="fill">
+            <mat-label>اسم الجهاز</mat-label>
+            <input name="model" ngModel matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input name="released" ngModel matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select ngModel name="company">
+              <mat-option *ngFor="let company of companies" [value]="company._id">{{company.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <button class="btn btn-success">أضف</button>
+
+
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let device of devices" [value]="device._id">{{device.model}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </form>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+</div>

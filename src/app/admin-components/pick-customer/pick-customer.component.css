@@ -1,0 +1,40 @@
+div{
+  width: 100%;
+}
+
+
+
+mat-card{
+  margin-bottom: 1.4rem;
+  cursor: pointer;
+  transition: .5 box-shadow ease;
+}
+
+mat-card:hover{
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+
+mat-form-field{
+  width: 100%;
+}
+
+.dialog-container{
+  position: relative;
+
+}
+
+
+mat-dialog-actions{
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  float: right;
+}
+
+mat-dialog-actions p {
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: bold;
+}

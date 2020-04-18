@@ -1,0 +1,111 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>سمارت فون لعندك</h1>
+  </header>
+
+
+  <div class="dashboard-card">
+
+    <div class="card-header">
+      <h3>قم بملاء الملف</h3>
+    </div>
+
+
+    <form (submit)="onAddingUpdatingRequest()" [formGroup]="form">
+      <div class="input-container">
+        <p>عنوان الطلب</p>
+        <input formControlName="title" type="text">
+        <app-normal-input-error *ngIf="form.touched && form.get('title').touched" name="title"
+          [errors]="form.get('title').errors"></app-normal-input-error>
+      </div>
+
+      <div class="input-container">
+        <p>نوع شركة الجهاز</p>
+        <select (change)="onSelectCompany()" formControlName="company">
+          <option value="-1">اختر الشركة</option>
+          <option *ngFor="let company of companies" value={{company._id}}>{{company.name}}</option>
+        </select>
+        <app-normal-input-error *ngIf="form.touched && form.get('company').touched" name="company"
+          [errors]="form.get('company').errors"></app-normal-input-error>
+      </div>
+
+
+      <div class="input-container">
+        <p>نوع الجهاز</p>
+        <select formControlName="device">
+          <option value="-1">اختر النوع</option>
+          <option *ngFor="let device of devices" value={{device._id}}>{{device.model}}</option>
+          {{form.get('device').updateValueAndValidity()}}
+        </select>
+
+        <app-normal-input-error *ngIf="form.touched && form.get('device').touched" name="device"
+          [errors]="form.get('device').errors"></app-normal-input-error>
+      </div>
+
+
+
+      <div class="input-container">
+        <p>المشكلة</p>
+        <select formControlName="issue" (change)="onChangeIssue()">
+          <option value="-1">اختر المشكلة</option>
+          <option *ngFor="let issue of issues" value={{issue._id}}>{{issue.name}}</option>
+          <option value="1">مشكلة اخرى</option>
+        </select>
+        <app-normal-input-error *ngIf="form.touched && form.get('issue').touched" name="issue"
+          [errors]="form.get('issue').errors"></app-normal-input-error>
+
+        <div *ngIf="form.get('issue').value && form.get('issue').value==1" class="input-container">
+          <p>مشكلة اخرى</p>
+          <textarea formControlName="otherIssue" rows="10"></textarea>
+          <app-normal-input-error *ngIf="form.touched && form.get('otherIssue').touched" name="other issue"
+          [errors]="form.get('otherIssue').errors"></app-normal-input-error>
+        </div>
+
+      </div>
+
+      <div class="input-container">
+        <p>المدينة</p>
+        <select formControlName="city">
+          <option value="-1">اختر المدينة</option>
+          <option *ngFor="let city of cities" value={{city._id}}>{{city.name}}</option>
+        </select>
+        <app-normal-input-error *ngIf="form.touched && form.get('city').touched" name="city"
+          [errors]="form.get('city').errors"></app-normal-input-error>
+      </div>
+
+      <div class="input-container">
+        <p>مكان التواجد</p>
+        <input formControlName="whereAbout" type="text">
+        <app-normal-input-error *ngIf="form.touched && form.get('whereAbout').touched" name="where about"
+          [errors]="form.get('whereAbout').errors"></app-normal-input-error>
+      </div>
+
+      <h1 *ngIf="message">{{message}}</h1>
+
+
+
+
+      <div *ngIf="!isLoading " class="form-button">
+        <button class="green-button"><span *ngIf="mode=='edit'">تعديل</span> <span *ngIf="mode=='add'">اضف
+            طلب</span></button>
+      </div>
+
+    </form>
+
+    <div class="spinner">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+</div>

@@ -1,0 +1,117 @@
+.box {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: 0.5s moveIn;
+}
+
+.align {
+  width: 80%;
+  margin: auto;
+}
+
+.box .login-container {
+  overflow: hidden;
+  width: 60%;
+  background: #2b353e;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+}
+
+.login-container header {
+  width: 100%;
+  text-align: right;
+  background: #60bb46;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.login-container header h1 {
+  color: #fff;
+  font-size: 1.3rem;
+  font-family: "Cairo", sans-serif;
+}
+
+.login-container .form-containe {
+  background: #f9f9f9;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.login-container form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.login-container .align-inputs {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.login-container form mat-checkbox {
+  align-self: flex-end;
+}
+
+.login-container form .input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.login-container form .input-container p {
+  align-self: flex-end;
+  margin: 0;
+}
+
+app-normal-input-error {
+  margin: 0;
+  padding: 0;
+  align-self: flex-start;
+}
+
+.login-container form .input-container input {
+  width: 100%;
+  background: #e8f0fe;
+  border: 0;
+  padding: 8px 10px;
+}
+
+.login-container .form-containe .form-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container .form-containe .form-links p {
+  cursor: pointer;
+  color: #333;
+}
+
+.login-container form button {
+  padding: 0.7rem 3rem;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+
+input[type="password"],
+input[type="text"] {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+}

@@ -1,0 +1,110 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>الزبائن</h1>
+  </header>
+
+
+
+  <div class="cards-container">
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>جميع الزبائن</h3>
+      </div>
+
+
+      <div class="search-box">
+        <mat-form-field appearance="fill">
+          <mat-label>الاسم الكامل / رقم الهاتف</mat-label>
+          <input #search matInput (input)="onGetingCustomers(search)">
+        </mat-form-field>
+
+        <button class="btn btn-success" (click)="onGetingCustomers(search)">بحث</button>
+      </div>
+
+
+      <div *ngIf="isLoading" class="center-container">
+        <div class="spinner-border text-success" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading">
+
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">الاسم الكامل</th>
+              <th scope="col">البلدة</th>
+              <th scope="col">رقم الهاتف</th>
+              <th scope="col">طلبات</th>
+              <th scope="col">طلبات تمت</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+
+
+          <div *ngIf="!customers || customers.length==0" class="center-container">
+            <p>لا يوجد زبائن </p>
+          </div>
+
+
+
+          <tbody>
+            <tr *ngFor="let customer of customers; let i=index">
+              <th scope="row">{{i+1}}</th>
+
+              <td>
+                <span>{{customer.firstName}} {{customer.lastName}}</span>
+              </td>
+
+              <td>
+                <span>{{customer.city.name}}</span>
+              </td>
+
+              <td>{{customer.phone}}</td>
+              <td>{{customer.numOfRequests}}</td>
+              <td>{{customer.numOfDoneRequests}}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-danger" (click)="onDeleteCustomer(customer)"> حذف</button>
+                  <button class="btn btn-success" (click)="editCustomer(customer)">تعديل</button>
+                </div>
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+
+
+      </div>
+
+      <div class="spacer"></div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li [ngClass]="{'page-item disabled': currentPage==1 || !page2?true:false}">
+            <a class="page-link" >السابق</a>
+          </li>
+          <li class="page-item"><a class="page-link"  (click)="onPage(page1)">{{page1}}</a></li>
+          <li class="page-item"><a class="page-link" *ngIf="page2" (click)="onPage(page2)">{{page2}}</a></li>
+          <li class="page-item"><a class="page-link" *ngIf="page3" (click)="onPage(page3)">{{page3}}</a></li>
+          <li class="page-item" [ngClass]="{'page-item disabled':  !page2?true:false}">
+            <a class="page-link">التالي</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+
+
+
+</div>

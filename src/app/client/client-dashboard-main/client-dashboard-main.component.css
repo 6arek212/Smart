@@ -1,0 +1,130 @@
+
+.dashborad-container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: row;
+  direction: rtl !important;
+}
+
+
+.dashborad-container .side-nav {
+  background: #2b353e;
+  flex: 1;
+}
+
+.nav-inner {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+}
+
+.side-nav li {
+  color: #fff;
+  padding: 1rem;
+  margin-bottom: 5px;
+  transition: 0.5s background;
+
+}
+
+.side-nav li:hover {
+  background: #9a9a9a98;
+  cursor: pointer;
+}
+
+.divider-vertical {
+  flex: 1 1 auto;
+}
+
+.user {
+  text-align: center;
+}
+
+.user h3,
+.side-nav h4 {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.logout {
+  text-align: left;
+}
+
+.side-nav .logout h4 {
+  padding: 1rem;
+}
+
+.side-nav .logout h4:hover {
+  cursor: pointer;
+  color: #9a9a9a;
+}
+.active-link li{
+  background: #9a9a9a98;
+  color: #fff;
+}
+
+
+.dashborad-container .center-container {
+  flex: 4;
+  padding: 1rem;
+  padding-top: 3rem;
+}
+
+
+
+.dashborad-container .right-container {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.dashborad-container .right-container .notification-container {
+  height: 50vh;
+  width: 70%;
+  background: #fff;
+}
+
+
+.nav-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: none;
+}
+.navbar-nav{
+  text-align: center;
+}
+
+.navbar-brand{
+  color: green;
+}
+
+@media (max-width: 980px) {
+  .side-nav {
+    display: none;
+  }
+
+  .navbar {
+    display: block;
+  }
+  .user{
+    display: flex;
+    flex-direction: row;
+  }
+  .user h3{
+    color: #333;
+
+  }
+}

@@ -1,0 +1,27 @@
+<div class="dialog-container">
+  <mat-dialog-actions>
+    <p  color="primary" mat-dialog-close>x</p>
+  </mat-dialog-actions>
+
+  <h1 mat-dialog-title>Pick Customer</h1>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="search by name" type="text" name="search" maxlength="24" ngModel #search (input)="onSearch(search)">
+
+  </mat-form-field>
+
+  <mat-card *ngFor="let customer of customers" [mat-dialog-close]="customer" >
+    <mat-card-title>
+      {{customer.firstName}} {{customer.lastName}}
+    </mat-card-title>
+  </mat-card>
+
+  <h4 class="mat-body-2" *ngIf="customers==null || customers.length==0">No Customers</h4>
+
+
+
+
+
+</div>

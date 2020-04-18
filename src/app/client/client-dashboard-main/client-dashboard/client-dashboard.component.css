@@ -1,0 +1,36 @@
+
+
+
+
+.dash-board-header{
+  text-align: right;
+}
+
+.dashboard-card .card-header {
+  text-align: right;
+}
+
+
+.main-container .dashboard-card .chart {
+  width: 50%;
+  margin: auto;
+  max-height: 20vh !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+mat-paginator {
+  direction: ltr;
+}
+
+
+@media (max-width: 980px) {
+
+  .main-container .dashboard-card .chart{
+    width: 100% !important;
+  }
+
+}

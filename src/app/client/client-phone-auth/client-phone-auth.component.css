@@ -1,0 +1,15 @@
+.main{
+  min-height: 89vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+app-phone-auth{
+  flex-basis: 70%;
+  transform: translateY(-30%);
+}
+
+

@@ -1,0 +1,29 @@
+.dashboard-card form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dashboard-card form mat-form-field {
+  text-align: start;
+  width: 100%;
+}
+
+.dashboard-card {
+  width: 40%;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.dashboard-card .card-content {
+  padding: 1rem;
+}
+
+.main-container .cards-container {
+  display: flex;
+  flex-direction: row, column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+

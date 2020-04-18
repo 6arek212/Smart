@@ -1,0 +1,12 @@
+main{
+  width: 80%;
+  margin:auto;
+  padding-top: 1rem;
+}
+div{
+  background: url(../../../assets/img/bg-client.jpg) no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-width: 100%;
+  min-height: 100vh;
+}

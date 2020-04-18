@@ -1,0 +1,51 @@
+.dash-board-header{
+  text-align: right;
+}
+
+.dashboard-card .card-header {
+  text-align: right;
+}
+
+
+
+.dashboard-card form {
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.dashboard-card form .input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  min-width: 50%;
+
+}
+
+.dashboard-card form .input-container input,
+textarea {
+  width: 50%;
+}
+
+.dashboard-card form .input-container select {
+  border: 2px solid #cecece;
+  padding: 0 3rem;
+}
+
+.dashboard-card form .input-container p {
+  margin: 0;
+}
+
+.dashboard-card form .form-button {
+  margin-top: 2rem;
+}
+
+.dashboard-card .spinner {
+  width: 100%;
+}
+
+
+.dashboard-card .spinner mat-spinner{
+  margin: auto;
+}

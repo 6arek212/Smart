@@ -1,0 +1,77 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>الملف الشخصي</h1>
+  </header>
+
+  <div class="center-content-container">
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>معلومات عامة</h3>
+      </div>
+
+
+
+
+
+      <form (submit)="onUpdate()" [formGroup]="form">
+
+        <div class="input-container">
+          <p>الاسم الشخصي</p>
+          <input formControlName="firstName" type="text">
+          <app-normal-input-error *ngIf="form.touched && form.get('firstName').touched" name="firstName"
+            [errors]="form.get('firstName').errors"></app-normal-input-error>
+        </div>
+
+
+        <div class="input-container">
+          <p>العائلة</p>
+          <input formControlName="lastName" type="text">
+          <app-normal-input-error *ngIf="form.touched && form.get('lastName').touched" name="lastName"
+            [errors]="form.get('lastName').errors"></app-normal-input-error>
+        </div>
+
+
+
+        <div class="input-container">
+          <p>رقم الهاتف</p>
+          <div class="inner-input-container">
+            <input type="text" [value]="customer?.phone" disabled>
+            <p class="link" (click)="editPhone()">تعديل</p>
+          </div>
+        </div>
+
+
+
+        <div class="input-container">
+          <p>المدينة</p>
+          <select formControlName="city">
+            <option value="-1">اختر المدينة</option>
+            <option *ngFor="let city of cities" value={{city._id}}>{{city.name}}</option>
+          </select>
+          <app-normal-input-error *ngIf="form.touched && form.get('city').touched" name="city"
+            [errors]="form.get('city').errors"></app-normal-input-error>
+        </div>
+
+
+        <button *ngIf="!isLoading" class="green-button">تعديل</button>
+
+        <div class="spinner" *ngIf="isLoading">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+      </form>
+
+
+
+    </div>
+
+
+
+  </div>
+</div>

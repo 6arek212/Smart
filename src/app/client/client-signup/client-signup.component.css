@@ -1,0 +1,173 @@
+.box {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  animation: .5s moveIn;
+}
+
+
+
+.align {
+  width: 80%;
+  margin: auto;
+}
+
+.box .login-container {
+  overflow: hidden;
+  width: 60%;
+  margin: 2rem 0;
+  background: #f9f9f9;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+}
+
+
+.login-container header{
+  width: 100%;
+  text-align: start;
+  background: #60BB46;
+  min-height: 10vh;
+  padding:1rem 1rem .5rem;
+}
+
+
+.login-container header h1{
+  color: #fff;
+  font-size: 1.3rem;
+  font-family: "Cairo", sans-serif;
+}
+
+.login-container .stepper{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container .stepper .step{
+  border-radius: 100%;
+  background:#60BB46;
+  padding: .5rem 1rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login-container .stepper .step.selected{
+  background: rgb(116, 224, 86);
+  border: 2px solid #333;
+}
+
+.login-container .stepper .line{
+  height: 2px;
+  width: 10vw;
+  background: #333;
+}
+
+
+.login-container form{
+  padding-top: 2rem;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.login-container form .input-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 1rem;
+}
+
+app-normal-input-error {
+  margin: 0;
+  padding: 0;
+  align-self: flex-start;
+}
+
+
+
+.login-container .full-width {
+  width: 100%;
+  flex: 1;
+  padding-top: 0 !important;
+  flex-basis: 100;
+  background: green;
+}
+
+
+.login-container form .input-container p{
+  align-self: flex-start;
+  margin: 0;
+}
+.login-container form .input-container select{
+  align-self: flex-start;
+  border: 2px solid #cecece;
+  padding: 0 3rem;
+}
+
+
+.login-container form .input-container input{
+  width: 100%;
+  background: rgb(231, 231, 231);
+  border: 0;
+  padding:8px 10px;
+}
+
+
+
+mat-radio-group{
+  width: 50%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-radio-button{
+  margin-left: 1rem;
+}
+
+
+.login-container form button{
+  padding: .7rem  3rem;
+  margin-top: 3rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+input[type="password"]  {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  direction: ltr;
+}
+
+input[type="text"]{
+  text-align: right;
+}
+
+
+.phone-number{
+  margin-top: 1rem;
+}
+
+
+.has-account{
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+
+@media (max-width:980px){
+  .login-container{
+    width: 100% !important;
+  }
+}

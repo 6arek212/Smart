@@ -1,0 +1,79 @@
+<form #form="ngForm" (submit)="onAddingDevice(form)">
+
+
+    <div class="center">
+      <mat-card-title>
+        <h1>Add New Repair</h1>
+      </mat-card-title>
+
+
+
+
+      <mat-form-field appearance="fill" >
+        <mat-label>Select Device Company</mat-label>
+        <mat-select (selectionChange)="onSelected($event)" required ngModel name="company" #companySelect="ngModel">
+          <mat-option [value]="comp._id"   *ngFor="let comp of companies">{{comp.name}}</mat-option>
+        </mat-select>
+
+        <mat-error>
+          <app-input-error [controller]="companySelect" [errors]="companySelect.errors"></app-input-error>
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select Device Model</mat-label>
+        <mat-select (selectionChange)="onSelected($event)" required ngModel name="device" #deviceSelect="ngModel">
+          <mat-option [value]="md._id" *ngFor="let md of devicesModel">{{md.model}}</mat-option>
+        </mat-select>
+        <mat-error>
+          <app-input-error [controller]="deviceSelect" [errors]="deviceSelect.errors"></app-input-error>
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Notes</mat-label>
+        <textarea matInput
+        placeholder="Add notes"
+        rows="10"
+        ngModel
+        name="notes"></textarea>
+      </mat-form-field>
+
+
+
+
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="" type="number"  name="price" ngModel required
+          #priceInput="ngModel">
+        <mat-error>
+          <app-input-error [controller]="priceInput" [errors]="priceInput.errors"></app-input-error>
+        </mat-error>
+      </mat-form-field>
+
+
+
+
+
+
+      <mat-card-actions>
+        <button mat-raised-button  color="accent">Add</button>
+
+      </mat-card-actions>
+
+
+      <mat-card-footer color="red" class="mat-body-2">
+        * Fullfill the required requests
+      </mat-card-footer>
+    </div>
+
+
+
+
+</form>

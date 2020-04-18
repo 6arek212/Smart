@@ -1,0 +1,62 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>SMS</h1>
+  </header>
+
+
+
+  <div class="cards-container">
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>ارسال رسائل SMS</h3>
+      </div>
+
+
+      <div class="cart-content">
+
+
+        <div *ngIf="isLoading" class="center-container">
+          <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+
+        <form #form="ngForm" (submit)="onSendingMessage(form)" *ngIf="!isLoading">
+          <div class="input-container">
+            <mat-checkbox name="toAll" ngModel #sendToAll>ارسل الي جميع الزبائن</mat-checkbox>
+          </div>
+
+          <div *ngIf="!sendToAll?.checked" class="input-container">
+            <p>رقم الهانف</p>
+            <input name="to" ngModel placeholder="052-0000000" type="tel">
+          </div>
+
+
+
+          <div class="input-container">
+            <p>الرسالة</p>
+            <textarea name="message" ngModel placeholder="Message here..." rows="10"></textarea>
+          </div>
+
+          <button>أرسل</button>
+        </form>
+
+
+
+        <div class="spacer"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>

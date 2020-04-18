@@ -1,0 +1,22 @@
+.spacer{
+  display: flex;
+  flex: 1 1 auto;
+}
+
+
+ul{
+  display: flex;
+  flex-direction: row;
+}
+
+
+li{
+  list-style: none;
+  margin-left: 1.4rem;
+}
+
+
+.brand{
+  color:#fff;
+  font-size: 1.4rem;
+}

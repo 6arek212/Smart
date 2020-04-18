@@ -1,0 +1,105 @@
+<div class="box align">
+
+  <div class="login-container">
+    <header>
+      <h1>تسجيل مستخدم</h1>
+    </header>
+
+
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+      <mat-step [stepControl]="forms['personalInfo']">
+        <form [formGroup]="forms['personalInfo']">
+          <ng-template matStepLabel>معلومات شخصية</ng-template>
+          <div class="input-container">
+            <p>الاسم الشخصي</p>
+            <input formControlName="firstName" type="text">
+            <app-normal-input-error *ngIf="forms['personalInfo'].get('firstName').touched" name="first name"
+              [errors]="forms['personalInfo'].get('firstName').errors"></app-normal-input-error>
+          </div>
+
+          <div class="input-container">
+            <p>العائلة</p>
+            <input formControlName="lastName" type="text">
+            <app-normal-input-error *ngIf="forms['personalInfo'].get('lastName').touched" name="last name"
+              [errors]="forms['personalInfo'].get('lastName').errors"></app-normal-input-error>
+          </div>
+
+          <div class="input-container">
+            <p>المدينة</p>
+            <select id="cities" formControlName="city">
+              <option value="-1">اختر المدينة</option>
+              <option *ngFor="let city of cities" value={{city._id}}>{{city.name}}</option>
+            </select>
+            <app-normal-input-error *ngIf="forms['personalInfo'].get('city').touched" name="city"
+              [errors]="forms['personalInfo'].get('city').errors"></app-normal-input-error>
+          </div>
+
+
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="male">ذكر</mat-radio-button>
+            <mat-radio-button value="female">انثى</mat-radio-button>
+          </mat-radio-group>
+
+          <div>
+            <button class="green-button" matStepperNext>التالي</button>
+          </div>
+        </form>
+      </mat-step>
+
+
+
+      <mat-step [stepControl]="forms['phoneAuth']">
+        <form class="full-width" [formGroup]="forms['phoneAuth']">
+          <ng-template matStepLabel>رقم الهاتف</ng-template>
+          <app-phone-auth (isDone)="isDone($event,stepper)"></app-phone-auth>
+
+          <!-- <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button class="green-button" matStepperNext>التالي</button>
+          </div> -->
+        </form>
+      </mat-step>
+
+
+
+      <mat-step [stepControl]="forms['password']">
+        <form  [formGroup]="forms['password']">
+          <ng-template matStepLabel>كلمة السر</ng-template>
+
+          <div class="input-container">
+            <p>كلمة السر</p>
+            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"  type="password"
+            formControlName="password">
+            <app-normal-input-error *ngIf="forms['password'].get('password').touched" name="password"
+            [errors]="forms['password'].get('password').errors"></app-normal-input-error>
+          </div>
+          <div class="input-container">
+            <p>تأكيد كلمة السر</p>
+            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" (change)="checkPasswordMatch()" type="password" formControlName="verifyPassword" >
+            <app-normal-input-error *ngIf="forms['password'].get('verifyPassword').touched" name="verify-password"
+            [errors]="forms['password'].get('verifyPassword').errors"></app-normal-input-error>
+          </div>
+
+
+          <div>
+            <button class="green-button" (click)="onSingUp()">تسجيل</button>
+            <button mat-button (click)="stepper.reset()">اعاده</button>
+          </div>
+
+        </form>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+
+    <div class="has-account">
+
+      <p>تملك حساب قم بتسجيل الدخول <span class="link" routerLink="/client/login">هنا</span></p>
+
+    </div>
+
+
+  </div>
+
+</div>

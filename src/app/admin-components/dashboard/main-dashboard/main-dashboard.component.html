@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="nav-header">
+    <a class="navbar-brand" href="#">Smart Phone</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a routerLink="/admin" class="nav-item nav-link" [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active">
+        <li>ראשי</li>
+      </a>
+      <a routerLink="sms" class="nav-item nav-link" routerLinkActive="active">
+        <li>הודעות</li>
+      </a>
+      <a routerLink="info" class="nav-item nav-link" routerLinkActive="active">
+        <li>מידע</li>
+      </a>
+      <a routerLink="customers" class="nav-item nav-link" routerLinkActive="active">
+        <li>לקוחות</li>
+      </a>
+      <a routerLink="/admin/requests" class="nav-item nav-link" routerLinkActive="active">
+        <li>בקשות</li>
+      </a>
+
+
+
+    </div>
+  </div>
+</nav>
+
+<div class="dashborad-container">
+
+
+
+
+  <div class="side-nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="../../../assets/img/logo-no-title.png" alt="">
+        <h1>Smart Phone</h1>
+      </div>
+
+
+      <div class="user">
+        <h3>שלום , <b>{{user?.firstName}} {{user?.lastName}}</b></h3>
+      </div>
+
+
+      <ul>
+        <a routerLink="/admin" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-link">
+          <li>ראשי</li>
+        </a>
+        <a routerLink="sms" routerLinkActive="active-link">
+          <li>הודעות</li>
+        </a>
+        <a routerLink="info" routerLinkActive="active-link">
+          <li>מידע</li>
+        </a>
+        <a routerLink="customers" routerLinkActive="active-link">
+          <li>לקוחות</li>
+        </a>
+        <a routerLink="/admin/requests" routerLinkActive="active-link">
+          <li>בקשות</li>
+        </a>
+        <!-- <li>client web</li>
+        <li>Products</li> -->
+      </ul>
+
+      <div class="divider-vertical"></div>
+
+
+      <div class="logout">
+        <h4 (click)="onLogOut()">צא ,</h4>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="side-content">
+
+    <router-outlet></router-outlet>
+
+  </div>
