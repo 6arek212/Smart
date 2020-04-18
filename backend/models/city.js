@@ -8,6 +8,6 @@ const CitySchema = mongoose.Schema({
 }, {
   timestamps: true
 })
-//////////////////////////////
+
 
 module.exports = mongoose.model("Cities", CitySchema)
