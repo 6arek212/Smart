@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Issue = require('./Issue')
+const Issue = require('./issue')
 const Device = require('./Device')
 const Company = require('./Company')
 const City = require('./City')
