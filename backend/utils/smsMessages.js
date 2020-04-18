@@ -1,3 +1,5 @@
+console.log(process.env.accountSid, process.env.authToken);
+
 const client = require('twilio')(process.env.accountSid, process.env.authToken);
 const errorHandler = require('../utils/error')
 
