@@ -27,7 +27,8 @@ const phoneAuth = require('./routes/phoneNumberAuth')
 
 const app = express()
 
-
+// local :   mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-4zqbh.gcp.mongodb.net/test?retryWrites=true&w=majority
+//mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority
 mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => {
