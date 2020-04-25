@@ -66,6 +66,8 @@ export class RequestsService {
 
   addRequest(request: RequestDbModel, error: Function, success: Function) {
     this.http.post<{ message: string, request: Request }>(BACKEND_URL, request).subscribe(res => {
+      console.log(res);
+
       this.requests.push(res.request)
       this.requestsListener.next({ requests: [...this.requests], max: this.max + 1 })
       success()
