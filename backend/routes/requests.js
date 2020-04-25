@@ -5,7 +5,7 @@ const adminAuth = require('../middleware/check-auth-admin')
 
 
 
-router.post('', adminAuth, requestsControler.getRequests)
+router.get('', adminAuth, requestsControler.getRequests)
 
 router.get('/getRequest/:id', checkAuth, requestsControler.getRequest)
 

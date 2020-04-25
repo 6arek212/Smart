@@ -12,8 +12,9 @@ exports.getRequests = async (req, res, next) => {
 
   const currentPage = + req.query.page
   const pageSize = +req.query.pagesize
+  const { filter, search } = req.query
 
-  const { filter, search } = req.body
+  //const { filter, search } = req.body
 
   const requestQuery = Request.find();
 
@@ -170,7 +171,7 @@ exports.addRequest = (req, res, next) => {
   const customer = req.body.customer
 
 
-  console.log('customer id',customer);
+  console.log('customer id --------------------->', customer);
 
 
   const request = new Request({
@@ -185,9 +186,11 @@ exports.addRequest = (req, res, next) => {
   })
 
 
+  console.log(request);
+
 
   request.save()
-    .then( result => {
+    .then(result => {
       res.status(201).json({
         message: 'Request added successfuly'
       })
