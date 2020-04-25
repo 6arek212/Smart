@@ -169,6 +169,10 @@ exports.deleteRequest = (req, res, next) => {
 exports.addRequest = (req, res, next) => {
   const customer = req.body.customer
 
+
+  console.log('customer id',customer);
+
+
   const request = new Request({
     title: req.body.title,
     company: req.body.company,
