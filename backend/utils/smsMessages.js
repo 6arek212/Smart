@@ -3,6 +3,8 @@ const errorHandler = require('../utils/error')
 
 
 exports.sendMessage = (message, to) => {
+  console.log(process.env.accountSid, process.env.authToken);
+
   client.messages
     .create({
       body: message,
