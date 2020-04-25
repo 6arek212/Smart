@@ -1,10 +1,27 @@
 let mongoose = require('mongoose');
 
-let Logs = mongoose.model('logs', {
-    type: {type:String,enum:['visit','new-request','new-customer']},
-    responseTime: Number,
-    day: String,
-    hour: Number
-});
 
-module.exports = Logs;
+// const innerSchema = mongoose.Schema({
+//   day: String,
+//   hour: Number
+// },
+// {
+//   timestamps: true
+// })
+
+// let logsSchema = mongoose.Schema({
+//   name: { type: String, enum: ['visit', 'new-request', 'new-customer'] },
+//   series: { type: [innerSchema], default: [] }
+// })
+
+let logsSchema = mongoose.Schema({
+  name: { type: String, enum: ['visit', 'new-request', 'new-customer'] },
+  date: { type: Date },
+  day: String,
+  hour: Number
+},
+  {
+    timestamps: true
+  })
+
+module.exports = mongoose.model('logs', logsSchema);

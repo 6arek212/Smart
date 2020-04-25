@@ -39,7 +39,6 @@ import { DialogMessageComponent } from './utils-components/dialog-message/dialog
 import { PickCustomerComponent } from './admin-components/pick-customer/pick-customer.component';
 import { AddDeviceComponent } from './admin-components/add-device/add-device.component';
 import { MainPageComponent } from './client/main-page/main-page.component'
-import { ClientAddRepairComponent } from './client/client-add-repair/client-add-repair.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -73,6 +72,7 @@ import { InfoComponent } from './admin-components/dashboard/info/info.component'
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditPhoneDialogComponent } from './utils-components/edit-phone-dialog/edit-phone-dialog.component';
+import { ForgotPasswordComponent } from './client/forgot-password/forgot-password.component';
 
 const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', options: {} };
 
@@ -93,7 +93,6 @@ const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', optio
     PickCustomerComponent,
     AddDeviceComponent,
     MainPageComponent,
-    ClientAddRepairComponent,
     RequestsListComponent,
     DashboardComponent,
     VerticalBarsComponent,
@@ -115,6 +114,7 @@ const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', optio
     EditCustomerDialogComponent,
     InfoComponent,
     EditPhoneDialogComponent,
+    ForgotPasswordComponent,
 
   ],
   imports: [

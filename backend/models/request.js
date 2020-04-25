@@ -6,6 +6,8 @@ const City = require('./city')
 const NumOf = require('./numOf')
 const Customer = require('./customer')
 const smsMessage = require('../utils/smsMessages')
+const moment = require('moment');
+const Logs = require('../models/logs')
 
 
 const RequestSchema = mongoose.Schema({
@@ -29,6 +31,7 @@ const RequestSchema = mongoose.Schema({
 RequestSchema.post('save', async (doc) => {
   console.log('post saving request', doc);
   const { customer, company, device, issue, city } = doc
+  let requestTime = Date.now();
 
   await Customer.updateOne({ _id: customer }, { $inc: { 'numOfRequests': 1 } }).exec()
   await Device.updateOne({ _id: device }, { $inc: { 'numOfRequests': 1 } }).exec()
@@ -36,6 +39,13 @@ RequestSchema.post('save', async (doc) => {
   await Issue.updateOne({ _id: issue }, { $inc: { 'numOfRequests': 1 } }).exec()
   await City.updateOne({ _id: city }, { $inc: { 'numOfRequests': 1 } }).exec()
   await NumOf.updateOne({ name: 'Requests' }, { $inc: { 'value': 1 } }).exec()
+
+  await Logs.create({
+    type: 'new-request',
+    day: moment(requestTime).format("dddd"),
+    hour: moment(requestTime).hour()
+  })
+
 
   const mCustomer = await Customer.findOne({ '_id': customer }).exec()
   smsMessage.sendMessage('طلبك فد استلم بنجاح سنقوم بالتواصل معك شكرا لاختيارك سمارت فون', mCustomer.phone)

@@ -3,14 +3,61 @@ const Device = require('../models/device')
 const Customer = require('../models/customer')
 const smsMessage = require('../utils/smsMessages')
 const errorHandler = require('../utils/error')
+const Issue = require('../models/issue')
+const Company = require('../models/company')
+const City = require('../models/city')
 
 
-
-exports.getRequests = (req, res, next) => {
+exports.getRequests = async (req, res, next) => {
 
   const currentPage = + req.query.page
   const pageSize = +req.query.pagesize
+
+  const { filter, search } = req.body
+
   const requestQuery = Request.find();
+
+
+
+
+
+  if (search) {
+    try {
+      const customerIds = await Customer.find({
+
+        $or: [
+          {
+            "$expr": {
+              "$regexMatch": {
+                "input": { "$concat": ["$firstName", " ", "$lastName"] },
+                "regex": search,  //Your text search here
+                "options": "i"
+              }
+            }
+
+          },
+          { 'phone': { $regex: "^" + search } }
+        ]
+      })
+        .distinct('_id')
+
+      console.log(customerIds);
+
+
+      if (customerIds)
+        requestQuery.where('customer').in(customerIds)
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+
+
+
+  if (filter) {
+    requestQuery.where('status', filter)
+  }
 
 
   if (currentPage && pageSize) {
@@ -18,15 +65,25 @@ exports.getRequests = (req, res, next) => {
       .limit(pageSize)
   }
 
+
+
+  let fetchedRequests
+
   requestQuery
     .populate('customer device company city issue')
     .sort({ createdAt: 'desc' })
     .then(result => {
+      fetchedRequests = result
+      return requestQuery.count()
+    })
+    .then(count => {
       res.status(200).json({
         message: 'Requests Fetched Successfuly',
-        requests: result
+        requests: fetchedRequests,
+        max: count
       })
-    }).catch(err => errorHandler.serverError(err, res))
+    })
+    .catch(err => errorHandler.serverError(err, res))
 }
 
 
@@ -109,7 +166,7 @@ exports.deleteRequest = (req, res, next) => {
 
 
 
-exports.addRequest =  (req, res, next) => {
+exports.addRequest = (req, res, next) => {
   const customer = req.body.customer
 
   const request = new Request({
@@ -190,7 +247,7 @@ exports.updateRequest = async (req, res, next) => {
 
 
 
-  Request.findOneAndUpdate({ '_id': requestId }, { $set: { ...updateOps } }, { new: true ,runValidators: true})
+  Request.findOneAndUpdate({ '_id': requestId }, { $set: { ...updateOps } }, { runValidators: true })
     .populate('customer', 'phone')
     .populate('device', 'model')
     .then(request => {
@@ -200,19 +257,38 @@ exports.updateRequest = async (req, res, next) => {
 
 
 
+      if (updateOps['company']) {
+        Company.updateOne({ '_id': request.company }, { $inc: { 'numOfRequests': -1 } })
+        Company.updateOne({ '_id': updateOps['company'] }, { $inc: { 'numOfRequests': 1 } })
+      }
+
+
+      if (updateOps['city']) {
+        City.updateOne({ '_id': request.city }, { $inc: { 'numOfRequests': -1 } })
+        City.updateOne({ '_id': updateOps['city'] }, { $inc: { 'numOfRequests': 1 } })
+      }
+
+      if (updateOps['issue']) {
+        Issue.updateOne({ '_id': request.issue }, { $inc: { 'numOfRequests': -1 } })
+        Issue.updateOne({ '_id': updateOps['issue'] }, { $inc: { 'numOfRequests': 1 } })
+      }
+
+      if (updateOps['device']) {
+        Device.updateOne({ '_id': request.device }, { $inc: { 'numOfRequests': -1 } })
+        Device.updateOne({ '_id': updateOps['device'] }, { $inc: { 'numOfRequests': 1 } })
+      }
 
       switch (updateOps['status']) {
         case 'DONE':
           Customer.updateOne({ '_id': request.customer }, { $inc: { 'numOfDoneRequests': 1 } }).exec()
+          smsMessage.sendMessage('طلبك قد تم  ' + request.device.model + ' ' + request.title + '  شكرا لاختيارك سمارت فون', request.customer.phone)
           break
         case 'IN-PROGRESS':
           break
         case 'CANCEL':
-          Customer.updateOne({ '_id': request.customer }, { $inc: { 'numOfDoneRequests': -1 } }).exec()
           break
       }
 
-      smsMessage.sendMessage('طلبك قد تم  ' + request.device.model + ' ' + request.title + '  شكرا لاختيارك سمارت فون', request.customer.phone)
 
     })
     .catch(err => errorHandler.serverError(err, res))

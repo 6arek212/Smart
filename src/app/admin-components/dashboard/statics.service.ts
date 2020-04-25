@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
 import { NumOf } from 'src/app/models/NumOf';
-import { StaticsMulti } from 'src/app/models/StaticsMulti';
+import { Analytics } from 'src/app/models/Analytics';
 
-const BACKEND = environment.apiUrl + "statistic"
+const BACKEND = environment.apiUrl + "analytics"
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class StaticsService {
   private numOf: NumOf[] = []
   private numOfSub = new Subject<NumOf[]>()
 
-  private statistics: StaticsMulti[] = []
-  private statisticsSub = new Subject<StaticsMulti[]>()
+  private analytics: Analytics[] = []
+  private analyticsSub = new Subject<Analytics[]>()
 
 
 
@@ -39,23 +39,19 @@ export class StaticsService {
 
 
 
-  getStaticsRecord() {
-    this.http.get<[StaticsMulti]>(BACKEND).subscribe(res => {
-      this.statistics = res
-      this.statisticsSub.next([...this.statistics])
+  getAnalytics() {
+    this.http.get<[Analytics]>(BACKEND).subscribe(res => {
+      this.analytics = res
+      this.analyticsSub.next([...this.analytics])
     })
   }
 
-  getStaticsRecordListener() {
-    return this.statisticsSub.asObservable()
+  getAnalyticsListener() {
+    return this.analyticsSub.asObservable()
   }
 
 
 
-  siteVisit() {
-    this.http.post(BACKEND + '/siteVisit', null).subscribe(res => {
 
-    })
-  }
 
 }

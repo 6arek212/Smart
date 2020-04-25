@@ -40,9 +40,9 @@ export class ClientDashboardComponent implements OnInit {
 
   constructor(private requestsService: RequestsService,
     private clientInfoService: ClientInfoService, private dialog: MatDialog) {
-      moment.locale('he')
+    moment.locale('he')
 
-    }
+  }
 
   ngOnInit(): void {
     this.isLoading['requests'] = true
@@ -51,7 +51,7 @@ export class ClientDashboardComponent implements OnInit {
 
     this.requestsService.getRequestsByCustomerId(this.currentPage, this.requestsPerPage)
     this.requestsSub = this.requestsService.getRequestsListener().subscribe(res => {
-      this.requests = res
+      this.requests = res.requests
       this.isLoading['requests'] = false
     })
 
@@ -84,7 +84,7 @@ export class ClientDashboardComponent implements OnInit {
   }
 
   fullDateFormat(date: string) {
-    let timezoneDate=momentTimezone(date)
+    let timezoneDate = momentTimezone(date)
     return timezoneDate.tz('Asia/hebron').format('LLLL')
   }
 

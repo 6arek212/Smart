@@ -1,9 +1,8 @@
-.action-buttons button{
+.action-buttons button {
   margin-left: 1rem;
 }
 
-
-.cards-container .search-box{
+.cards-container .search-box {
   margin-top: 1rem;
   width: 100%;
   display: flex;
@@ -12,26 +11,30 @@
   justify-content: flex-start;
 }
 
-.cards-container .search-box button{
+.cards-container .search-box button {
   margin-right: 1rem;
 }
 
 
 
-
-.cards-container .search-box mat-form-field{
-  width: 50%;
+.cards-container .search-box mat-form-field {
   text-align: right;
+  width: 100%;
 }
 
 
 
-
-.cards-container{
+.cards-container {
   height: 100%;
 }
 
-.dashboard-card{
+.dashboard-card {
   height: 100%;
 }
 
+.search-box{
+  width: 50% !important;
+}
+.search-box form{
+  width: 100%;
+}

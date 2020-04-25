@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const issuesControler = require('../controllers/issues')
 const checkAuth = require('../middleware/check-auth')
+const adminAuth = require('../middleware/check-auth-admin')
 
-router.get('', issuesControler.getIssues)
+router.get('', checkAuth, issuesControler.getIssues)
 
-router.post('', issuesControler.addIssue)
+router.post('', adminAuth, issuesControler.addIssue)
 
 module.exports = router

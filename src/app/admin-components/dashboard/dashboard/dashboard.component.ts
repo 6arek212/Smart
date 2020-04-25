@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaticsService } from '../statics.service';
 import { Subscription } from 'rxjs';
-import { StaticsMulti } from 'src/app/models/StaticsMulti';
+import { Analytics } from 'src/app/models/Analytics';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,6 @@ import { StaticsMulti } from 'src/app/models/StaticsMulti';
 })
 export class DashboardComponent implements OnInit {
   multi: any[];
-  view: any[] = [700, 300];
 
   // options
   legend: boolean = true;
@@ -20,15 +19,15 @@ export class DashboardComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel: string = 'יום';
+  yAxisLabel: string = 'כמות';
   timeline: boolean = true;
 
 
   single: any[];
   numOfSub: Subscription
 
-  staticsRecord: StaticsMulti[] = []
+  staticsRecord: Analytics[] = []
   staticsRecordSub: Subscription
 
 
@@ -43,10 +42,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.staticsService.getStaticsRecord()
+    this.staticsService.getAnalytics()
     this.staticsService.getNumOf()
 
-    this.staticsRecordSub = this.staticsService.getStaticsRecordListener().subscribe(res => {
+    this.staticsRecordSub = this.staticsService.getAnalyticsListener().subscribe(res => {
+      console.log(res);
+
       this.staticsRecord = res
     })
 

@@ -5,6 +5,8 @@ const Company = require('./company')
 const City = require('./city')
 const NumOf = require('./numOf')
 const Request = require('./request')
+const moment = require('moment');
+const Logs = require('../models/logs')
 
 const customerSchema = mongoose.Schema({
   firstName: { type: String, required: true, match: /^[a-z\u0590-\u05fe\u0621-\u064A]+$/i, תminlength: 2, maxlength: 24 },
@@ -25,10 +27,21 @@ const customerSchema = mongoose.Schema({
 
 
 customerSchema.post('save', async (doc, next) => {
-  console.log('post saving customer',doc);
+  console.log('post saving customer', doc);
+  let time = Date.now();
+  var m = moment().utcOffset(0);
+  m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+
 
   await NumOf.updateOne({ name: 'Customers' }, { $inc: { 'value': 1 } }).exec()
   await City.updateOne({ '_id': doc.city }, { $inc: { 'numOfCustomers': 1 } }).exec()
+
+  Logs.create({
+    name: 'new-customer',
+    date: m,
+    day: moment(time).format("dddd"),
+    hour: moment(time).hour()
+  })
 
   next()
 })

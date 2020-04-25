@@ -18,12 +18,15 @@
 
 
       <div class="search-box">
-        <mat-form-field appearance="fill">
-          <mat-label>الاسم الكامل / رقم الهاتف</mat-label>
-          <input #search matInput (input)="onGetingCustomers(search)">
-        </mat-form-field>
 
-        <button class="btn btn-success" (click)="onGetingCustomers(search)">بحث</button>
+        <form [formGroup]="form">
+          <mat-form-field appearance="fill">
+            <mat-label>الاسم الكامل / رقم الهاتف</mat-label>
+            <input formControlName="search" matInput (input)="onGetingCustomers()">
+          </mat-form-field>
+        </form>
+
+        <button class="btn btn-success" (click)="onGetingCustomers()">بحث</button>
       </div>
 
 
@@ -90,14 +93,16 @@
 
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li [ngClass]="{'page-item disabled': currentPage==1 || !page2?true:false}">
-            <a class="page-link" >السابق</a>
+          <li [ngClass]="{'page-item disabled': currentPage==1 }">
+            <a class="page-link" (click)="prevPage()">السابق</a>
           </li>
-          <li class="page-item"><a class="page-link"  (click)="onPage(page1)">{{page1}}</a></li>
+
+          <li class="page-item active"><a class="page-link" (click)="onPage(page1)">{{page1}}</a></li>
           <li class="page-item"><a class="page-link" *ngIf="page2" (click)="onPage(page2)">{{page2}}</a></li>
           <li class="page-item"><a class="page-link" *ngIf="page3" (click)="onPage(page3)">{{page3}}</a></li>
+
           <li class="page-item" [ngClass]="{'page-item disabled':  !page2?true:false}">
-            <a class="page-link">التالي</a>
+            <a class="page-link" (click)="nextPage()">التالي</a>
           </li>
         </ul>
       </nav>

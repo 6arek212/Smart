@@ -6,6 +6,7 @@ const moment = require('moment');
 
 const Request = require('./models/request')
 const Customer = require('./models/customer')
+const NumOf = require('./models/numOf')
 const html = __dirname + '/smartPhone';
 const Logs = require('./models/logs')
 
@@ -19,6 +20,7 @@ const citiesRoutes = require('./routes/cities')
 const issuesRoutes = require('./routes/issues')
 const smsRoutes = require('./routes/sms')
 const analyticsRoutes = require('./routes/analytics')
+const forgotPassword = require('./routes/forgotPassword')
 
 const statisticRout = require('./routes/statistic')
 const phoneAuth = require('./routes/phoneNumberAuth')
@@ -57,7 +59,7 @@ app.use(bodyParser.json())
 
 
 
-
+const nightJobs = require('./routes/nightJobs')
 
 
 
@@ -74,6 +76,7 @@ app.use('/api/sms', smsRoutes)
 app.use('/api/analytics', analyticsRoutes)
 app.use('/api/statistic', statisticRout)
 app.use('/api/phoneAuth', phoneAuth)
+app.use('/api/forgotPassword', forgotPassword)
 
 
 
@@ -82,19 +85,20 @@ app.use('/api/phoneAuth', phoneAuth)
 
 app.get('/', (req, res, next) => {
   let requestTime = Date.now();
-
+  var m = moment().utcOffset(0);
+  m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
   Logs.create({
-    type: 'visit',
-    responseTime: (Date.now() - requestTime) / 1000,
+    name: 'visit',
+    date: m,
     day: moment(requestTime).format("dddd"),
     hour: moment(requestTime).hour()
   }).then(result => {
-    console.log('+++++++')
+    NumOf.updateOne({ name: 'Visitors' }, { $inc: { 'value': 1 } }).exec()
     res.sendFile(html + '/index.html')
-  }
-  ).catch(err => console.log(err)
-  )
+  })
+    .catch(err => console.log(err))
+
 })
 app.use(express.static(html));
 

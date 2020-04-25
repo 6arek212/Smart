@@ -4,6 +4,13 @@ ngx-charts-number-card{
   max-height: 20vh;
 }
 
+ngx-charts-pie-grid {
+  height: 30vh;
+}
+ngx-charts-line-chart{
+  min-height: 50vh;
+}
+
 .main-container .dashboard-card .chart {
   width: 100%;
   margin: auto;
@@ -15,6 +22,7 @@ ngx-charts-number-card{
 }
 
 
-ngx-charts-line-chart {
-  padding-top: 3rem;
+.card-content{
+  padding: 3rem 0;
 }
+

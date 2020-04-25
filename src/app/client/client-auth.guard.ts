@@ -20,7 +20,6 @@ export class ClientAuthGuard implements CanActivate {
     const isAuth = this.clientAuthService.getIsAuthenticated()
 
     if (!isAuth) {
-      console.log('redirect');
       return this.router.parseUrl('/client/login')
     }
 

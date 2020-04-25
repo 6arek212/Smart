@@ -4,7 +4,6 @@ import { RepairListComponent } from './admin-components/repair/repair-list/repai
 import { AddRepairComponent } from './admin-components/repair/add-repair/add-repair.component';
 import { AddCustomerComponent } from './admin-components/add-customer/add-customer.component';
 import { RepairDetailsComponent } from './admin-components/repair/repair-details/repair-details.component';
-import { ClientAddRepairComponent } from './client/client-add-repair/client-add-repair.component';
 import { AdminComponent } from './admin-components/admin/admin.component';
 import { MainPageComponent } from './client/main-page/main-page.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -25,18 +24,19 @@ import { ClientDashboardMainComponent } from './client/client-dashboard-main/cli
 import { CustomersComponent } from './admin-components/dashboard/customers/customers.component';
 import { RequestsListComponent } from './admin-components/dashboard/requests-list/requests-list.component';
 import { InfoComponent } from './admin-components/dashboard/info/info.component';
+import { ForgotPasswordComponent } from './client/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
   {
     path: 'admin', children: [
       {
-        path: '',canActivate:[AuthGuard] , component: MainDashboardComponent, children: [
-          { path: '', pathMatch: 'full', component: DashboardComponent ,canActivate:[AuthGuard] },
-          { path: 'sms', component: SmsComponent ,canActivate:[AuthGuard] },
-          { path: 'customers', component: CustomersComponent ,canActivate:[AuthGuard] },
-          { path: 'requests', component: RequestsListComponent ,canActivate:[AuthGuard] },
-          { path: 'info', component: InfoComponent ,canActivate:[AuthGuard] },
+        path: '', canActivate: [AuthGuard], component: MainDashboardComponent, children: [
+          { path: '', pathMatch: 'full', component: DashboardComponent, canActivate: [AuthGuard] },
+          { path: 'sms', component: SmsComponent, canActivate: [AuthGuard] },
+          { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
+          { path: 'requests', component: RequestsListComponent, canActivate: [AuthGuard] },
+          { path: 'info', component: InfoComponent, canActivate: [AuthGuard] },
 
         ]
       },
@@ -55,7 +55,8 @@ const routes: Routes = [
         ]
       },
       { path: 'signup', component: ClientSignupComponent },
-      { path: 'login', component: ClientLoginComponent }
+      { path: 'login', component: ClientLoginComponent },
+      { path: 'forgotPassword', component: ForgotPasswordComponent }
     ]
   }
 ];

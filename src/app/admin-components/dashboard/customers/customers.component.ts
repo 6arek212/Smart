@@ -4,7 +4,7 @@ import { Customer } from 'src/app/models/Customer';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMessageComponent } from 'src/app/utils-components/dialog-message/dialog-message.component';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { EditCustomerDialogComponent } from 'src/app/utils-components/edit-customer-dialog/edit-customer-dialog.component';
 
 @Component({
@@ -17,9 +17,7 @@ export class CustomersComponent implements OnInit {
   page2 = null
   page3 = null
 
-
-  updatePagesNum = false
-
+  form: FormGroup
   currentPage = 1
   pageSize = 10
   pagesNeeded: number
@@ -34,43 +32,55 @@ export class CustomersComponent implements OnInit {
   constructor(private customerService: CustomersService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-
-    if (2 < this.pagesNeeded)
-      this.page2 = 2
-
-    if (3 < this.pagesNeeded)
-      this.page3 = 3
+    this.form = new FormGroup({
+      'search': new FormControl(null)
+    })
 
     this.isLoading = true
-    this.customerService.getCustomers()
+    this.customerService.getCustomers(null, this.currentPage, this.pageSize)
     this.customersSub = this.customerService.getCustomersListener().subscribe(res => {
+      console.log(res);
+
       this.customers = res.customers
       this.totalCustomers = res.totalCustomers
       this.calPagesNeeded()
 
-      if (this.updatePagesNum) {
-        if (this.page1 < this.pagesNeeded)
-          this.page1++
-        if (this.page2 < this.pagesNeeded)
-          this.page2++
+      this.page1 = this.currentPage
 
-        if (this.page2 < this.pagesNeeded)
-          this.page2++
-        this.updatePagesNum = false
-      }
+
+        if (this.currentPage + 1 <= this.pagesNeeded)
+          this.page2 = this.currentPage + 1
+        else
+          this.page2 = null
+
+
+        if (this.currentPage + 2 <= this.pagesNeeded)
+          this.page3 = this.currentPage + 2
+        else
+          this.page3 = null
+
 
       this.isLoading = false
     })
   }
 
 
+  prevPage() {
+    this.isLoading = true
+    this.currentPage = this.currentPage - 1
+    this.customerService.getCustomers(this.form.value.search, this.currentPage, this.pageSize)
+  }
+
+  nextPage() {
+    this.isLoading = true
+    this.currentPage = this.currentPage + 1
+    this.customerService.getCustomers(this.form.value.search, this.currentPage, this.pageSize)
+  }
+
   calPagesNeeded() {
     let pages = Math.round(this.totalCustomers / this.pageSize)
-
-    if (this.totalCustomers % 10 != 0)
-      pages++
-
-    console.log(pages);
+    console.log(this.totalCustomers, this.pageSize, pages);
+    this.pagesNeeded = pages
   }
 
 
@@ -91,9 +101,10 @@ export class CustomersComponent implements OnInit {
 
 
 
-  onGetingCustomers(search: HTMLInputElement) {
+  onGetingCustomers() {
     this.isLoading = true
-    this.customerService.getCustomers(search.value)
+    this.currentPage = 1
+    this.customerService.getCustomers(this.form.value.search, this.currentPage, this.pageSize)
   }
 
 
@@ -107,7 +118,8 @@ export class CustomersComponent implements OnInit {
   }
 
   onPage(num: number) {
-    this.updatePagesNum = true
-    this.customerService.getCustomers(null, this.currentPage, this.pageSize)
+    this.isLoading = true
+    this.currentPage = num
+    this.customerService.getCustomers(this.form.value.search, this.currentPage, this.pageSize)
   }
 }

@@ -17,45 +17,45 @@ const statisticController = require('../controllers/statistic')
 // });
 
 
-const schedule = require('node-schedule')
+// const schedule = require('node-schedule')
 
-schedule.scheduleJob('0 0 0 * * *', () => {
-  var date = new Date();
-  console.log(date.toLocaleDateString({ timezone: "Asia/Jerusalem" }))
+// schedule.scheduleJob('0 0 0 * * *', () => {
+//   var date = new Date();
+//   console.log(date.toLocaleDateString({ timezone: "Asia/Jerusalem" }))
 
-  date.setDate(date.getDate() + 1)
-  const day = date.getUTCDate()
-  const month = date.getUTCMonth() + 1
-  const year = date.getUTCFullYear()
+//   date.setDate(date.getDate() + 1)
+//   const day = date.getUTCDate()
+//   const month = date.getUTCMonth() + 1
+//   const year = date.getUTCFullYear()
 
-  console.log('Midnight job started day', date);
+//   console.log('Midnight job started day', date);
 
-  const st = {
-    name: day + 1 + '/' + month,
-    day: day,
-    month,
-    year
-  }
+//   const st = {
+//     name: day + 1 + '/' + month,
+//     day: day,
+//     month,
+//     year
+//   }
 
-  names = ['Requests', 'Visitors']
+//   names = ['Requests', 'Visitors']
 
-  for (const name of names) {
-    Statistic.updateOne(
-      { name: name /* doc id */ },
-      { $push: { 'series': st } }
-    ).then(result => {
-      console.log('Midnight job successful');
-    })
-  }
+//   for (const name of names) {
+//     Statistic.updateOne(
+//       { name: name /* doc id */ },
+//       { $push: { 'series': st } }
+//     ).then(result => {
+//       console.log('Midnight job successful');
+//     })
+//   }
 
 
-  // '* * * * * *' - runs every second
-  // '*/5 * * * * *' - runs every 5 seconds
-  // '10,20,30 * * * * *' - run at 10th, 20th and 30th second of every minute
-  // '0 * * * * *' - runs every minute
-  // '0 0 * * * *' - runs every hour (at 0 minutes and 0 seconds)
+//   // '* * * * * *' - runs every second
+//   // '*/5 * * * * *' - runs every 5 seconds
+//   // '10,20,30 * * * * *' - run at 10th, 20th and 30th second of every minute
+//   // '0 * * * * *' - runs every minute
+//   // '0 0 * * * *' - runs every hour (at 0 minutes and 0 seconds)
 
-}) // run everyday at midnight
+// }) // run everyday at midnight
 
 
 router.get('/numOf', (req, res, next) => {
@@ -196,51 +196,3 @@ router.post('/sms', async (req, res, next) => {
 
 module.exports = router
 
-
-
-// router.post('', (req, res, next) => {
-//   const date = new Date()
-//   const day = date.getUTCDate()
-//   const month = date.getUTCMonth() + 1
-//   const year = date.getUTCFullYear()
-
-//   const st = {
-//     name: day + '/' + month,
-//     day: day,
-//     month,
-//     year
-//   }
-
-
-//   const statistic = new Statistic({
-//     name: 'Requests'
-//   })
-
-//   // Statistic.findOneAndRemove(
-//   //   { name: 'Visitors' /* doc id */ },
-//   //   { $pull: { '_id': '5e88bf7b24dd23722c016286' } }
-//   // ).then(result => {
-//   //   res.status(201).json({
-//   //     message: '',
-//   //     result
-//   //   })
-//   // })
-
-//   statistic.save().then(e => {
-//     Statistic.updateOne(
-//       { name: 'Requests' /* doc id */ },
-//       { $push: { 'series': st } }
-//     ).then(result => {
-//       res.status(201).json({
-//         message: '',
-//         result
-//       })
-//     })
-//   })
-
-
-
-// })
-
-
-///remove fun

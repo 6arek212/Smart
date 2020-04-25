@@ -28,7 +28,7 @@
 
 
       <div *ngIf="requests && requests.length==0" class="center-container">
-        <p >لا يوجد لديك طلبات </p>
+        <p>لا يوجد لديك طلبات </p>
       </div>
 
       <div *ngIf="isLoading['requests']" class="center-container">
@@ -52,8 +52,7 @@
                 <div class="spacer"></div>
 
                 <div class="status-box">
-                  <div class="status"
-                    [ngStyle]="statusHandler(request.status)">
+                  <div class="status" [ngStyle]="statusHandler(request.status)">
                   </div>
                   <div>
                     <span *ngIf="request.status=='DONE'">تم</span>
@@ -79,7 +78,7 @@
                 <p>{{request.issue?.name}}</p>
               </div>
 
-              <div class="panel-info">
+              <div *ngIf="request.otherIssue" class="panel-info">
                 <p>مشكلة اخرى</p>
                 <p>{{request.otherIssue}}</p>
               </div>

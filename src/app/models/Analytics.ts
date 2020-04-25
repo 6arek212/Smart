@@ -1,4 +1,4 @@
-export class StaticsMulti {
+export class Analytics {
   name: string
   series: [{
     name: string,

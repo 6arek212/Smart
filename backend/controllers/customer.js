@@ -37,24 +37,26 @@ exports.search = async (req, res, next) => {
   }
 
 
+
+
   if (!name) {
     return (customerQuery.find()
       .populate('city', 'name')
       .then(result => {
-
-        res.status(201).json({
+        return res.status(201).json({
           message: 'Customers Fetched Successfuly',
           customers: result,
           totalCustomers
         })
       })
       .catch(err => {
-
+        errorHandler.serverError('err', res)
       }))
   }
   const searchString = name.trim()
 
 
+  let fetchedCustomers
 
   const find = customerQuery.find({
 
@@ -76,13 +78,18 @@ exports.search = async (req, res, next) => {
   find
     .populate('city', 'name')
     .then(result => {
+      fetchedCustomers = result
+      return customerQuery.count()
+    })
+    .then(count => {
       res.status(201).json({
         message: 'Customers Fetched By Name Successfuly',
-        customers: result,
-        totalCustomers
+        customers: fetchedCustomers,
+        totalCustomers: count
       })
     })
     .catch(err => {
+      errorHandler.serverError('err', res)
     })
 }
 

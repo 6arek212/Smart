@@ -1,5 +1,3 @@
-console.log(process.env.accountSid, process.env.authToken);
-
 const client = require('twilio')(process.env.accountSid, process.env.authToken);
 const errorHandler = require('../utils/error')
 
@@ -8,7 +6,7 @@ exports.sendMessage = (message, to) => {
   client.messages
     .create({
       body: message,
-      from: '+12029914931',
+      from: '+18654138931',
       to: '+972' + to
     })
     .then(result => {

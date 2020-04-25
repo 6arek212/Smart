@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const PhoneAuth = require('../models/phoneNumberAuth')
 const Customer = require('../models/customer')
+const checkAuth = require('../middleware/check-auth')
+const adminAuth = require('../middleware/check-auth-admin')
+const smsMessage = require('../utils/smsMessages')
 
-const accountSid = 'AC8a7c103d2a3bec243cda5ac32542256a';
-const authToken = '29b89183b591fd4998ca876256f60dbe';
-const client = require('twilio')(accountSid, authToken);
 const errorHandler = require('../utils/error')
 
 router.get('', async (req, res, next) => {
@@ -37,16 +37,7 @@ router.post('', async (req, res, next) => {
 
   auth.save().then(result => {
 
-    client.messages
-      .create({
-        body: code + ' مرحبا بك في سمارت فون باقة رقمك السري',
-        from: '+12029914931',
-        to: '+9720525145565'
-      })
-      .then(message => console.log('Message sent'))
-      .catch(err => { console.log(err); }
-      )
-
+    smsMessage.sendMessage(code + ' مرحبا بك في سمارت فون باقة رقمك السري', '0525145565')
     res.status(201).json({
       message: 'Added phone number to authenticate',
       _id: result._id

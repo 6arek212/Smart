@@ -8,6 +8,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { statusHandler } from '../../../utils-components/statusHandler'
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMessageComponent } from 'src/app/utils-components/dialog-message/dialog-message.component';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-requests-list',
@@ -26,6 +28,7 @@ export class RequestsListComponent implements OnInit {
   currentPage = 1
 
   isLoading = false
+  form: FormGroup
 
 
   constructor(private requestService: RequestsService, private dialog: MatDialog, private staticsService: StaticsService) {
@@ -33,30 +36,44 @@ export class RequestsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      'filter': new FormControl('all'),
+      'search': new FormControl()
+    })
+
     this.isLoading = true
     this.requestService.getRequests(this.currentPage, this.pageSize)
     this.requestsSub = this.requestService.getRequestsListener().subscribe(req => {
-      this.requests = req
+      this.requests = req.requests
+      this.totalRequests = req.max
       this.isLoading = false
     })
+  }
 
-    this.staticsService.getNumOf()
-    this.numOfSub = this.staticsService.getNumOfListener().subscribe(res => {
-      this.getRequestsData(res)
-    })
+
+  onChangeFilter(e: MatSelectChange) {
+    var filter = e.value
+
+    if (filter === 'all')
+      filter = null
+
+    this.form.updateValueAndValidity()
+    this.requestService.getRequests(this.currentPage, this.pageSize, filter)
   }
 
 
 
+  onSearch() {
+    console.log(this.form);
 
+    var filter = this.form.value.filter
+    if (filter === 'all')
+      filter = null
 
-  async getRequestsData(data) {
-    for (const d of data) {
-      if (d.name == 'Requests') {
-        this.totalRequests = d.value
-      }
-    }
+    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search)
   }
+
+
 
 
   dateFormat(date: string) {
@@ -119,7 +136,7 @@ export class RequestsListComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    this.numOfSub.unsubscribe()
-    this.requestsSub.unsubscribe()
+    this.numOfSub?.unsubscribe()
+    this.requestsSub?.unsubscribe()
   }
 }

@@ -48,7 +48,7 @@ body{
 
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 
@@ -77,7 +77,7 @@ a {
 }
 
 .dash-board-header h1{
-  margin: 0;
+  margin: 0 !important;
 }
 
 

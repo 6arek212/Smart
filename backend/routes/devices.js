@@ -1,11 +1,12 @@
 const router = require('express').Router()
 const devicesController = require('../controllers/devices')
 const checkAuth = require('../middleware/check-auth')
+const adminAuth = require('../middleware/check-auth-admin')
 
-router.get('', devicesController.getDevices)
+router.get('', checkAuth, devicesController.getDevices)
 
-router.get('/:companyId', devicesController.getDeviceByCompany)
+router.get('/:companyId', checkAuth, devicesController.getDeviceByCompany)
 
-router.post('', devicesController.addDevice)
+router.post('', adminAuth, devicesController.addDevice)
 
 module.exports = router

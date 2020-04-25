@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const companiesController = require('../controllers/companies')
 const checkAuth = require('../middleware/check-auth')
+const adminAuth = require('../middleware/check-auth-admin')
 
-router.get('', companiesController.getComapnies)
+router.get('',checkAuth, companiesController.getComapnies)
 
-router.post('', companiesController.addCompany)
+router.post('',adminAuth, companiesController.addCompany)
 
 module.exports = router

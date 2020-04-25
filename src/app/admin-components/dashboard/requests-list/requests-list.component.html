@@ -15,6 +15,32 @@
         <h3>طلباتي</h3>
       </div>
 
+      <form [formGroup]="form" (submit)="onSearch()">
+
+        <mat-form-field appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
+          <mat-label>خيارات</mat-label>
+
+          <mat-select formControlName="filter" value="all" (selectionChange)="onChangeFilter($event)">
+            <mat-option value="all">جميع الطلبات</mat-option>
+            <mat-option value="IN-PROGRESS">قيد التنفيذ</mat-option>
+            <mat-option value="DONE">تم</mat-option>
+            <mat-option value="CANCEL">الغي</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+
+
+        <div class="search-box">
+          <mat-form-field appearance="fill">
+            <mat-label>الاسم \ رقم الهاتف</mat-label>
+            <input formControlName="search" matInput>
+          </mat-form-field>
+
+          <button class="btn btn-success">بحث</button>
+        </div>
+      </form>
+
       <div *ngIf="requests && requests.length==0" class="center-container">
         <p>لا يوجد طلبات </p>
       </div>
@@ -42,8 +68,7 @@
                 <div class="spacer"></div>
 
                 <div class="status-box">
-                  <div class="status"
-                    [ngStyle]="statusHandler(request.status)">
+                  <div class="status" [ngStyle]="statusHandler(request.status)">
                   </div>
                   <div>
                     <span *ngIf="request.status=='DONE'">تم</span>
@@ -69,7 +94,7 @@
                 <p>{{request.issue?.name}}</p>
               </div>
 
-              <div class="panel-info">
+              <div *ngIf="request.otherIssue" class="panel-info">
                 <p>مشكلة اخرى</p>
                 <p>{{request.otherIssue}}</p>
               </div>
@@ -96,7 +121,6 @@
             </div>
 
 
-            <h3 mat-button>تفاصيل</h3>
 
             <mat-action-row>
               <a mat-raised-button color="primary" (click)="onUpdatingStatus(request)">تم</a>

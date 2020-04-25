@@ -23,18 +23,18 @@ module.exports = {
     let getRequestsPerDay = RequestLog.aggregate([
       {
         $group: {
-          _id: { type: '$type', day: '$day' },
+          _id: { type: '$type' },
+          series: { $push: '$$ROOT' },
           count: { $sum: 1 }
         }
       }
-
     ]);
 
     let getRequestsPerHour = RequestLog.aggregate([
       {
         $group: {
           _id: '$hour',
-          numberOfRequests: { $sum: 1 }
+          count: { $sum: 1 }
         }
       },
       { $sort: { numberOfRequests: 1 } }

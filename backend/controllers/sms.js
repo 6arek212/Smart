@@ -7,11 +7,9 @@ const errorHandler = require('../utils/error')
 exports.sendMessage = (req, res, next) => {
   const { toAll, to, message } = req.body
 
-
-
   if (toAll) {
 
-    Customer.find().select({ "phone": 1, "_id": 0}).then(docs => {
+    Customer.find().select({ "phone": 1, "_id": 0 }).then(docs => {
       console.log(docs);
 
       res.status(200).json({
@@ -50,7 +48,7 @@ exports.sendMessage = (req, res, next) => {
         })
       })
       .catch(err => {
-          return errorHandler.errorMessage('Check message field', 500, res, err)
+        return errorHandler.errorMessage('Check message field', 500, res, err)
       }
       )
   }
