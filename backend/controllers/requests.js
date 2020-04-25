@@ -12,10 +12,7 @@ exports.getRequests = async (req, res, next) => {
 
   const currentPage = + req.query.page
   const pageSize = +req.query.pagesize
-  const { filter, search } = req.query
-  console.log(filter,search);
-
-  //const { filter, search } = req.body
+  const { filter, search } = req.body
 
   const requestQuery = Request.find();
 
