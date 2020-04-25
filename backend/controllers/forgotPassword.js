@@ -4,19 +4,27 @@ const bcrypt = require('bcryptjs')
 const errorHandler = require('../utils/error')
 const sms = require('../utils/smsMessages')
 
-exports.sendPasswordMessage = (req, res, next) => {
+exports.sendPasswordMessage = async (req, res, next) => {
   const code = Math.floor(Math.random() * 90000) + 10000
+  const phone = req.body.phone
   const date = new Date()
   date.setDate(date.getDate() + 1)
 
+
+  const customer = await Customer.findOne({ 'phone': phone }).exec()
+  if (!customer)
+    return res.status(401).json({
+      message: 'The phone number is not in use'
+    })
+
   const fg = new ForgotPassword({
-    phone: req.body.phone,
+    phone: phone,
     code,
     expireDate: date
   })
 
   fg.save().then(result => {
-    sms.sendMessage(code + 'رقمك السري ', req.body.phone)
+    sms.sendMessage(code + 'رقمك السري ', phone)
     res.status(201).json({
       message: 'Forgot password request was added successfuly',
       code,

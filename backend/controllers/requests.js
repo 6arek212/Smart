@@ -183,7 +183,7 @@ exports.addRequest = (req, res, next) => {
 
 
   request.save()
-    .then(async (result) => {
+    .then( result => {
       res.status(201).json({
         message: 'Request added successfuly'
       })
