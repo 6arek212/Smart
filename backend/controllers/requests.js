@@ -74,7 +74,7 @@ exports.getRequests = async (req, res, next) => {
     .sort({ createdAt: 'desc' })
     .then(result => {
       fetchedRequests = result
-      return requestQuery.count()
+      return requestQuery.countDocuments()
     })
     .then(count => {
       res.status(200).json({
