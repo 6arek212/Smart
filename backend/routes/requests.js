@@ -5,14 +5,14 @@ const adminAuth = require('../middleware/check-auth-admin')
 
 
 
-router.get('', adminAuth, requestsControler.getRequests)
+router.post('', adminAuth, requestsControler.getRequests)
 
 router.get('/getRequest/:id', checkAuth, requestsControler.getRequest)
 
 router.get('/requestsByCustomerId', checkAuth, requestsControler.getRequestByCustomerId)
 
 
-router.post('', checkAuth, requestsControler.addRequest)
+router.put('', checkAuth, requestsControler.addRequest)
 
 router.post('/cancel', checkAuth, requestsControler.cancelRequest)
 

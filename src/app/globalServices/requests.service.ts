@@ -33,9 +33,9 @@ export class RequestsService {
   }
 
   getRequests(page: number = 1, pagesize = 10, filter: string = null, search: string = null) {
-    const queryParams = `?page=${page}&pagesize=${pagesize}&search=${search}&filter=${filter}`
+    const queryParams = `?page=${page}&pagesize=${pagesize}`
 
-    this.http.get<{ message: string, requests: Request[], max: number }>(BACKEND_URL + queryParams).subscribe(res => {
+    this.http.post<{ message: string, requests: Request[], max: number }>(BACKEND_URL + queryParams, { search, filter }).subscribe(res => {
       this.requests = res.requests
       this.max = res.max
       this.requestsListener.next({ requests: [...this.requests], max: res.max })
@@ -65,7 +65,7 @@ export class RequestsService {
 
 
   addRequest(request: RequestDbModel, error: Function, success: Function) {
-    this.http.post<{ message: string, request: Request }>(BACKEND_URL, request).subscribe(res => {
+    this.http.put<{ message: string, request: Request }>(BACKEND_URL, request).subscribe(res => {
       console.log(res);
 
       this.requests.push(res.request)

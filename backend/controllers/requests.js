@@ -13,6 +13,7 @@ exports.getRequests = async (req, res, next) => {
   const currentPage = + req.query.page
   const pageSize = +req.query.pagesize
   const { filter, search } = req.query
+  console.log(filter,search);
 
   //const { filter, search } = req.body
 
@@ -23,6 +24,8 @@ exports.getRequests = async (req, res, next) => {
 
 
   if (search) {
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
+
     try {
       const customerIds = await Customer.find({
 
