@@ -104,7 +104,7 @@
               <p>{{fullDateFormat(request.createdAt)}}</p>
             </div>
             <mat-action-row *ngIf="request.status!=='DONE'">
-              <a mat-raised-button color="primary" [routerLink]="['/client/editRequest',request._id]">تعديل</a>
+              <a mat-raised-button color="primary"  *ngIf="request.status!=='CANCEL'" [routerLink]="['/client/editRequest',request._id]">تعديل</a>
               <button mat-raised-button color="warn" (click)="onCancelRequest(request)">الغاء</button>
 
             </mat-action-row>

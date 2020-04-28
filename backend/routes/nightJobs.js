@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 const PhoneVerify = require('../models/phoneNumberAuth')
 const moment = require('moment')
 
-var job = new CronJob('0 0 * * * *', function () {
+var job = new CronJob('0 0 0 * * *', function () {
   console.log('You will see this message at midnight');
 
   var m = moment().utcOffset(0);

@@ -18,7 +18,8 @@ let logsSchema = mongoose.Schema({
   name: { type: String, enum: ['visit', 'new-request', 'new-customer'] },
   date: { type: Date },
   day: String,
-  hour: Number
+  hour: Number,
+  ip: String
 },
   {
     timestamps: true

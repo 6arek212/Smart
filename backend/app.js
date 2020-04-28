@@ -89,11 +89,18 @@ app.get('/', (req, res, next) => {
   var m = moment().utcOffset(0);
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+
+  console.log('IP ADDRESS IS ', ip);
+
+
   Logs.create({
     name: 'visit',
     date: m,
     day: moment(requestTime).format("dddd"),
-    hour: moment(requestTime).hour()
+    hour: moment(requestTime).hour(),
+    ip: ip
   }).then(result => {
     NumOf.updateOne({ name: 'Visitors' }, { $inc: { 'value': 1 } }).exec()
     res.sendFile(html + '/index.html')

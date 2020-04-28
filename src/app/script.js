@@ -1,6 +1,5 @@
 
 
-console.log('aaaaaaaaaaaaaaa');
 
 
 // $(document).ready(function(){

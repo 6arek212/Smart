@@ -20,7 +20,6 @@ export class PhoneAuthService {
 
   constructor(private http: HttpClient) { }
   ngOnDestroy(): void {
-    console.log('phone service destroied');
   }
 
   getPhoneAuthId() {

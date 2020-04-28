@@ -31,7 +31,6 @@ const RequestSchema = mongoose.Schema({
 RequestSchema.post('save', async (doc) => {
   console.log('post saving request', doc);
   const { customer, company, device, issue, city } = doc
-  let requestTime = Date.now();
 
   await Customer.updateOne({ _id: customer }, { $inc: { 'numOfRequests': 1 } }).exec()
   await Device.updateOne({ _id: device }, { $inc: { 'numOfRequests': 1 } }).exec()
@@ -40,12 +39,17 @@ RequestSchema.post('save', async (doc) => {
   await City.updateOne({ _id: city }, { $inc: { 'numOfRequests': 1 } }).exec()
   await NumOf.updateOne({ name: 'Requests' }, { $inc: { 'value': 1 } }).exec()
 
-  await Logs.create({
-    type: 'new-request',
-    day: moment(requestTime).format("dddd"),
-    hour: moment(requestTime).hour()
-  })
 
+  let time = Date.now();
+  var m = moment().utcOffset(0);
+  m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+
+  Logs.create({
+    name: 'new-request',
+    date: m,
+    day: moment(time).format("dddd"),
+    hour: moment(time).hour()
+  })
 
   const mCustomer = await Customer.findOne({ '_id': customer }).exec()
   smsMessage.sendMessage('طلبك فد استلم بنجاح سنقوم بالتواصل معك شكرا لاختيارك سمارت فون', mCustomer.phone)

@@ -160,7 +160,6 @@ export class ClientAddRequestComponent implements OnInit {
     if (issue?.value !== '1') {
       otherIssue.setErrors(null)
     }
-    console.log(otherIssue);
   }
 
 
@@ -270,7 +269,6 @@ export class ClientAddRequestComponent implements OnInit {
       }
     }
 
-    console.log('update', updateOps);
 
 
 
@@ -297,8 +295,6 @@ export class ClientAddRequestComponent implements OnInit {
 
 
     if (this.form.invalid) {
-      console.log(this.form);
-
       return
     }
 
