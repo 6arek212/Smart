@@ -91,8 +91,10 @@ app.get('/', (req, res, next) => {
 
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
+  var ip2= req.headers['x-real-ip'] ;
 
-  console.log('IP ADDRESS IS ', ip);
+
+  console.log('IP ADDRESS IS ', ip2 ,'----',req.headers['x-forwarded-for'],'----' ,req.connection.remoteAddress );
 
 
   Logs.create({
