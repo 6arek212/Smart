@@ -27,6 +27,7 @@ const statisticRout = require('./routes/statistic')
 const phoneAuth = require('./routes/phoneNumberAuth')
 
 const app = express()
+moment.locale('Asia/Hebron')
 
 // local :   mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-4zqbh.gcp.mongodb.net/test?retryWrites=true&w=majority
 //mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority
@@ -89,7 +90,6 @@ app.get('/', (req, res, next) => {
   let requestTime = Date.now();
   var m = moment().utcOffset(0);
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-
 
   var ip = req.headers['x-real-ip'];
   var geo = geoip.lookup(ip)
