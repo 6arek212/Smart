@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const moment = require('moment');
+var geoip = require('geoip-lite');
 
 const Request = require('./models/request')
 const Customer = require('./models/customer')
@@ -89,12 +90,11 @@ app.get('/', (req, res, next) => {
   var m = moment().utcOffset(0);
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-  var ip2= req.headers['x-real-ip'] ;
+  var ip= req.headers['x-real-ip'] ;
+  var geo = geoip.lookup(ip)
 
-
-  console.log('IP ADDRESS IS ', ip2 ,'----',req.headers['x-forwarded-for'],'----' ,req.connection.remoteAddress );
+  console.log('IP ADDRESS IS ', ip ,geo);
 
 
   Logs.create({
