@@ -91,10 +91,10 @@ app.get('/', (req, res, next) => {
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
 
-  var ip= req.headers['x-real-ip'] ;
+  var ip = req.headers['x-real-ip'];
   var geo = geoip.lookup(ip)
 
-  console.log('IP ADDRESS IS ', ip ,geo);
+  console.log('IP ADDRESS IS ', ip, geo);
 
 
   Logs.create({
@@ -102,7 +102,8 @@ app.get('/', (req, res, next) => {
     date: m,
     day: moment(requestTime).format("dddd"),
     hour: moment(requestTime).hour(),
-    ip: ip
+    ip: ip,
+    location: geo
   }).then(result => {
     NumOf.updateOne({ name: 'Visitors' }, { $inc: { 'value': 1 } }).exec()
     res.sendFile(html + '/index.html')
