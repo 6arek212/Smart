@@ -3,7 +3,7 @@ const adminAuth = require('../middleware/check-auth-admin')
 const smsControler = require('../controllers/sms')
 
 
-router.post('/', smsControler.sendMessage)
-// , adminAuth
+router.post('/', adminAuth, smsControler.sendMessage)
+//
 
 module.exports = router

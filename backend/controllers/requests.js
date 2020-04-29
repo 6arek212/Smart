@@ -71,7 +71,8 @@ exports.getRequests = async (req, res, next) => {
   let fetchedRequests
 
   requestQuery
-    .populate('customer device company city issue')
+    .populate('customer', 'firstName lastName phone')
+    .populate('device company city issue')
     .sort({ createdAt: 'desc' })
     .then(result => {
       fetchedRequests = result
@@ -134,7 +135,7 @@ exports.getRequestByCustomerId = (req, res, next) => {
 
 
   requestQuery
-    .select('whereAbout status title createdAt')
+    .select('whereAbout status title otherIssue createdAt')
     .populate('company', 'name')
     .populate('city', 'name')
     .populate('device', 'model')

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { StaticsService } from '../statics.service';
 import { Subscription } from 'rxjs';
 import { Analytics } from 'src/app/models/Analytics';
+import { animations } from '../../../animations'
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   multi: any[];
@@ -46,8 +47,6 @@ export class DashboardComponent implements OnInit {
     this.staticsService.getNumOf()
 
     this.staticsRecordSub = this.staticsService.getAnalyticsListener().subscribe(res => {
-      console.log(res);
-
       this.staticsRecord = res
     })
 

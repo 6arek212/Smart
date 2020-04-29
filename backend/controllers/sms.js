@@ -1,6 +1,6 @@
 const Customer = require('../models/customer')
-const client = require('twilio')(process.env.accountSid, process.env.authToken);
 const errorHandler = require('../utils/error')
+const sms = require('../utils/smsMessages')
 
 
 
@@ -17,40 +17,17 @@ exports.sendMessage = (req, res, next) => {
       })
 
       for (doc of docs) {
-
-        client.messages
-          .create({
-            body: message,
-            from: '+12029914931',
-            to: '+972' + doc.phone
-          })
-          .then(message => console.log('Message sent'))
-          .catch(err => {
-            return errorHandler.errorMessage('Check message field', 500, res, err)
-          }
-          )
-
+        sms.sendMessage(message, doc.phone)
       }
 
     })
 
 
   } else {
-    client.messages
-      .create({
-        body: message,
-        from: '+12029914931',
-        to: '+972' + to
+      sms.sendMessage(message,to)
+      res.status(200).json({
+        message: 'message will be sent'
       })
-      .then(message => {
-        res.status(200).json({
-          message: 'message will be sent'
-        })
-      })
-      .catch(err => {
-        return errorHandler.errorMessage('Check message field', 500, res, err)
-      }
-      )
   }
 
 }

@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 import { RequestDbModel } from '../models/RequestDbModel';
 import { Request } from '../models/Request';
 import { ClientAuthService } from '../client/services/client-auth.service';
-
+import * as io from 'socket.io-client';
+import { AuthService } from '../admin-components/services/auth.service';
 
 const BACKEND_URL = environment.apiUrl + 'requests/'
 
@@ -20,8 +21,52 @@ export class RequestsService {
   private request: Request
   private requestListener = new Subject<Request>()
 
-  constructor(private http: HttpClient, private clientAuthService: ClientAuthService) { }
+  private socket: SocketIOClient.Socket;
 
+
+
+  constructor(private adminAuthService: AuthService, private http: HttpClient, private clientAuthService: ClientAuthService) {
+  }
+
+
+  requestsSocketListener() {
+    this.socket = io(environment.url + 'requests', { query: { token: this.adminAuthService.getToken() } });
+    this.socket.on('requestsChanged', (data) => {
+      console.log(data);
+      const type = data.operationType
+      const doc = data.fullDocument
+
+      switch (type) {
+        case 'insert':
+          this.requests.unshift(doc)
+          this.max++
+          this.requestsListener.next({ requests: [...this.requests], max: this.max })
+          break
+
+        case 'update':
+          const requestId = data.documentKey._id
+          const updatedFields = data.updateDescription.updatedFields
+
+          let request = this.requests.filter(doc => {
+            return doc._id === requestId
+          })[0]
+
+          const newObj = {
+            ...request,
+            ...updatedFields
+          }
+          const index = this.requests.indexOf(request)
+
+          this.requests[index] = newObj
+          this.requestsListener.next({ requests: [...this.requests], max: this.max })
+          break
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.socket?.close()
+  }
 
   getRequestsListener() {
     return this.requestsListener.asObservable()
@@ -34,7 +79,6 @@ export class RequestsService {
 
   getRequests(page: number = 1, pagesize = 10, filter: string = null, search: string = null) {
     const queryParams = `?page=${page}&pagesize=${pagesize}`
-
     this.http.post<{ message: string, requests: Request[], max: number }>(BACKEND_URL + queryParams, { search, filter }).subscribe(res => {
       this.requests = res.requests
       this.max = res.max
@@ -83,12 +127,10 @@ export class RequestsService {
   }
 
 
-  deleteRequest(requestId: string, success) {
-    this.http.delete<{ message: string }>(BACKEND_URL + requestId).subscribe(res => {
-      const newArray = this.requests.filter(req => {
-        return req._id !== requestId
-      })
-      this.requests = newArray
+  deleteRequest(request: Request, success) {
+    this.http.delete<{ message: string }>(BACKEND_URL + request._id).subscribe(res => {
+      const index = this.requests.indexOf(request)
+      this.requests.splice(index, 1)
       this.requestsListener.next({ requests: [...this.requests], max: this.max - 1 })
       success()
     })

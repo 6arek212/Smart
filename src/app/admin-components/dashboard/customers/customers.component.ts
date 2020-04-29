@@ -39,8 +39,6 @@ export class CustomersComponent implements OnInit {
     this.isLoading = true
     this.customerService.getCustomers(null, this.currentPage, this.pageSize)
     this.customersSub = this.customerService.getCustomersListener().subscribe(res => {
-      console.log(res);
-
       this.customers = res.customers
       this.totalCustomers = res.totalCustomers
       this.calPagesNeeded()
@@ -79,7 +77,6 @@ export class CustomersComponent implements OnInit {
 
   calPagesNeeded() {
     let pages = Math.round(this.totalCustomers / this.pageSize)
-    console.log(this.totalCustomers, this.pageSize, pages);
     this.pagesNeeded = pages
   }
 

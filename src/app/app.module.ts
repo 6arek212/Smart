@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RepairListComponent } from './admin-components/repair/repair-list/repair-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './admin-components/header/header.component';
@@ -29,22 +28,17 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 
-import { RepairDetailsComponent } from './admin-components/repair/repair-details/repair-details.component';
 import { AdminComponent } from './admin-components/admin/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCustomerComponent } from './admin-components/add-customer/add-customer.component';
 import { InputErrorComponent } from './utils-components/input-error/input-error.component';
-import { AddRepairComponent } from './admin-components/repair/add-repair/add-repair.component';
 import { DialogMessageComponent } from './utils-components/dialog-message/dialog-message.component';
 import { PickCustomerComponent } from './admin-components/pick-customer/pick-customer.component';
-import { AddDeviceComponent } from './admin-components/add-device/add-device.component';
 import { MainPageComponent } from './client/main-page/main-page.component'
 import { AuthInterceptor } from './auth/auth-interceptor';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './admin-components/dashboard/dashboard/dashboard.component';
 import { VerticalBarsComponent } from './admin-components/dashboard/charts/vertical-bars/vertical-bars.component';
 import { MainDashboardComponent } from './admin-components/dashboard/main-dashboard/main-dashboard.component';
@@ -73,25 +67,21 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditPhoneDialogComponent } from './utils-components/edit-phone-dialog/edit-phone-dialog.component';
 import { ForgotPasswordComponent } from './client/forgot-password/forgot-password.component';
+import { MessagesComponent } from './utils-components/messages/messages.component';
 
-const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', options: {} };
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RepairListComponent,
     LoginComponent,
     SignupComponent,
     HeaderComponent,
     AddCustomerComponent,
-    RepairDetailsComponent,
     AdminComponent,
     InputErrorComponent,
-    AddRepairComponent,
     DialogMessageComponent,
     PickCustomerComponent,
-    AddDeviceComponent,
     MainPageComponent,
     RequestsListComponent,
     DashboardComponent,
@@ -115,6 +105,7 @@ const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', optio
     InfoComponent,
     EditPhoneDialogComponent,
     ForgotPasswordComponent,
+    MessagesComponent,
 
   ],
   imports: [
@@ -126,7 +117,6 @@ const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', optio
     CommonModule,
     HttpClientModule,
     NgxChartsModule,
-    //SocketIoModule.forRoot(config),
 
     NgbModule,
     ModalModule,
@@ -153,6 +143,6 @@ const config: SocketIoConfig = { url: 'https://smart-phone-baqa.com/api/', optio
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, PhoneAuthService, ClientAuthService],
   bootstrap: [AppComponent],
-  entryComponents: [PickCustomerComponent, DialogMessageComponent, AddDeviceComponent,]
+  entryComponents: [PickCustomerComponent, DialogMessageComponent]
 })
 export class AppModule { }

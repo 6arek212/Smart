@@ -89,7 +89,7 @@
                 <p>{{request.city.name}}</p>
               </div>
 
-              <div class="panel-info">
+              <div *ngIf="request.issue" class="panel-info">
                 <p>المشكلة</p>
                 <p>{{request.issue?.name}}</p>
               </div>
@@ -112,6 +112,17 @@
               <div class="panel-info">
                 <p>مكان التواجد</p>
                 <p>{{request.whereAbout}}</p>
+              </div>
+
+
+
+              <div class="panel-info">
+                <p>الاسم</p>
+                <p>{{request.customer.firstName}} {{request.customer.lastName}}</p>
+              </div>
+              <div class="panel-info">
+                <p>رقم الهاتف</p>
+                <p>{{request.customer.phone}}</p>
               </div>
             </div>
 

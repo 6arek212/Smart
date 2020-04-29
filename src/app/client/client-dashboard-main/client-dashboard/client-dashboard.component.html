@@ -73,7 +73,7 @@
                 <p>{{request.city.name}}</p>
               </div>
 
-              <div class="panel-info">
+              <div *ngIf="request.issue" class="panel-info">
                 <p>المشكلة</p>
                 <p>{{request.issue?.name}}</p>
               </div>

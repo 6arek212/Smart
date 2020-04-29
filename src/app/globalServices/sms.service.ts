@@ -16,9 +16,7 @@ export class SMSService {
 
 
   sendMessage(to: string, toAll: boolean, message: string) {
-    this.http.post<{ message: string }>(BACKEND_URL,{to,toAll,message}).subscribe(res=>{
-      console.log(res);
-    })
+    return this.http.post<{ message: string }>(BACKEND_URL,{to,toAll,message})
   }
 
 

@@ -22,6 +22,7 @@ const issuesRoutes = require('./routes/issues')
 const smsRoutes = require('./routes/sms')
 const analyticsRoutes = require('./routes/analytics')
 const forgotPassword = require('./routes/forgotPassword')
+const messagesRouts = require('./routes/messages')
 
 const statisticRout = require('./routes/statistic')
 const phoneAuth = require('./routes/phoneNumberAuth')
@@ -41,11 +42,11 @@ mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster
 
   })
 
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
-mongoose.set('debug', function (coll, method, query, doc, options) {
-  console.log(coll, method);
-});
+// mongoose.set('debug', function (coll, method, query, doc, options) {
+//   console.log(coll, method);
+// });
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -79,6 +80,7 @@ app.use('/api/sms', smsRoutes)
 app.use('/api/analytics', analyticsRoutes)
 app.use('/api/statistic', statisticRout)
 app.use('/api/phoneAuth', phoneAuth)
+app.use('/api/messages', messagesRouts)
 app.use('/api/forgotPassword', forgotPassword)
 
 

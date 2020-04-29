@@ -1,0 +1,15 @@
+
+<div class="messages-container">
+
+  <div *ngIf="!messages || messages.length===0" class="no-messages">
+    <p>لا يوجد اشعارات</p>
+  </div>
+
+
+  <div class="message" *ngFor="let msg of messages">
+    <p>{{msg.text}}</p>
+    <p>{{dateFormat(msg.createdAt)}}</p>
+  </div>
+
+
+</div>

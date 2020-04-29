@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RepairListComponent } from './admin-components/repair/repair-list/repair-list.component';
-import { AddRepairComponent } from './admin-components/repair/add-repair/add-repair.component';
 import { AddCustomerComponent } from './admin-components/add-customer/add-customer.component';
-import { RepairDetailsComponent } from './admin-components/repair/repair-details/repair-details.component';
 import { AdminComponent } from './admin-components/admin/admin.component';
 import { MainPageComponent } from './client/main-page/main-page.component';
 import { LoginComponent } from './auth/login/login.component';

@@ -1,0 +1,16 @@
+.messages-container{
+  padding: 1rem;
+}
+
+
+.messages-container .message{
+  background: #F7F098;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+
+.no-messages{
+  text-align: center;
+}

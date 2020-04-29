@@ -2,7 +2,7 @@
 .dashborad-container {
   min-height: 90vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: row , column;
   direction: rtl !important;
 }
 
@@ -82,16 +82,29 @@
   flex: 2;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 3rem;
 }
 
 
+.dashborad-container .right-container .notification-container .dash-board-header{
+  padding:1rem 1rem 1rem;
+  color: #333;
+  background:  #f9f9f9 ;
+  position: sticky;
+  top: 0;
+}
 
 .dashborad-container .right-container .notification-container {
-  height: 50vh;
-  width: 70%;
+  height: 60vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
   background: #fff;
+  border-radius: 10px;
+  overflow: auto;
+  margin-bottom: 1rem;
 }
+
 
 
 .nav-header{
@@ -126,5 +139,9 @@
   .user h3{
     color: #333;
 
+  }
+
+  .dashborad-container {
+    flex-direction: column;
   }
 }

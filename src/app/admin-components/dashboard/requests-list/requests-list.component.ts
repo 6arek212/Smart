@@ -36,6 +36,8 @@ export class RequestsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.requestService.requestsSocketListener()
+
     this.form = new FormGroup({
       'filter': new FormControl('all'),
       'search': new FormControl()
@@ -97,7 +99,7 @@ export class RequestsListComponent implements OnInit {
 
   onDeletingRequest(request) {
     const confirm = () => {
-      this.requestService.deleteRequest(request._id, () => {
+      this.requestService.deleteRequest(request, () => {
         this.staticsService.getNumOf()
       })
       this.dialog.closeAll()

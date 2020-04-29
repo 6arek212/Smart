@@ -27,7 +27,7 @@ router.get('', (req, res) => {
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
   const lastWeekDate = m._d
 
-  console.log(date, '----------', lastWeekDate);
+ // console.log(date, '----------', lastWeekDate);
 
 
   Logs.aggregate([

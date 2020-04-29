@@ -20,31 +20,33 @@
       <div class="cart-content">
 
 
-        <div *ngIf="isLoading" class="center-container">
-          <div class="spinner-border text-success" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
 
 
-        <form #form="ngForm" (submit)="onSendingMessage(form)" *ngIf="!isLoading">
+
+        <form #form="ngForm" (submit)="onSendingMessage(form)" *ngIf="!isLoading['sms']">
           <div class="input-container">
             <mat-checkbox name="toAll" ngModel #sendToAll>ارسل الي جميع الزبائن</mat-checkbox>
           </div>
 
           <div *ngIf="!sendToAll?.checked" class="input-container">
             <p>رقم الهانف</p>
-            <input name="to" ngModel placeholder="052-0000000" type="tel">
+            <input name="to" ngModel placeholder="052-0000000" type="tel" >
           </div>
 
 
 
           <div class="input-container">
             <p>الرسالة</p>
-            <textarea name="message" ngModel placeholder="Message here..." rows="10"></textarea>
+            <textarea name="message" ngModel placeholder="Message here..." rows="10" required></textarea>
           </div>
 
           <button>أرسل</button>
+
+          <div *ngIf="isLoading['sms']" >
+            <div class="spinner-border text-success" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
         </form>
 
 
@@ -54,6 +56,56 @@
       </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3>ارسال اشعارات</h3>
+      </div>
+
+
+      <div class="cart-content">
+
+
+
+
+
+        <form #form2="ngForm" (submit)="onSendingNotification(form2)" >
+          <div class="input-container">
+            <p>الرسالة</p>
+            <textarea name="message" ngModel placeholder="Message here..." rows="10"></textarea>
+          </div>
+
+          <button *ngIf="!isLoading['message']">أرسل</button>
+
+          <div *ngIf="isLoading['message']" >
+            <div class="spinner-border text-success" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
+        </form>
+
+
+
+
+        <div class="spacer"></div>
+
+      </div>
+
+    </div>
+
+
+
+
+
 
   </div>
 

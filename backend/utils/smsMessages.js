@@ -16,7 +16,6 @@ exports.sendMessage = (message, to) => {
     })
     .catch(err => {
       console.log(err);
-
     }
     )
 }

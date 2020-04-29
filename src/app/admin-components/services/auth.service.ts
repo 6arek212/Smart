@@ -35,6 +35,9 @@ export class AuthService {
     return this.isLoading
   }
 
+  getToken() {
+    return this.token
+  }
 
   getUser() {
     return this.user
@@ -151,9 +154,7 @@ export class AuthService {
 
 
 
-  getToken() {
-    return this.token
-  }
+
 
 
   ///--- Summary ---////
