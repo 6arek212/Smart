@@ -39,54 +39,55 @@
       <div *ngIf="!isLoading">
 
 
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">الاسم الكامل</th>
-              <th scope="col">البلدة</th>
-              <th scope="col">رقم الهاتف</th>
-              <th scope="col">طلبات</th>
-              <th scope="col">طلبات تمت</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
+        <div class="table-responsive">
+          <table class="table table-striped ">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">الاسم الكامل</th>
+                <th scope="col">البلدة</th>
+                <th scope="col">رقم الهاتف</th>
+                <th scope="col">طلبات</th>
+                <th scope="col">طلبات تمت</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
 
 
-          <div *ngIf="!customers || customers.length==0" class="center-container">
-            <p>لا يوجد زبائن </p>
-          </div>
+            <div *ngIf="!customers || customers.length==0" class="center-container">
+              <p>لا يوجد زبائن </p>
+            </div>
 
 
 
-          <tbody>
-            <tr *ngFor="let customer of customers; let i=index">
-              <th scope="row">{{i+1}}</th>
+            <tbody>
+              <tr *ngFor="let customer of customers; let i=index">
+                <th scope="row">{{i+1}}</th>
 
-              <td>
-                <span>{{customer.firstName}} {{customer.lastName}}</span>
-              </td>
+                <td>
+                  <span>{{customer.firstName}} {{customer.lastName}}</span>
+                </td>
 
-              <td>
-                <span>{{customer.city.name}}</span>
-              </td>
+                <td>
+                  <span>{{customer.city.name}}</span>
+                </td>
 
-              <td>{{customer.phone}}</td>
-              <td>{{customer.numOfRequests}}</td>
-              <td>{{customer.numOfDoneRequests}}</td>
-              <td>
-                <div class="action-buttons">
-                  <button class="btn btn-danger" (click)="onDeleteCustomer(customer)"> حذف</button>
-                  <button class="btn btn-success" (click)="editCustomer(customer)">تعديل</button>
-                </div>
-              </td>
+                <td>{{customer.phone}}</td>
+                <td>{{customer.numOfRequests}}</td>
+                <td>{{customer.numOfDoneRequests}}</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-danger" (click)="onDeleteCustomer(customer)"> حذف</button>
+                    <button class="btn btn-success" (click)="editCustomer(customer)">تعديل</button>
+                  </div>
+                </td>
 
-            </tr>
+              </tr>
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
 
-
+        </div>
       </div>
 
       <div class="spacer"></div>
