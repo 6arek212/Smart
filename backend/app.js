@@ -22,7 +22,7 @@ const issuesRoutes = require('./routes/issues')
 const smsRoutes = require('./routes/sms')
 const analyticsRoutes = require('./routes/analytics')
 const forgotPassword = require('./routes/forgotPassword')
-const messagesRouts = require('./routes/messages')
+const notificationsRouts = require('./routes/notifications')
 
 const statisticRout = require('./routes/statistic')
 const phoneAuth = require('./routes/phoneNumberAuth')
@@ -55,7 +55,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
@@ -80,7 +80,7 @@ app.use('/api/sms', smsRoutes)
 app.use('/api/analytics', analyticsRoutes)
 app.use('/api/statistic', statisticRout)
 app.use('/api/phoneAuth', phoneAuth)
-app.use('/api/messages', messagesRouts)
+app.use('/api/notifications', notificationsRouts)
 app.use('/api/forgotPassword', forgotPassword)
 
 

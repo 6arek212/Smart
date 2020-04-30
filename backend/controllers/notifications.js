@@ -1,20 +1,20 @@
-const Message = require('../models/message')
+const Message = require('../models/notification')
 
-exports.getMessages = (req, res, next) => {
+exports.getNotifications = (req, res, next) => {
   Message.find()
     .limit(3)
     .sort({ createdAt: 'desc' })
     .then(docs => {
       res.status(200).json({
-        message: 'Messages fetched successfuly',
-        messages: docs
+        message: 'Notifications fetched successfuly',
+        notifications: docs
       })
     })
 }
 
 
 
-exports.addMessage = (req, res, next) => {
+exports.addNotification = (req, res, next) => {
   const message = new Message({
     text: req.body.message
   })
@@ -28,7 +28,7 @@ exports.addMessage = (req, res, next) => {
 
 
 
-exports.deleteMessage = (req, res, next) => {
+exports.deleteNotification = (req, res, next) => {
   const id = req.params.id
 
   Message.deleteOne({ '_id': id }).then(result => {

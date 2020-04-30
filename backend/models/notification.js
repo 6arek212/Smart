@@ -1,11 +1,11 @@
 let mongoose = require('mongoose');
 
 
-let messageSchema = mongoose.Schema({
+let notificationSchema = mongoose.Schema({
   text: { type: String, required: true },
 },
   {
     timestamps: true
   })
 
-module.exports = mongoose.model('messages', messageSchema);
+module.exports = mongoose.model('notifications', notificationSchema);

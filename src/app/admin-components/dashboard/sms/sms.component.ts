@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { NgForm } from '@angular/forms';
 import { SMSService } from 'src/app/globalServices/sms.service';
-import { MessagesService } from 'src/app/globalServices/messages.service';
+import { NotificationsService } from 'src/app/globalServices/notifications.service';
 
 @Component({
   selector: 'app-sms',
@@ -12,7 +12,7 @@ import { MessagesService } from 'src/app/globalServices/messages.service';
 export class SmsComponent implements OnInit {
   isLoading = []
 
-  constructor(private smsService: SMSService, private messagesService: MessagesService) { }
+  constructor(private smsService: SMSService, private messagesService: NotificationsService) { }
 
   ngOnInit(): void {
     this.isLoading['sms'] = false
@@ -40,7 +40,7 @@ export class SmsComponent implements OnInit {
 
     this.isLoading['message'] = true
 
-    this.messagesService.sendMessage(form.value.message).subscribe(res => {
+    this.messagesService.sendNotification(form.value.message).subscribe(res => {
       this.isLoading['message'] = false
     })
     form.reset()

@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MessagesService } from 'src/app/globalServices/messages.service';
+import { NotificationsService } from 'src/app/globalServices/notifications.service';
 import { dateFormat } from '../utils'
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css'],
-  providers: [MessagesService]
+  providers: [NotificationsService]
 })
 export class MessagesComponent implements OnInit {
   messages: { text: string }[]
   dateFormat: any = dateFormat;
 
-  constructor(private messagesService: MessagesService) { }
+  constructor(private messagesService: NotificationsService) { }
 
   ngOnInit(): void {
-    this.messagesService.messagesSocket()
-    this.messagesService.getMessages()
-    this.messagesService.getMessagesListner().subscribe(res => {
+    this.messagesService.notificationSocket()
+    this.messagesService.getNotifications()
+    this.messagesService.getNotificationsListner().subscribe(res => {
       this.messages = res
     })
   }

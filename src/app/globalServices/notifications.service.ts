@@ -6,15 +6,15 @@ import * as io from 'socket.io-client';
 import { ClientAuthService } from '../client/services/client-auth.service';
 
 
-const BACKEND_URL = environment.apiUrl + 'messages/'
+const BACKEND_URL = environment.apiUrl + 'notifications/'
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class MessagesService {
-  private messages: { text: string }[]
-  private messagesListener = new Subject<{ text: string }[]>()
+export class NotificationsService {
+  private notifications: { text: string }[]
+  private notificationsListener = new Subject<{ text: string }[]>()
   private socket: SocketIOClient.Socket;
 
 
@@ -22,16 +22,16 @@ export class MessagesService {
 
 
 
-  messagesSocket() {
-    this.socket = io(environment.url + 'messages', { query: { token: this.clientAudthService.getToken() } });
-    this.socket.on('messageChange', (data) => {
+  notificationSocket() {
+    this.socket = io(environment.url + 'notifications', { query: { token: this.clientAudthService.getToken() } });
+    this.socket.on('notificationChange', (data) => {
       const type = data.operationType
       const doc = data.fullDocument
 
       switch (type) {
         case 'insert':
-          this.messages.unshift(doc)
-          this.messagesListener.next([...this.messages])
+          this.notifications.unshift(doc)
+          this.notificationsListener.next([...this.notifications])
           break
 
         case 'update':
@@ -46,25 +46,25 @@ export class MessagesService {
     this.socket?.close()
   }
 
-  getMessagesListner() {
-    return this.messagesListener.asObservable()
+  getNotificationsListner() {
+    return this.notificationsListener.asObservable()
   }
 
 
-  getMessages() {
-    this.http.get<{ message: string, messages: { text: string }[] }>(BACKEND_URL)
+  getNotifications() {
+    this.http.get<{ message: string, notifications: { text: string }[] }>(BACKEND_URL)
       .subscribe(res => {
-        this.messages = res.messages
-        this.messagesListener.next([...this.messages])
+        this.notifications = res.notifications
+        this.notificationsListener.next([...this.notifications])
       })
   }
 
-  sendMessage(msg: string) {
+  sendNotification(msg: string) {
     return this.http.post<{ message: string }>(BACKEND_URL, { message: msg })
   }
 
 
-  deleteMessage(id: string) {
+  deleteNotification(id: string) {
     this.http.delete<{
       message: string
     }>(BACKEND_URL + id).subscribe(res => {

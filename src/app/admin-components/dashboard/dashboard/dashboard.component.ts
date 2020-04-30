@@ -8,6 +8,7 @@ import { animations } from '../../../animations'
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
+  providers: [StaticsService]
 })
 export class DashboardComponent implements OnInit {
   multi: any[];
@@ -43,6 +44,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.staticsService.attachAnalyticsListener()
+    this.staticsService.attachNumOfListener()
+
     this.staticsService.getAnalytics()
     this.staticsService.getNumOf()
 

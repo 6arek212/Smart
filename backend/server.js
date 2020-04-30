@@ -65,19 +65,21 @@ server.listen(port);
 
 const io = require('socket.io')(server);
 const Request = require('./models/request')
-const Message = require('./models/message')
+const Notification = require('./models/notification')
+const Log = require('./models/logs')
+const NumOf = require('./models/numOf')
 
 const checkAuthSocket = require('./middleware/check-auth-socket')
 
-
+const numOfListener = NumOf.watch()
 const changeStream = Request.watch();
-const messagesListener = Message.watch();
-
+const messagesListener = Notification.watch();
+const logListener = Log.watch()
 
 const nsp = io.of('/requests');
 nsp.use(checkAuthSocket)
   .on('connection', function (socket) {
-    console.log('admin is connected to requests sockets', io.engine.clientsCount);
+    console.log('admin is connected to requests sockets', nsp.server.engine.clientsCount);
     socket.on("disconnect", (data) => {
       console.log('disconnected from requests ', nsp.server.engine.clientsCount - 1);
     })
@@ -90,23 +92,56 @@ changeStream.on('change', (change) => {
 
 
 
-const messagesSocket = io.of('/messages');
-messagesSocket
+const notificationsSocket = io.of('/notifications');
+notificationsSocket
   .on('connection', function (socket) {
-    console.log('connected to messages', io.engine.clientsCount);
+    console.log('connected to notifications', notificationsSocket.server.engine.clientsCount);
     socket.on("disconnect", (data) => {
-      console.log('disconnected from messages', messagesSocket.server.engine.clientsCount);
+      console.log('disconnected from notifications', notificationsSocket.server.engine.clientsCount);
     })
   });
 
 messagesListener.on('change', (change) => {
-  console.log('change in messsages data');
-  messagesSocket.emit('messageChange', change);
+  console.log('change in notification data');
+  notificationsSocket.emit('notificationChange', change);
+});
+
+
+
+const functions = require('./utils/functions')
+
+const analyticsSocket = io.of('/analytics');
+analyticsSocket
+  .on('connection', function (socket) {
+    console.log('connected to analytics', analyticsSocket.server.engine.clientsCount);
+    socket.on("disconnect", (data) => {
+      console.log('disconnected from analytics', analyticsSocket.server.engine.clientsCount-1);
+    })
+  });
+
+logListener.on('change', (change) => {
+  console.log('change in analytics data');
+  functions.getAnalytics().then(res => {
+    analyticsSocket.emit('analyticsChange', res);
+  })
 });
 
 
 
 
 
+const numOfSocket = io.of('/numOf');
+numOfSocket
+  .on('connection', function (socket) {
+    console.log('connected to numOf', numOfSocket.server.engine.clientsCount);
+    socket.on("disconnect", (data) => {
+      console.log('disconnected from numOf', numOfSocket.server.engine.clientsCount-1);
+    })
+  });
 
-
+numOfListener.on('change', (change) => {
+  console.log('change in analytics data');
+  functions.getNumOf().then(res => {
+    numOfSocket.emit('numOfChange', res);
+  })
+});
