@@ -240,7 +240,8 @@ exports.updateRequest = async (req, res, next) => {
     if (!request)
       return errorHandler.errorMessage('request not found', 404, res)
     else {
-      const devices = await Device.findOne({ '_id': request.device, 'company': op['company'] })
+      const devices = await Device.findOne({ '_id': updateOps['device'] ? updateOps['device'] : request.device, 'company': updateOps['company'] })
+
       if (!devices)
         return errorHandler.errorMessage('device not found', 404, res)
     }
