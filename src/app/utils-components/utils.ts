@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-moment.locale('Asia/hebron')
+moment.locale('he')
 
 
 export const dateFormat = (date: string) => {

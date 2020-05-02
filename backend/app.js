@@ -42,11 +42,11 @@ mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster
 
   })
 
-// mongoose.set('debug', true);
+mongoose.set('debug', true);
 
-// mongoose.set('debug', function (coll, method, query, doc, options) {
-//   console.log(coll, method);
-// });
+mongoose.set('debug', function (coll, method, query, doc, options) {
+  console.log(coll, method);
+});
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')

@@ -9,7 +9,7 @@ router.post('', adminAuth, requestsControler.getRequests)
 
 router.get('/getRequest/:id', checkAuth, requestsControler.getRequest)
 
-router.get('/requestsByCustomerId', checkAuth, requestsControler.getRequestByCustomerId)
+router.get('/requestsByCustomerId', requestsControler.getRequestByCustomerId)
 
 
 router.put('', checkAuth, requestsControler.addRequest)

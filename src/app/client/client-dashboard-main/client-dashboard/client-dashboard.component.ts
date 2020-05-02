@@ -41,7 +41,6 @@ export class ClientDashboardComponent implements OnInit {
   constructor(private requestsService: RequestsService,
     private clientInfoService: ClientInfoService, private dialog: MatDialog) {
     moment.locale('he')
-
   }
 
   ngOnInit(): void {
