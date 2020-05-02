@@ -66,6 +66,7 @@ app.use(bodyParser.json())
 const nightJobs = require('./routes/nightJobs')
 
 
+app.use(express.static(__dirname+'/images'));
 
 
 app.use('/api/repairs', repairsRoutes)

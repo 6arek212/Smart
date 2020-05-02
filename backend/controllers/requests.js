@@ -138,7 +138,7 @@ exports.getRequestByCustomerId = (req, res, next) => {
     .select('whereAbout status title otherIssue createdAt')
     .populate('company', 'name')
     .populate('city', 'name')
-    .populate('device', 'model')
+    .populate('device', 'model image')
     .populate('issue', 'name')
     .sort({ createdAt: 'desc' })
     .then(result => {
@@ -214,6 +214,12 @@ exports.cancelRequest = (req, res, next) => {
 }
 
 
+
+
+
+
+
+
 exports.updateRequest = async (req, res, next) => {
   const { requestId } = req.params
   const updateOps = []
@@ -250,9 +256,13 @@ exports.updateRequest = async (req, res, next) => {
     }
   }
 
+  if (updateOps['otherIssue']) {
+    updateOps['issue'] = null
+  }
 
-
-
+  if (updateOps['issue']) {
+    updateOps['otherIssue'] = null
+  }
 
 
   Request.findOneAndUpdate({ '_id': requestId }, { $set: { ...updateOps } }, { runValidators: true })
