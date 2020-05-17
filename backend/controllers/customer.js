@@ -98,7 +98,7 @@ exports.getCustomerDetails = (req, res, next) => {
   const customerId = req.params.customerId
 
   Customer.findOne({ '_id': customerId })
-    .select('firstName lastName phone city')
+    .select('firstName lastName phone city numOfRequests numOfDoneRequests')
     .populate('city', 'name')
     .then(customer => {
       if (!customer)
