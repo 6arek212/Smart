@@ -6,6 +6,7 @@ const errorHandler = require('../utils/error')
 const Issue = require('../models/issue')
 const Company = require('../models/company')
 const City = require('../models/city')
+const fcm=require('../utils/firebaseConfig')
 
 
 exports.getRequests = async (req, res, next) => {
@@ -301,6 +302,7 @@ exports.updateRequest = async (req, res, next) => {
         case 'DONE':
           Customer.updateOne({ '_id': request.customer }, { $inc: { 'numOfDoneRequests': 1 } }).exec()
           smsMessage.sendMessage('طلبك قد تم  ' + request.device.model + ' ' + request.title + '  شكرا لاختيارك سمارت فون', request.customer.phone)
+          fcm.sendMessage('your request is done '+request.device.model)
           break
         case 'IN-PROGRESS':
           break
