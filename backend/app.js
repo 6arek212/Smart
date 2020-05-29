@@ -3,7 +3,10 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const moment = require('moment');
-var geoip = require('geoip-lite');
+const geoip = require('geoip-lite');
+const admin = require("firebase-admin");
+
+const serviceAccount = require('./utils/serviceAccountKey');
 
 const Request = require('./models/request')
 const Customer = require('./models/customer')
@@ -23,12 +26,19 @@ const smsRoutes = require('./routes/sms')
 const analyticsRoutes = require('./routes/analytics')
 const forgotPassword = require('./routes/forgotPassword')
 const notificationsRouts = require('./routes/notifications')
+const fcmRoutes = require('./routes/fcm')
 
 const statisticRout = require('./routes/statistic')
 const phoneAuth = require('./routes/phoneNumberAuth')
 
 const app = express()
 moment.locale('Asia/Hebron')
+
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://smart-phone-notification.firebaseio.com"
+});
 
 // local :   mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-4zqbh.gcp.mongodb.net/test?retryWrites=true&w=majority
 //mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority
@@ -66,7 +76,7 @@ app.use(bodyParser.json())
 const nightJobs = require('./routes/nightJobs')
 
 
-app.use(express.static(__dirname+'/images'));
+app.use(express.static(__dirname + '/images'));
 
 
 app.use('/api/repairs', repairsRoutes)
@@ -83,6 +93,7 @@ app.use('/api/statistic', statisticRout)
 app.use('/api/phoneAuth', phoneAuth)
 app.use('/api/notifications', notificationsRouts)
 app.use('/api/forgotPassword', forgotPassword)
+app.use('/api/fcm', fcmRoutes)
 
 
 

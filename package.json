@@ -29,6 +29,8 @@
     "bootstrap": "^4.4.1",
     "cron": "^1.8.2",
     "express": "^4.17.1",
+    "firebase": "^7.14.6",
+    "firebase-admin": "^8.12.1",
     "geoip-lite": "^1.4.1",
     "ioredis": "^4.16.1",
     "jquery": "^3.5.0",
