@@ -5,8 +5,13 @@ const mongoose = require('mongoose')
 const moment = require('moment');
 const geoip = require('geoip-lite');
 const admin = require("firebase-admin");
-
 const serviceAccount = require('./utils/serviceAccountKey');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://smart-phone-notification.firebaseio.com"
+});
+
 
 const Request = require('./models/request')
 const Customer = require('./models/customer')
@@ -35,10 +40,7 @@ const app = express()
 moment.locale('Asia/Hebron')
 
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://smart-phone-notification.firebaseio.com"
-});
+
 
 // local :   mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-4zqbh.gcp.mongodb.net/test?retryWrites=true&w=majority
 //mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority
@@ -52,11 +54,11 @@ mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster
 
   })
 
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
-mongoose.set('debug', function (coll, method, query, doc, options) {
-  console.log(coll, method);
-});
+// mongoose.set('debug', function (coll, method, query, doc, options) {
+//   console.log(coll, method);
+// });
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
