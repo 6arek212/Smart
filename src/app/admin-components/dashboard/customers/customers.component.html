@@ -3,7 +3,7 @@
 
 
   <header class="dash-board-header">
-    <h1>الزبائن</h1>
+    <h1>לקוחות</h1>
   </header>
 
 
@@ -13,7 +13,12 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>جميع الزبائن</h3>
+        <h3>לקוחות</h3>
+      </div>
+
+      <div>
+        <button class="btn btn-info add-customer"> + הוסף לקוח</button>
+
       </div>
 
 
@@ -21,18 +26,18 @@
 
         <form [formGroup]="form">
           <mat-form-field appearance="fill">
-            <mat-label>الاسم الكامل / رقم الهاتف</mat-label>
+            <mat-label>שם מלא \ מספר טלפון</mat-label>
             <input formControlName="search" matInput (input)="onGetingCustomers()">
           </mat-form-field>
         </form>
 
-        <button class="btn btn-success" (click)="onGetingCustomers()">بحث</button>
+        <button class="btn btn-success" (click)="onGetingCustomers()">חפש</button>
       </div>
 
 
       <div *ngIf="isLoading" class="center-container">
         <div class="spinner-border text-success" role="status">
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only">טוען...</span>
         </div>
       </div>
 
@@ -44,18 +49,18 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">الاسم الكامل</th>
-                <th scope="col">البلدة</th>
-                <th scope="col">رقم الهاتف</th>
-                <th scope="col">طلبات</th>
-                <th scope="col">طلبات تمت</th>
+                <th scope="col">שם מלא</th>
+                <th scope="col">עיר</th>
+                <th scope="col">מספר טלפון</th>
+                <th scope="col">הקשות</th>
+                <th scope="col">בקשות מוכנות</th>
                 <th scope="col"></th>
               </tr>
             </thead>
 
 
             <div *ngIf="!customers || customers.length==0" class="center-container">
-              <p>لا يوجد زبائن </p>
+              <p>אין לקוחות</p>
             </div>
 
 
@@ -77,8 +82,8 @@
                 <td>{{customer.numOfDoneRequests}}</td>
                 <td>
                   <div class="action-buttons">
-                    <button class="btn btn-danger" (click)="onDeleteCustomer(customer)"> حذف</button>
-                    <button class="btn btn-success" (click)="editCustomer(customer)">تعديل</button>
+                    <button class="btn btn-danger" (click)="onDeleteCustomer(customer)"> מחק</button>
+                    <button class="btn btn-success" (click)="editCustomer(customer)">עריכה</button>
                   </div>
                 </td>
 
@@ -95,7 +100,7 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li [ngClass]="{'page-item disabled': currentPage==1 }">
-            <a class="page-link" (click)="prevPage()">السابق</a>
+            <a class="page-link" (click)="prevPage()">קודם</a>
           </li>
 
           <li class="page-item active"><a class="page-link" (click)="onPage(page1)">{{page1}}</a></li>
@@ -103,7 +108,7 @@
           <li class="page-item"><a class="page-link" *ngIf="page3" (click)="onPage(page3)">{{page3}}</a></li>
 
           <li class="page-item" [ngClass]="{'page-item disabled':  !page2?true:false}">
-            <a class="page-link" (click)="nextPage()">التالي</a>
+            <a class="page-link" (click)="nextPage()">הבא</a>
           </li>
         </ul>
       </nav>

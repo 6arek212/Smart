@@ -6,24 +6,41 @@ const errorHandler = require('../utils/error')
 const Issue = require('../models/issue')
 const Company = require('../models/company')
 const City = require('../models/city')
-const fcm=require('../utils/firebaseConfig')
+const fcm = require('../utils/firebaseConfig')
+const moment = require('moment')
+
+
+
 
 
 exports.getRequests = async (req, res, next) => {
-
   const currentPage = + req.query.page
   const pageSize = +req.query.pagesize
-  const { filter, search } = req.body
+  const { filter, search, date } = req.body
 
   const requestQuery = Request.find();
 
 
 
 
+  if (date) {
+    console.log(date);
+    const mDate = new Date(date)
+    mDate.setHours(0)
+    mDate.setMinutes(0)
+    mDate.setSeconds(0)
+    mDate.setMilliseconds(0)
+
+    const minDate = moment.utc(mDate).format()
+    const maxDate = new Date(minDate)
+    maxDate.setDate(maxDate.getDate() + 1)
+
+    console.log(minDate, maxDate);
+    requestQuery.find({ createdAt: { "$gte": minDate, "$lt": maxDate } });
+  }
+
 
   if (search) {
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
-
     try {
       const customerIds = await Customer.find({
 
@@ -69,6 +86,10 @@ exports.getRequests = async (req, res, next) => {
 
 
 
+
+
+
+
   let fetchedRequests
 
   requestQuery
@@ -88,6 +109,9 @@ exports.getRequests = async (req, res, next) => {
     })
     .catch(err => errorHandler.serverError(err, res))
 }
+
+
+
 
 
 
@@ -302,7 +326,7 @@ exports.updateRequest = async (req, res, next) => {
         case 'DONE':
           Customer.updateOne({ '_id': request.customer }, { $inc: { 'numOfDoneRequests': 1 } }).exec()
           smsMessage.sendMessage('طلبك قد تم  ' + request.device.model + ' ' + request.title + '  شكرا لاختيارك سمارت فون', request.customer.phone)
-          fcm.sendMessage('your request is done '+request.device.model)
+          fcm.sendMessage('Request update', 'your request is done' + request.device.model)
           break
         case 'IN-PROGRESS':
           break

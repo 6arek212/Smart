@@ -1,16 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
 * {
-  font-family: "Cairo", Arial, sans-serif;
+  font-family: "Varela Round" , "Cairo", Arial, sans-serif;
   box-sizing: border-box;
 }
-
-
 h1,
 h3,
 h4,
 h2 {
-  font-family: "Cairo", sans-serif !important;
+  font-family: "Varela Round" , "Cairo", Arial, sans-serif !important;
 }
 
 html,
@@ -140,19 +140,28 @@ a {
   padding: 0.3rem 1rem;
 }
 
-.dashboard-card .panel-data {
-  padding: 1rem;
-  background: rgb(66, 72, 78);
-}
-
-.dashboard-card .panel-data .panel-info {
-  color: #fff;
+.dashboard-card .inner-expansion-panel {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0.2px 0.2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.dashboard-card .panel-data .panel-info p {
-  margin-left: 1rem;
+.dashboard-card .panel-data {
+  width: 100%;
+}
+
+.dashboard-card .panel-data table {
+  width: 100%;
+  margin: 0 !important;
+  background: #f9f9f9 !important;
+  color: #333;
+}
+
+.dashboard-card .panel-data table th {
+  text-align: center !important;
 }
 
 .dashboard-card .panel-date {
@@ -161,6 +170,7 @@ a {
   background: #f4f4f4;
   color: #333;
 }
+
 .dashboard-card .panel-date p {
   margin: 0;
   margin-top: 8px;

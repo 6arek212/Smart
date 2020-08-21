@@ -29,7 +29,13 @@ export class CitiesService {
 
 
   addCity(name: string) {
-    return this.http.post<{ message: string }>(BACKEND_URL, {name})
+    return this.http.post<{ message: string }>(BACKEND_URL, { name })
+  }
+
+
+
+  deleteCity(cityId: string) {
+    return this.http.delete<{ message: string }>(BACKEND_URL + cityId)
   }
 
 }

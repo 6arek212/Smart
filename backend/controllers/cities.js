@@ -32,6 +32,8 @@ exports.getAdminCities = (req, res, next) => {
 exports.deleteCity = (req, res, next) => {
   const cityId = req.params.cityId
 
+  console.log('deleting city ',cityId);
+
   City.findOneAndDelete({ _id: cityId }).then(result => {
     res.status(200).json({
       message: 'Cities deleted successfuly'

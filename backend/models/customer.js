@@ -17,7 +17,8 @@ const customerSchema = mongoose.Schema({
   password: { type: String, required: true, match: /[^A-Za-z0-9]+/ },
   city: { type: mongoose.Schema.Types.ObjectId, ref: "Cities", required: true },
   numOfRequests: { type: Number, default: 0 },
-  numOfDoneRequests: { type: Number, default: 0 }
+  numOfDoneRequests: { type: Number, default: 0 },
+  token: { type: String}
 },
   {
     timestamps: true

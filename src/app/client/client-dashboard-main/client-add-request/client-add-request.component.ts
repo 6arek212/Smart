@@ -13,12 +13,14 @@ import { ClientInfoService } from '../../services/client-info.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Request } from 'src/app/models/Request';
 import { textCheck } from '../../../utils-components/validators'
+import { fadeIn } from 'src/app/my-animations';
 
 @Component({
   selector: 'app-client-add-request',
   templateUrl: './client-add-request.component.html',
   styleUrls: ['./client-add-request.component.css'],
-  providers: [CitiesService, CompaniesService, IssuesService, DevicesService, RequestsService, ClientInfoService]
+  providers: [CitiesService, CompaniesService, IssuesService, DevicesService, RequestsService, ClientInfoService],
+  animations: fadeIn
 })
 export class ClientAddRequestComponent implements OnInit {
   cities

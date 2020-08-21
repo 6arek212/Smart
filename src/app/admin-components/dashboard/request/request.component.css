@@ -1,0 +1,165 @@
+.request-container{
+  position: relative;
+  margin: 1rem 1rem;
+  padding: 2rem 1rem 0 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, .5);
+  overflow: hidden;
+}
+
+
+
+.request-container .status-box span{
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.request-container .request-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.request-container .request-header .status-container{
+  display: flex;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+
+
+.request-container .request-header .device-box{
+  display: flex;
+  flex-direction: row;
+  padding: 0 3rem;
+}
+
+.request-container .request-header .device-model h3, .request-container .request-header .device-model h4{
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: bolder;
+
+}
+
+
+.request-container .request-header .device-model h4{
+  font-size: .9rem;
+}
+
+.request-container .request-header .device-model{
+  margin-left: 1rem;
+}
+
+.request-container .request-header .request-image img{
+  min-width: 60px;
+  max-width: 100px;
+  min-height: 100px;
+  max-height: 150px;
+  margin-right: 2rem;
+}
+
+
+
+.request-container .request-title{
+  font-size: 1.5rem;
+  color: #000;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  width: 70%;
+  background: #f9f9f9;
+  padding: 1rem;
+}
+.request-container .request-title p{
+  display: inline-block;
+}
+
+.request-container .request-content{
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  display: none;
+}
+
+.show{
+  display: flex;
+}
+
+
+.request-container #show-more{
+  color: #1AA2B8;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#arrow{
+  transition: transform 500ms;
+
+}
+
+.rotate-90 {
+  transform: rotate(90deg) ;
+}
+
+.request-container .request-content .content-info{
+  padding: 2rem;
+  margin-top: 1rem;
+  min-height: 150px;
+  min-width: 150px;
+  color: #fff;
+  border-radius: 30px;
+  text-align: center;
+  margin-left: 5px;
+}
+
+
+.request-container .request-content .content-info div{
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+
+.request-container .request-content .content-info p{
+  font-size: .9rem;
+  margin-top: 1rem;
+}
+
+
+.request-container  .actions{
+  display: flex;
+  justify-content: flex-end;
+  width: 70%;
+  margin: auto;
+  margin-top: 4rem;
+
+}
+
+
+.request-container .actions .btn-success{
+  margin-right: 1rem;
+}
+
+.request-container .date{
+  margin-top: 1rem;
+  background: #f8f8f8;
+  transform: translateX(-30%);
+  padding:.5rem 1rem;
+  color: #333;
+  font-weight: bold;
+  border-top-right-radius: 30px;
+  transition: transform 500ms ease-in;
+}
+
+.request-container .date:hover{
+  transform: translateX(-20%)
+}
+
+

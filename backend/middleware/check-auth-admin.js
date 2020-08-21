@@ -8,10 +8,10 @@ module.exports = (req, res, next) => {
     req.adminData =
       { email: decodedToken.email, phone: decodedToken.phone, adminId: decodedToken.adminId }
 
-      console.log('admin Auth ',req.adminData);
+      console.log('AAAAAAAAAAAAAAdmin Auth  -----------> ',req.adminData);
 
 
-    User.find({ 'phone': decodedToken.adminId })
+    User.find({ '_id': decodedToken.adminId })
       .then(result => {
         if (result)
           next()

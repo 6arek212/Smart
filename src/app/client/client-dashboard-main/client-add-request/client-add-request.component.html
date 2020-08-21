@@ -1,85 +1,85 @@
-<div class="main-container">
+<div class="main-container" @fade>
 
 
 
   <header class="dash-board-header">
-    <h1>سمارت فون لعندك</h1>
+    <h1>סמארטפון לידך</h1>
   </header>
 
 
   <div class="dashboard-card">
 
     <div class="card-header">
-      <h3>قم بملاء الملف</h3>
+      <h3>מלא הטופס</h3>
     </div>
 
 
     <form (submit)="onAddingUpdatingRequest()" [formGroup]="form">
       <div class="input-container">
-        <p>عنوان الطلب</p>
+        <p>כותרת הבקשה</p>
         <input formControlName="title" type="text">
-        <app-normal-input-error *ngIf="form.touched && form.get('title').touched" name="title"
+        <app-normal-input-error *ngIf="form.touched && form.get('title').touched" name="כותרת"
           [errors]="form.get('title').errors"></app-normal-input-error>
       </div>
 
       <div class="input-container">
-        <p>نوع شركة الجهاز</p>
+        <p>חברת המכשיר</p>
         <select (change)="onSelectCompany()" formControlName="company">
-          <option value="-1">اختر الشركة</option>
+          <option value="-1">בחר חברה</option>
           <option *ngFor="let company of companies" value={{company._id}}>{{company.name}}</option>
         </select>
-        <app-normal-input-error *ngIf="form.touched && form.get('company').touched" name="company"
+        <app-normal-input-error *ngIf="form.touched && form.get('company').touched" name="חברה"
           [errors]="form.get('company').errors"></app-normal-input-error>
       </div>
 
 
       <div class="input-container">
-        <p>نوع الجهاز</p>
+        <p>סוג מכשיר</p>
         <select formControlName="device">
-          <option value="-1">اختر النوع</option>
+          <option value="-1">בחר סוג</option>
           <option *ngFor="let device of devices" value={{device._id}}>{{device.model}}</option>
           {{form.get('device').updateValueAndValidity()}}
         </select>
 
-        <app-normal-input-error *ngIf="form.touched && form.get('device').touched" name="device"
+        <app-normal-input-error *ngIf="form.touched && form.get('device').touched" name="מכשיר"
           [errors]="form.get('device').errors"></app-normal-input-error>
       </div>
 
 
 
       <div class="input-container">
-        <p>المشكلة</p>
+        <p>בעיה</p>
         <select formControlName="issue" (change)="onChangeIssue()">
-          <option value="-1">اختر المشكلة</option>
+          <option value="-1">בחר בעיה</option>
           <option *ngFor="let issue of issues" value={{issue._id}}>{{issue.name}}</option>
-          <option value="1">مشكلة اخرى</option>
+          <option value="1">בעיה אחרת</option>
         </select>
-        <app-normal-input-error *ngIf="form.touched && form.get('issue').touched" name="issue"
+        <app-normal-input-error *ngIf="form.touched && form.get('issue').touched" name="בעיה"
           [errors]="form.get('issue').errors"></app-normal-input-error>
 
         <div *ngIf="form.get('issue').value && form.get('issue').value==1" class="input-container">
-          <p>مشكلة اخرى</p>
+          <p>בעיה אחרת</p>
           <textarea formControlName="otherIssue" rows="10"></textarea>
-          <app-normal-input-error *ngIf="form.touched && form.get('otherIssue').touched" name="other issue"
-          [errors]="form.get('otherIssue').errors"></app-normal-input-error>
+          <app-normal-input-error *ngIf="form.touched && form.get('otherIssue').touched" name="בעיה אחרת"
+            [errors]="form.get('otherIssue').errors"></app-normal-input-error>
         </div>
 
       </div>
 
       <div class="input-container">
-        <p>المدينة</p>
+        <p>עיר</p>
         <select formControlName="city">
-          <option value="-1">اختر المدينة</option>
+          <option value="-1">בחר עיר</option>
           <option *ngFor="let city of cities" value={{city._id}}>{{city.name}}</option>
         </select>
-        <app-normal-input-error *ngIf="form.touched && form.get('city').touched" name="city"
+        <app-normal-input-error *ngIf="form.touched && form.get('city').touched" name="עיר"
           [errors]="form.get('city').errors"></app-normal-input-error>
       </div>
 
       <div class="input-container">
-        <p>مكان التواجد</p>
+        <p>מיקום</p>
         <input formControlName="whereAbout" type="text">
-        <app-normal-input-error *ngIf="form.touched && form.get('whereAbout').touched" name="where about"
+        <app-normal-input-error *ngIf="form.touched && form.get('whereAbout').touched" name="מיקום"
           [errors]="form.get('whereAbout').errors"></app-normal-input-error>
       </div>
 
@@ -89,8 +89,7 @@
 
 
       <div *ngIf="!isLoading " class="form-button">
-        <button class="green-button"><span *ngIf="mode=='edit'">تعديل</span> <span *ngIf="mode=='add'">اضف
-            طلب</span></button>
+        <button class="green-button"><span *ngIf="mode=='edit'">עריכה</span> <span *ngIf="mode=='add'">הוסף בקשה</span></button>
       </div>
 
     </form>

@@ -1,22 +1,36 @@
 
 const admin = require("firebase-admin");
+const serviceAccount = require('../utils/key');
 
-const registrationToken = 'dnkH2fbzSeiiR3t9-R0JmF:APA91bHTnZ2nJhB-Ljz5JFQwYWIo9D4-LJD5C46zPVOJtnQhXBmHxYUzMfb-7FP9Kv1IM12YgYXgaTV7TB4haNkI1uMHaA3J3Ftf1xma3CBmERiK2LqAo-c067inAo0Ik8T0VPT94rCl';
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://notification-api-23c28.firebaseio.com"
+});
 
 
-exports.sendMessage = (message, token = registrationToken) => {
+const registrationToken = 'c9iActLbTSGX2S7QL1jfRr:APA91bFsBruSu0OjC8NBCrWO8xAPmrRydWpjaQ9-znym0XY5USoeu18jXXYid3Oj8PsBXhbeaDE5o-qDQxnKU1jIGuDXuGnu68JUX5Gyv4-HocuEK8abJaf5-Zb4uJq8goPoGq9ibsoG';
+
+
+exports.sendMessage = (title, message, token = registrationToken) => {
   console.log('sending notification');
 
+  // var payload = {
+  //   notification: {
+  //     title: title,
+  //     body: message
+  //   }
+  // };
 
-  const data = {
+  var message = {
     data: {
-      message: message
-    },
-    token: token
+      title: title,
+      body: message
+    }
+
   };
 
-  admin.messaging().send(data).then(res=>{
-    console.log('notification sent',res);
+  admin.messaging().sendToDevice(token, message).then(res => {
+   // console.log('notification sent', res);
 
   })
     .catch(err => console.log(err)

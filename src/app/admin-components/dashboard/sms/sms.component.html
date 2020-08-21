@@ -13,7 +13,7 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>ارسال رسائل SMS</h3>
+        <h3>שליחת SMS</h3>
       </div>
 
 
@@ -25,26 +25,38 @@
 
         <form #form="ngForm" (submit)="onSendingMessage(form)" *ngIf="!isLoading['sms']">
           <div class="input-container">
-            <mat-checkbox name="toAll" ngModel #sendToAll>ارسل الي جميع الزبائن</mat-checkbox>
+            <mat-checkbox name="toAll" ngModel #sendToAll>שלח לכל הלקוחות</mat-checkbox>
           </div>
 
           <div *ngIf="!sendToAll?.checked" class="input-container">
-            <p>رقم الهانف</p>
+            <p>מספר טלפון</p>
             <input name="to" ngModel placeholder="052-0000000" type="tel" >
+
+            <mat-form-field class="options" appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
+              <mat-label>תפריט</mat-label>
+
+              <mat-select formControlName="filter" value="all">
+                <mat-option value="all">הכל</mat-option>
+                <mat-option value="IN-PROGRESS">בטיפול</mat-option>
+                <mat-option value="DONE">מוכן</mat-option>
+                <mat-option value="CANCEL">בוטל</mat-option>
+              </mat-select>
+
+            </mat-form-field>
           </div>
 
 
 
           <div class="input-container">
-            <p>الرسالة</p>
-            <textarea name="message" ngModel placeholder="Message here..." rows="10" required></textarea>
+            <p>הודעה</p>
+            <textarea name="message" ngModel placeholder="כתוב הודעה" rows="10" required></textarea>
           </div>
 
-          <button>أرسل</button>
+          <button>שלח</button>
 
           <div *ngIf="isLoading['sms']" >
             <div class="spinner-border text-success" role="status">
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only">טוען...</span>
             </div>
           </div>
         </form>
@@ -67,7 +79,7 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>ارسال اشعارات</h3>
+        <h3>שלח התראות לאפליקציה</h3>
       </div>
 
 
@@ -79,15 +91,15 @@
 
         <form #form2="ngForm" (submit)="onSendingNotification(form2)" >
           <div class="input-container">
-            <p>الرسالة</p>
-            <textarea name="message" ngModel placeholder="Message here..." rows="10"></textarea>
+            <p>הודעה</p>
+            <textarea name="message" ngModel placeholder="כתוב הודעה" rows="10"></textarea>
           </div>
 
-          <button *ngIf="!isLoading['message']">أرسل</button>
+          <button *ngIf="!isLoading['message']">שלח</button>
 
           <div *ngIf="isLoading['message']" >
             <div class="spinner-border text-success" role="status">
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only">טוען...</span>
             </div>
           </div>
 

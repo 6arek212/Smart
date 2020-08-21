@@ -11,12 +11,15 @@ import { PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
 import * as momentTimezone from 'moment-timezone';
 import { statusHandler } from 'src/app/utils-components/statusHandler';
+import { animate } from '@angular/animations';
+import { fadeIn, ff } from 'src/app/my-animations';
 
 @Component({
   selector: 'app-client-dashboard',
   templateUrl: './client-dashboard.component.html',
   styleUrls: ['./client-dashboard.component.css'],
-  providers: [RequestsService]
+  providers: [RequestsService],
+  animations: fadeIn
 })
 export class ClientDashboardComponent implements OnInit {
   private requestsSub: Subscription
@@ -31,6 +34,7 @@ export class ClientDashboardComponent implements OnInit {
   numOfRequests = 0
   currentPage = 1
   requestsPerPage = 10
+
 
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']

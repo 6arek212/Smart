@@ -4,13 +4,6 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const moment = require('moment');
 const geoip = require('geoip-lite');
-const admin = require("firebase-admin");
-const serviceAccount = require('./utils/serviceAccountKey');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://smart-phone-notification.firebaseio.com"
-});
 
 
 const Request = require('./models/request')

@@ -1,15 +1,10 @@
-
-
-
-
-.dash-board-header{
+.dash-board-header {
   text-align: right;
 }
 
 .dashboard-card .card-header {
   text-align: right;
 }
-
 
 .main-container .dashboard-card .chart {
   width: 50%;
@@ -21,16 +16,21 @@
   justify-content: center;
 }
 
-
 mat-paginator {
   direction: ltr;
 }
 
-
 @media (max-width: 980px) {
-
-  .main-container .dashboard-card .chart{
+  .main-container .dashboard-card .chart {
     width: 100% !important;
   }
+}
 
+.fade-in {
+  opacity: 0;
+  transition: opacity 250ms ease-in;
+}
+
+.fade-in.appear {
+  opacity: 1;
 }

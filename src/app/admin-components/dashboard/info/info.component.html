@@ -3,7 +3,7 @@
 
 
   <header class="dash-board-header">
-    <h1>معلومات</h1>
+    <h1>עריכת נתונים</h1>
   </header>
 
 
@@ -13,7 +13,7 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>اضافة مدينة</h3>
+        <h3>עריכת ערים</h3>
       </div>
 
       <div class="card-content">
@@ -22,35 +22,39 @@
 
         <div *ngIf="isLoading" class="center-container">
           <div class="spinner-border text-success" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">טוען...</span>
           </div>
         </div>
 
 
 
 
-        <form #cityForm="ngForm" (submit)="onAddingCity(cityForm)">
+        <form #cityForm="ngForm">
           <mat-form-field appearance="fill">
-            <mat-label>اسم الدينة</mat-label>
+            <mat-label>שם עיר</mat-label>
             <input name="city" ngModel matInput>
           </mat-form-field>
 
 
 
-          <button class="btn btn-success">أضف</button>
-
 
 
 
 
           <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
-            <mat-select>
+            <mat-label>בחר</mat-label>
+            <mat-select name="pickCity" ngModel>
               <mat-option *ngFor="let city of cities" [value]="city._id">{{city.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
 
+
+          <div class="action-buttons">
+            <button class="btn btn-success" (submit)="onAddingCity(cityForm)">הוסף</button>
+            <button class="btn btn-danger" (click)="onDeletingCity(cityForm)">מחק</button>
+          </div>
+
         </form>
 
 
@@ -70,7 +74,7 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>اضافة مشكلة</h3>
+        <h3>עריכת בעיות</h3>
       </div>
 
       <div class="card-content">
@@ -79,32 +83,38 @@
 
         <div *ngIf="isLoading" class="center-container">
           <div class="spinner-border text-success" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">טוען...</span>
           </div>
         </div>
 
-        <form #issueForm="ngForm" (submit)="onAddingIssue(issueForm)">
+        <form #issueForm="ngForm">
           <mat-form-field appearance="fill">
-            <mat-label>عنوان المشكلة</mat-label>
+            <mat-label>כותרת הבעיה</mat-label>
             <input name="issue" ngModel matInput>
           </mat-form-field>
 
 
 
-          <button class="btn btn-success">أضف</button>
+
 
 
 
 
 
           <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
-            <mat-select>
+            <mat-label>בחר</mat-label>
+            <mat-select name="pickedIssue" ngModel>
               <mat-option *ngFor="let issue of issues" [value]="issue._id">{{issue.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
 
+          <div class="action-buttons">
+            <button class="btn btn-success" (click)="onAddingIssue(issueForm)">הוסף</button>
+            <button class="btn btn-danger" (click)="onDeletingIssue(issueForm)">מחק</button>
+          </div>
+
+
         </form>
       </div>
     </div>
@@ -119,7 +129,7 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>اضافة شركة</h3>
+        <h3>עריכת חברות</h3>
       </div>
 
 
@@ -128,31 +138,30 @@
 
         <div *ngIf="isLoading" class="center-container">
           <div class="spinner-border text-success" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">טוען...</span>
           </div>
         </div>
 
         <form #companyForm="ngForm" (submit)="onAddingCompany(companyForm)">
           <mat-form-field appearance="fill">
-            <mat-label>اسم الشركة</mat-label>
+            <mat-label>שם חברה</mat-label>
             <input name="company" ngModel matInput>
           </mat-form-field>
 
 
 
-          <button class="btn btn-success">أضف</button>
-
-
-
-
 
           <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
+            <mat-label>בחר</mat-label>
             <mat-select>
               <mat-option *ngFor="let company of companies" [value]="company._id">{{company.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
+          <div class="action-buttons">
+            <button class="btn btn-success">הוסף</button>
+            <button class="btn btn-danger">מחק</button>
+          </div>
 
         </form>
       </div>
@@ -175,7 +184,7 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>اضافة جهاز</h3>
+        <h3>עריכת מכשרים</h3>
       </div>
 
       <div class="card-content">
@@ -184,44 +193,46 @@
 
         <div *ngIf="isLoading" class="center-container">
           <div class="spinner-border text-success" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">טוען...</span>
           </div>
         </div>
 
         <form #deviceForm="ngForm" (submit)="onAddingDevice(deviceForm)">
           <mat-form-field appearance="fill">
-            <mat-label>اسم الجهاز</mat-label>
+            <mat-label>שם מכשיר</mat-label>
             <input name="model" ngModel matInput>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Choose a date</mat-label>
+            <mat-label>בחר תאריך</mat-label>
             <input name="released" ngModel matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
 
+
           <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
+            <mat-label>בחר</mat-label>
             <mat-select ngModel name="company">
               <mat-option *ngFor="let company of companies" [value]="company._id">{{company.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
-
-          <button class="btn btn-success">أضف</button>
-
-
-
+          <div class="action-buttons">
+            <button class="btn btn-success">הוסף</button>
+            <button class="btn btn-danger">מחק</button>
+          </div>
 
 
           <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
+            <mat-label>בחר</mat-label>
             <mat-select>
               <mat-option *ngFor="let device of devices" [value]="device._id">{{device.model}}</mat-option>
             </mat-select>
           </mat-form-field>
+
+
 
 
         </form>

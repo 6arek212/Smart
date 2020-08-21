@@ -9,7 +9,7 @@ router.get('', citiesController.getCities)
 router.get('/admin', adminAuth, citiesController.getAdminCities)
 
 
-router.delete('/:id', adminAuth, checkAuth, citiesController.deleteCity)
+router.delete('/:cityId', adminAuth, citiesController.deleteCity)
 
 
 router.post('', adminAuth, citiesController.addCity)

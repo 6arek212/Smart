@@ -77,14 +77,17 @@ export class RequestsService {
     return this.requestListener.asObservable()
   }
 
-  getRequests(page: number = 1, pagesize = 10, filter: string = null, search: string = null) {
+  getRequests(page: number = 1, pagesize = 10, filter: string = null, search: string = null, date: Date = null) {
+    console.log(page, pagesize, filter, search, date);
+
     const queryParams = `?page=${page}&pagesize=${pagesize}`
-    this.http.post<{ message: string, requests: Request[], max: number }>(BACKEND_URL + queryParams, { search, filter }).subscribe(res => {
+    this.http.post<{ message: string, requests: Request[], max: number }>(BACKEND_URL + queryParams, { search, filter, date }).subscribe(res => {
       this.requests = res.requests
       this.max = res.max
       this.requestsListener.next({ requests: [...this.requests], max: res.max })
     })
   }
+
 
 
   getRequestsByCustomerId(page: number = 1, pagesize = 10) {

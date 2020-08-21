@@ -1,10 +1,17 @@
-<p *ngIf="errors && errors['required']">{{name}} is <b>required</b></p>
-<p *ngIf="errors &&errors['email'] ">please enter a valid email</p>
-<p *ngIf="errors &&errors['minlength']">{{name}} must be at least
-  {{errors.minlength.requiredLength}} charachters</p>
-<p *ngIf="errors &&errors['maxlength']">{{name}} must be no longer than
-  {{errors.maxlength.requiredLength}} charachters</p>
-<p *ngIf="errors &&errors['phoneNumber']">phone number not valid</p>
-<p *ngIf="errors &&errors['name']">name must contain letters only</p>
-<p *ngIf="errors &&errors['passwordNotMatch']">Passwords not match</p>
-<p *ngIf="errors &&errors['text']">{{name}} must contain letters and spaces only</p>
+<p *ngIf="errors && errors['required']"> {{name}} הינו שדה חובה </p>
+
+<p *ngIf="errors &&errors['email'] ">מייל לא תקין</p>
+
+<p *ngIf="errors &&errors['minlength']">צריך להיות לפחות {{name}}
+  {{errors.minlength.requiredLength}} תווים </p>
+
+<p *ngIf="errors &&errors['maxlength']">תווים {{errors.maxlength.requiredLength}} אסור להיות ארוך מ {{name}}
+   </p>
+
+<p *ngIf="errors &&errors['phoneNumber']">מספר טלפון לא תקין</p>
+
+<p *ngIf="errors &&errors['name']">השם חייב להכיל אותיות בלבד</p>
+
+<p *ngIf="errors &&errors['passwordNotMatch']">סיסמה לא מתאימה</p>
+
+<p *ngIf="errors &&errors['text']">יכול להכיל אותיות ורבחים בלבד {{name}}</p>

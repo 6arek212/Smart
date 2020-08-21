@@ -13,3 +13,67 @@ ngx-charts-number-card {
 mat-paginator {
   direction: ltr;
 }
+
+.show-all{
+  background: none;
+  margin-top: 1rem;
+}
+
+.dashboard-card .search{
+  flex: 1;
+  width: 100%;
+  padding:5px;
+}
+
+.dashboard-card .search-options{
+  width: 50%;
+  margin: auto;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+
+.dashboard-card .search-options .search-options-1{
+  display: flex;
+  flex-direction: row,column;
+  flex-wrap: wrap;
+}
+
+.dashboard-card .search-options .options{
+  padding:5px;
+  width: 100%;
+  flex: 1;
+
+}
+.dashboard-card .search-options .date{
+  width: 100%;
+  flex: 1;
+  padding:5px;
+}
+
+.dashboard-card .search-box .btn-danger{
+  margin-right: 1rem;
+}
+
+.dashboard-card .search-box .btn-success{
+  padding-right: 5rem;
+  padding-left: 5rem;
+}
+
+.add-request{
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+
+@media (max-width: 980px) {
+  .dashboard-card .search-options .search-options-1{
+    flex-direction: column;
+  }
+  .dashboard-card .search-options .options{
+    margin: 0;
+  }
+}

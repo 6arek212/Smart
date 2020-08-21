@@ -27,3 +27,7 @@
   justify-content: center;
 }
 
+
+.dashboard-card .card-content .action-buttons .btn-success{
+  margin-left: 1rem;
+}

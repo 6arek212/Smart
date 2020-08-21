@@ -68,7 +68,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditPhoneDialogComponent } from './utils-components/edit-phone-dialog/edit-phone-dialog.component';
 import { ForgotPasswordComponent } from './client/forgot-password/forgot-password.component';
 import { MessagesComponent } from './utils-components/messages/messages.component';
-
+import {MatIconModule} from '@angular/material/icon';
+import { RequestComponent } from './admin-components/dashboard/request/request.component'
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { MessagesComponent } from './utils-components/messages/messages.componen
     EditPhoneDialogComponent,
     ForgotPasswordComponent,
     MessagesComponent,
+    RequestComponent,
 
   ],
   imports: [
@@ -121,6 +123,7 @@ import { MessagesComponent } from './utils-components/messages/messages.componen
     NgbModule,
     ModalModule,
 
+    MatIconModule,
     MatSnackBarModule,
     MatNativeDateModule,
     MatDatepickerModule,

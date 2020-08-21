@@ -15,7 +15,9 @@
   margin-right: 1rem;
 }
 
-
+.cards-container .add-customer{
+ margin-top: 1rem;
+}
 
 .cards-container .search-box mat-form-field {
   text-align: right;

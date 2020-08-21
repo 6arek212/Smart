@@ -29,6 +29,10 @@ export class IssuesService {
 
 
   addIssue(name: string) {
-    return this.http.post<{ message: string }>(BACKEND_URL, {name})
+    return this.http.post<{ message: string }>(BACKEND_URL, { name })
+  }
+
+  deleteIssue(issueId: string) {
+    return this.http.delete<{ message: string }>(BACKEND_URL + issueId)
   }
 }

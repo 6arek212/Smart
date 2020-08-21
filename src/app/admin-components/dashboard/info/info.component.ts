@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.css'],
-  providers:[DevicesService,CompaniesService,IssuesService,CitiesService]
+  providers: [DevicesService, CompaniesService, IssuesService, CitiesService]
 })
 export class InfoComponent implements OnInit {
   minDate: Date;
@@ -33,7 +33,7 @@ export class InfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.maxDate = new Date();
-    this.minDate=new Date('2005')
+    this.minDate = new Date('2005')
 
     this.cityService.getCites()
     this.citiesSub = this.cityService.getCitiesListener().subscribe(cities => {
@@ -68,10 +68,28 @@ export class InfoComponent implements OnInit {
   }
 
 
+  onDeletingCity(form: NgForm) {
+    const cityId = form.value.pickCity
+    console.log(cityId);
+    if (!form.value.pickCity)
+      return
+    this.cityService.deleteCity(cityId).subscribe(res => {
+      this.cityService.getCites()
+    })
+  }
+
+
   onAddingIssue(form: NgForm) {
     const issue = form.value.issue
     this.issueService.addIssue(issue).subscribe(res => {
       console.log(res);
+      this.issueService.getIssues()
+    })
+  }
+
+  onDeletingIssue(form: NgForm) {
+    const issueId = form.value.pickedIssue
+    this.issueService.deleteIssue(issueId).subscribe(res => {
       this.issueService.getIssues()
     })
   }
@@ -89,8 +107,8 @@ export class InfoComponent implements OnInit {
 
 
   onAddingDevice(form: NgForm) {
-    const {company,released,model}=form.value
-    this.deviceService.addDevice(model,released,company).subscribe(res=>{
+    const { company, released, model } = form.value
+    this.deviceService.addDevice(model, released, company).subscribe(res => {
       console.log(res);
       this.deviceService.getDevices()
     })

@@ -12,10 +12,12 @@ export const isScrolledIntoView =  (elem) => {
 
 
 
-export const fadeIn =  () => {
 
 
 
+
+
+  export const fadeIn =  () => {
 //   $(window).scroll(function () {
 //     var mypos = $(window).scrollTop();
 //     $(".fadeIn").each(function () {

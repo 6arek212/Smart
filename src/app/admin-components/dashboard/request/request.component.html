@@ -1,0 +1,107 @@
+<div class="request-container">
+
+
+
+
+  <div class="request-header">
+
+    <div class="status-container">
+      <div class="status" [ngStyle]="statusHandler(request.status)">
+      </div>
+      <div>
+        <span *ngIf="request.status=='DONE'" [ngStyle]="statusTextColorHandler(request.status)">מוכן</span>
+        <span *ngIf="request.status=='IN-PROGRESS'" [ngStyle]="statusTextColorHandler(request.status)">בטיפול</span>
+        <span *ngIf="request.status=='CANCEL'" [ngStyle]="statusTextColorHandler(request.status)">בוטל</span>
+      </div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+    <div class="device-box">
+      <div class="device-model">
+        <h3>{{request.device.model}}</h3>
+        <h4>{{request.company.name}}</h4>
+      </div>
+
+      <div class="request-image">
+        <img [src]="request.device.image" alt="">
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+
+
+
+
+  <div class="request-title">
+    <p>כותרת : </p>
+    <p>{{request.title}}</p>
+  </div>
+
+
+  <div id="show-more" (click)="showMore(request._id)">
+    <a  >הצג מידע</a>
+    <img id="arrow" [class]="request._id" src="../../../../assets/img/down-arrow.png" alt="">
+  </div>
+
+  <div class="request-content" [id]="request._id">
+
+    <div class="content-info" style="background:#D33142;">
+      <div>עיר</div>
+      <p>{{request.city.name}}</p>
+    </div>
+
+    <div class="content-info" style="background:#269F3E;">
+      <div>בעיה</div>
+      <p>{{request.issue?.name}}</p>
+    </div>
+
+
+
+
+
+    <div class="content-info" style="background:#35383F;">
+      <div>חברה</div>
+      <p>{{request.company.name}}</p>
+    </div>
+
+
+
+    <div class="content-info" style="background:#1AA2B8;">
+      <div>איפה נמצא</div>
+      <p>{{request.whereAbout}}</p>
+    </div>
+
+
+    <div class="content-info" style="background:#F87E02;">
+      <div>שם לקוח</div>
+      <p>{{request.customer.firstName}} {{request.customer.lastName}}</p>
+    </div>
+
+
+    <div class="content-info" style="background:#668032;">
+      <div>מספר טלפון</div>
+      <p>{{request.customer.phone}}</p>
+    </div>
+
+
+    <div *ngIf="request.otherIssue" class="content-info" style="background:#0074F2; flex-basis: 100%;">
+      <div>בעיה אחרת</div>
+      <p>{{request.otherIssue}}</p>
+    </div>
+
+  </div>
+
+
+  <div class="actions">
+    <button class="btn btn-danger" (click)="onDeletingRequest(request)">מחק</button>
+    <button class="btn btn-success" (click)="onUpdatingStatus(request)">לסיום בקשרה</button>
+  </div>
+
+  <div class="date">
+    <p>{{dateFormat(request.createdAt)}}</p>
+    <p>{{fullDateFormat(request.createdAt)}}</p>
+  </div>
+</div>

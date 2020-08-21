@@ -7,4 +7,7 @@ router.get('', checkAuth, issuesControler.getIssues)
 
 router.post('', adminAuth, issuesControler.addIssue)
 
+router.delete('/:issueId', adminAuth, issuesControler.deleteIssue)
+
+
 module.exports = router

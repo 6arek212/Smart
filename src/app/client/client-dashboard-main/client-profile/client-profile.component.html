@@ -1,16 +1,16 @@
-<div class="main-container">
+<div class="main-container" @fade>
 
 
 
   <header class="dash-board-header">
-    <h1>الملف الشخصي</h1>
+    <h1>דף אישי</h1>
   </header>
 
   <div class="center-content-container">
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>معلومات عامة</h3>
+        <h3>מידע כללי</h3>
       </div>
 
 
@@ -20,48 +20,48 @@
       <form (submit)="onUpdate()" [formGroup]="form">
 
         <div class="input-container">
-          <p>الاسم الشخصي</p>
+          <p>שם פרטי</p>
           <input formControlName="firstName" type="text">
-          <app-normal-input-error *ngIf="form.touched && form.get('firstName').touched" name="firstName"
+          <app-normal-input-error *ngIf="form.touched && form.get('firstName').touched" name="שם פרטי"
             [errors]="form.get('firstName').errors"></app-normal-input-error>
         </div>
 
 
         <div class="input-container">
-          <p>العائلة</p>
+          <p>שם משפחה</p>
           <input formControlName="lastName" type="text">
-          <app-normal-input-error *ngIf="form.touched && form.get('lastName').touched" name="lastName"
+          <app-normal-input-error *ngIf="form.touched && form.get('lastName').touched" name="שם משפחה"
             [errors]="form.get('lastName').errors"></app-normal-input-error>
         </div>
 
 
 
         <div class="input-container">
-          <p>رقم الهاتف</p>
+          <p>מספר טלפון</p>
           <div class="inner-input-container">
             <input type="text" [value]="customer?.phone" disabled>
-            <p class="link" (click)="editPhone()">تعديل</p>
+            <p class="link" (click)="editPhone()">עריכה</p>
           </div>
         </div>
 
 
 
         <div class="input-container">
-          <p>المدينة</p>
+          <p>עיר</p>
           <select formControlName="city">
-            <option value="-1">اختر المدينة</option>
+            <option value="-1">בחר עיר</option>
             <option *ngFor="let city of cities" value={{city._id}}>{{city.name}}</option>
           </select>
-          <app-normal-input-error *ngIf="form.touched && form.get('city').touched" name="city"
+          <app-normal-input-error *ngIf="form.touched && form.get('city').touched" name="עיר"
             [errors]="form.get('city').errors"></app-normal-input-error>
         </div>
 
 
-        <button *ngIf="!isLoading" class="green-button">تعديل</button>
+        <button *ngIf="!isLoading" class="green-button">עריכה</button>
 
         <div class="spinner" *ngIf="isLoading">
           <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">טוען ...</span>
           </div>
         </div>
 

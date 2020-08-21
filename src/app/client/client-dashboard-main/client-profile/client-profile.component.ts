@@ -9,12 +9,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { selectInput, nameCheck } from '../../../utils-components/validators'
 import { ClientAuthService } from '../../services/client-auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { fadeIn } from 'src/app/my-animations';
 
 @Component({
   selector: 'app-client-profile',
   templateUrl: './client-profile.component.html',
   styleUrls: ['./client-profile.component.css'],
-  providers: [CitiesService, ClientInfoService]
+  providers: [CitiesService, ClientInfoService],
+  animations: fadeIn
 })
 export class ClientProfileComponent implements OnInit {
   cities

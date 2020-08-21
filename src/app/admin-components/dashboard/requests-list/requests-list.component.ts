@@ -18,7 +18,6 @@ import { MatSelectChange } from '@angular/material/select';
   providers: [RequestsService]
 })
 export class RequestsListComponent implements OnInit {
-
   requests
   private requestsSub: Subscription
 
@@ -30,6 +29,8 @@ export class RequestsListComponent implements OnInit {
   isLoading = false
   form: FormGroup
 
+  maxDate: Date
+  minDate: Date
 
   constructor(private requestService: RequestsService, private dialog: MatDialog, private staticsService: StaticsService) {
     moment.locale('he')
@@ -38,13 +39,20 @@ export class RequestsListComponent implements OnInit {
   ngOnInit(): void {
     this.requestService.requestsSocketListener()
 
+
+    const fullYear = new Date().getFullYear()
+    this.maxDate = new Date()
+    this.minDate = new Date(fullYear - 10, 0, 1)
+
+
     this.form = new FormGroup({
       'filter': new FormControl('all'),
-      'search': new FormControl()
+      'search': new FormControl(),
+      'date': new FormControl(new Date())
     })
 
     this.isLoading = true
-    this.requestService.getRequests(this.currentPage, this.pageSize)
+    this.requestService.getRequests(this.currentPage, this.pageSize, null, this.form.value.search, this.form.value.date)
     this.requestsSub = this.requestService.getRequestsListener().subscribe(req => {
       this.requests = req.requests
       this.totalRequests = req.max
@@ -52,6 +60,18 @@ export class RequestsListComponent implements OnInit {
     })
   }
 
+  clearInputs(){
+    this.form.reset()
+    this.form.controls.filter.setValue('all')
+    this.requestService.getRequests(this.currentPage, this.pageSize, null, this.form.value.search, this.form.value.date)
+  }
+
+
+  showAll(){
+    $(".request-content")
+    .fadeToggle(500)
+    .css("display","flex")
+  }
 
   onChangeFilter(e: MatSelectChange) {
     var filter = e.value
@@ -60,31 +80,27 @@ export class RequestsListComponent implements OnInit {
       filter = null
 
     this.form.updateValueAndValidity()
-    this.requestService.getRequests(this.currentPage, this.pageSize, filter)
-  }
+    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search, this.form.value.date)
+    }
 
 
 
   onSearch() {
-    console.log(this.form);
+    console.log(this.form.value.date);
 
     var filter = this.form.value.filter
     if (filter === 'all')
       filter = null
 
-    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search)
-  }
 
+    const mDate = (this.form.value.date as Date)
+    if(mDate){
+      mDate.setHours(0)
+      mDate.setMinutes(0)
+      mDate.setSeconds(0)
+    }
 
-
-
-  dateFormat(date: string) {
-    return moment(date).fromNow()
-  }
-
-  fullDateFormat(date: string) {
-    let timezoneDate = momentTimezone(date)
-    return timezoneDate.tz('Asia/hebron').format('LLLL')
+    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search, this.form.value.date)
   }
 
 
@@ -93,41 +109,6 @@ export class RequestsListComponent implements OnInit {
     this.currentPage = pageData.pageIndex + 1
     this.staticsService.getNumOf()
     this.requestService.getRequests(this.currentPage, this.pageSize)
-  }
-
-
-
-  onDeletingRequest(request) {
-    const confirm = () => {
-      this.requestService.deleteRequest(request, () => {
-        this.staticsService.getNumOf()
-      })
-      this.dialog.closeAll()
-    }
-    this.dialog.open(DialogMessageComponent, { data: { buttons: true, title: 'حذف طلب', message: 'هل أنت متأكد من حذف الطلب ؟', confirm } })
-  }
-
-
-
-  onUpdatingStatus(request) {
-    const updateOps = [
-      { name: 'status', value: 'DONE' }
-    ]
-
-
-    const confirm = () => {
-      this.requestService.updateReuqest(request._id, updateOps).subscribe(res => {
-        request.status = 'DONE'
-      })
-      this.dialog.closeAll()
-    }
-
-    this.dialog.open(DialogMessageComponent, {
-      data: {
-        buttons: true, title: 'اتمام طلب',
-        message: 'هل أنت متأكد من اتمام الطلب ؟', confirm
-      }
-    })
   }
 
 
