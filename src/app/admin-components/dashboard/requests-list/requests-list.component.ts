@@ -60,17 +60,17 @@ export class RequestsListComponent implements OnInit {
     })
   }
 
-  clearInputs(){
+  clearInputs() {
     this.form.reset()
     this.form.controls.filter.setValue('all')
     this.requestService.getRequests(this.currentPage, this.pageSize, null, this.form.value.search, this.form.value.date)
   }
 
 
-  showAll(){
+  showAll() {
     $(".request-content")
-    .fadeToggle(500)
-    .css("display","flex")
+      .fadeToggle(500)
+      .css("display", "flex")
   }
 
   onChangeFilter(e: MatSelectChange) {
@@ -81,26 +81,22 @@ export class RequestsListComponent implements OnInit {
 
     this.form.updateValueAndValidity()
     this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search, this.form.value.date)
-    }
+  }
 
 
 
   onSearch() {
-    console.log(this.form.value.date);
-
     var filter = this.form.value.filter
     if (filter === 'all')
       filter = null
 
 
-    const mDate = (this.form.value.date as Date)
-    if(mDate){
-      mDate.setHours(0)
-      mDate.setMinutes(0)
-      mDate.setSeconds(0)
-    }
+    const mDate = (this.form.value.date as Date).toUTCString()
 
-    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search, this.form.value.date)
+    console.log(this.form.value.date);
+
+
+    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search,mDate)
   }
 
 

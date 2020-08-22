@@ -8,7 +8,8 @@ const Company = require('../models/company')
 const City = require('../models/city')
 const fcm = require('../utils/firebaseConfig')
 const moment = require('moment')
-
+const momentTz = require('moment-timezone')
+moment.locale('utc')
 
 
 
@@ -24,18 +25,18 @@ exports.getRequests = async (req, res, next) => {
 
 
   if (date) {
-    console.log(date);
-    const mDate = new Date(date)
-    mDate.setHours(0)
-    mDate.setMinutes(0)
-    mDate.setSeconds(0)
-    mDate.setMilliseconds(0)
+    console.log('input date : ',new Date(date));
+    // const mDate = new Date(date)
+    // mDate.setHours(0)
+    // mDate.setMinutes(0)
+    // mDate.setSeconds(0)
+    // mDate.setMilliseconds(0)
 
-    const minDate = moment.utc(mDate).format()
+    const minDate =new Date(moment(date).startOf('day').format())
     const maxDate = new Date(minDate)
     maxDate.setDate(maxDate.getDate() + 1)
 
-    console.log(minDate, maxDate);
+    console.log('search Date : ',minDate, maxDate);
     requestQuery.find({ createdAt: { "$gte": minDate, "$lt": maxDate } });
   }
 

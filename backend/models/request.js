@@ -21,7 +21,8 @@ const RequestSchema = mongoose.Schema({
   whereAbout: { type: String, match: /^([a-z\u0590-\u05fe\u0621-\u064A]+\s)*[a-z\u0590-\u05fe\u0621-\u064A]+$/ },
   status: {
     type: String, default: 'IN-PROGRESS', enum: ['DONE', 'IN-PROGRESS', 'CANCEL']
-  }
+  },
+  price: { type: Number, min: 0, max: 10000 }
 },
   {
     timestamps: true
