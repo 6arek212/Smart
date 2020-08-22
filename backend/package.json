@@ -16,7 +16,11 @@
     "twilio": "^3.42.0",
     "cron": "^1.8.2",
     "node-schedule": "^1.3.2",
-    "geoip-lite": "^1.4.1"
+    "geoip-lite": "^1.4.1",
+    "firebase": "^7.14.6",
+    "firebase-admin": "^8.12.1",
+    "moment-timezone": "^0.5.28"
+
   },
   "engines": {
     "node": "12.16.1"
