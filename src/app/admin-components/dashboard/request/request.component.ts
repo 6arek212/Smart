@@ -7,6 +7,8 @@ import { RequestsService } from 'src/app/globalServices/requests.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMessageComponent } from 'src/app/utils-components/dialog-message/dialog-message.component';
 import { StaticsService } from '../statics.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-request',
@@ -15,6 +17,7 @@ import { StaticsService } from '../statics.service';
 })
 export class RequestComponent implements OnInit {
   @Input() request
+  url = environment.url
 
 
   constructor(private requestService: RequestsService, private dialog: MatDialog, private staticsService: StaticsService) {
@@ -26,15 +29,15 @@ export class RequestComponent implements OnInit {
   }
 
   showMore(id) {
-      console.log(id);
+    console.log(id);
 
-      $(".request-content#"+id)
-     .fadeToggle(500)
-     .css("display","flex")
+    $(".request-content#" + id)
+      .fadeToggle(500)
+      .css("display", "flex")
 
 
-     $("#arrow."+id)
-     .toggleClass('rotate-90')
+    $("#arrow." + id)
+      .toggleClass('rotate-90')
   }
 
   statusHandler(status) {
