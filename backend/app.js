@@ -93,7 +93,6 @@ app.use('/api/fcm', fcmRoutes)
 
 
 
-app.use(express.static(html));
 
 
 app.get('/', (req, res, next) => {
@@ -121,6 +120,7 @@ app.get('/', (req, res, next) => {
     .catch(err => console.log(err))
 
 })
+app.use(express.static(html));
 
 app.get('/*', (req, res, next) => {
   res.sendFile(html + '/index.html')
