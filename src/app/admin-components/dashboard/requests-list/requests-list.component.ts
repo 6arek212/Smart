@@ -91,9 +91,9 @@ export class RequestsListComponent implements OnInit {
       filter = null
 
 
-    const mDate = (this.form.value.date as Date).toUTCString()
+    const mDate = (this.form.value.date as Date).toString()
 
-    console.log(this.form.value.date);
+    console.log(mDate);
 
 
     this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search,mDate)
