@@ -25,16 +25,13 @@ exports.getRequests = async (req, res, next) => {
 
 
   if (date) {
-    console.log('input date : ',new Date(date));
-    // const mDate = new Date(date)
-    // mDate.setHours(0)
-    // mDate.setMinutes(0)
-    // mDate.setSeconds(0)
-    // mDate.setMilliseconds(0)
+    const mDate = moment(date).utc().utcOffset(0).format()
 
-    const minDate =new Date(moment(date).startOf('day').format())
-    const maxDate = new Date(minDate)
-    maxDate.setDate(maxDate.getDate() + 1)
+    console.log('input date : ',date);
+
+
+    const minDate =moment().utc(date).startOf('day').format()
+    const maxDate = moment(date).utc().endOf('day').format()
 
     console.log('search Date : ',minDate, maxDate);
     requestQuery.find({ createdAt: { "$gte": minDate, "$lt": maxDate } });
