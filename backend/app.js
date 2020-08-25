@@ -100,7 +100,12 @@ app.get('/', (req, res, next) => {
   var m = moment().utcOffset(0);
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
-  var ip = req.headers['x-real-ip'];
+  var ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress ||
+  req.socket.remoteAddress ||
+  (req.connection.socket ? req.connection.socket.remoteAddress : null);
+
+  //var ip = req.headers['x-real-ip'];
   var geo = geoip.lookup(ip)
 
   console.log('IP ADDRESS IS ', ip, geo);
