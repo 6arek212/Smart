@@ -2,7 +2,7 @@
 
   <div class="login-container">
     <header>
-      <h1>تسجيل مستخدم</h1>
+      <h1>הרשמת משתמש חדש</h1>
     </header>
 
 
@@ -11,39 +11,39 @@
 
       <mat-step [stepControl]="forms['personalInfo']">
         <form [formGroup]="forms['personalInfo']">
-          <ng-template matStepLabel>معلومات شخصية</ng-template>
+          <ng-template matStepLabel>מידע אישי</ng-template>
           <div class="input-container">
-            <p>الاسم الشخصي</p>
+            <p>שם פרטי</p>
             <input formControlName="firstName" type="text">
-            <app-normal-input-error *ngIf="forms['personalInfo'].get('firstName').touched" name="first name"
+            <app-normal-input-error *ngIf="forms['personalInfo'].get('firstName').touched" name="שם פרטי"
               [errors]="forms['personalInfo'].get('firstName').errors"></app-normal-input-error>
           </div>
 
           <div class="input-container">
-            <p>العائلة</p>
+            <p>שם משפחה</p>
             <input formControlName="lastName" type="text">
-            <app-normal-input-error *ngIf="forms['personalInfo'].get('lastName').touched" name="last name"
+            <app-normal-input-error *ngIf="forms['personalInfo'].get('lastName').touched" name="שם משפחה"
               [errors]="forms['personalInfo'].get('lastName').errors"></app-normal-input-error>
           </div>
 
           <div class="input-container">
-            <p>المدينة</p>
+            <p>עיר</p>
             <select id="cities" formControlName="city">
-              <option value="-1">اختر المدينة</option>
+              <option value="-1">בחר עיר</option>
               <option *ngFor="let city of cities" value={{city._id}}>{{city.name}}</option>
             </select>
-            <app-normal-input-error *ngIf="forms['personalInfo'].get('city').touched" name="city"
+            <app-normal-input-error *ngIf="forms['personalInfo'].get('city').touched" name="עיר"
               [errors]="forms['personalInfo'].get('city').errors"></app-normal-input-error>
           </div>
 
 
           <mat-radio-group formControlName="gender">
-            <mat-radio-button value="male">ذكر</mat-radio-button>
-            <mat-radio-button value="female">انثى</mat-radio-button>
+            <mat-radio-button value="male">זכר</mat-radio-button>
+            <mat-radio-button value="female">נקבה</mat-radio-button>
           </mat-radio-group>
 
           <div>
-            <button class="green-button" matStepperNext>التالي</button>
+            <button class="green-button" matStepperNext>הבא</button>
           </div>
         </form>
       </mat-step>
@@ -51,14 +51,26 @@
 
 
       <mat-step [stepControl]="forms['phoneAuth']">
-        <form class="full-width" [formGroup]="forms['phoneAuth']">
-          <ng-template matStepLabel>رقم الهاتف</ng-template>
-          <app-phone-auth (isDone)="isDone($event,stepper)"></app-phone-auth>
+        <form [formGroup]="forms['phoneAuth']">
+          <ng-template matStepLabel>מספר טלפון</ng-template>
+          <!-- <app-phone-auth (isDone)="isDone($event,stepper)"></app-phone-auth> -->
 
-          <!-- <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button class="green-button" matStepperNext>التالي</button>
-          </div> -->
+
+          <div class="input-container">
+            <p>מספר טלפון</p>
+            <input formControlName="phone" type="text">
+            <app-normal-input-error *ngIf="forms['phoneAuth'].get('phone').touched" name="מספר טלפון"
+              [errors]="forms['phoneAuth'].get('phone').errors"></app-normal-input-error>
+          </div>
+
+
+          <div>
+            <button mat-button matStepperPrevious>אחורה</button>
+            <button class="green-button" matStepperNext>הבא</button>
+          </div>
+
+
+
         </form>
       </mat-step>
 
@@ -66,26 +78,26 @@
 
       <mat-step [stepControl]="forms['password']">
         <form  [formGroup]="forms['password']">
-          <ng-template matStepLabel>كلمة السر</ng-template>
+          <ng-template matStepLabel>סיסמה</ng-template>
 
           <div class="input-container">
             <p>كلمة السر</p>
             <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"  type="password"
             formControlName="password">
-            <app-normal-input-error *ngIf="forms['password'].get('password').touched" name="password"
+            <app-normal-input-error *ngIf="forms['password'].get('password').touched" name="סיסמה"
             [errors]="forms['password'].get('password').errors"></app-normal-input-error>
           </div>
           <div class="input-container">
             <p>تأكيد كلمة السر</p>
             <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" (change)="checkPasswordMatch()" type="password" formControlName="verifyPassword" >
-            <app-normal-input-error *ngIf="forms['password'].get('verifyPassword').touched" name="verify-password"
+            <app-normal-input-error *ngIf="forms['password'].get('verifyPassword').touched" name="אימות סיסמה"
             [errors]="forms['password'].get('verifyPassword').errors"></app-normal-input-error>
           </div>
 
 
           <div>
-            <button class="green-button" (click)="onSingUp()">تسجيل</button>
-            <button mat-button (click)="stepper.reset()">اعاده</button>
+            <button class="green-button" (click)="onSingUp()">הרשם</button>
+            <button mat-button (click)="stepper.reset()">התחל מחדש</button>
           </div>
 
         </form>
@@ -95,7 +107,7 @@
 
     <div class="has-account">
 
-      <p>تملك حساب قم بتسجيل الدخول <span class="link" routerLink="/client/login">هنا</span></p>
+      <p>יש לך כבר חשבון לחץ <span class="link" routerLink="/client/login">כאן</span></p>
 
     </div>
 

@@ -140,7 +140,7 @@ numOfSocket
   });
 
 numOfListener.on('change', (change) => {
-  console.log('change in analytics data');
+  console.log('change in numOf data');
   functions.getNumOf().then(res => {
     numOfSocket.emit('numOfChange', res);
   })

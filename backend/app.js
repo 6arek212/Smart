@@ -72,6 +72,7 @@ const nightJobs = require('./routes/nightJobs')
 
 
 app.use(express.static(__dirname + '/images'));
+app.use(express.static(__dirname + '/videos'));
 
 
 app.use('/api/repairs', repairsRoutes)

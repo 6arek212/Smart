@@ -9,6 +9,7 @@ import { ClientAuthService } from '../services/client-auth.service';
 import { CustomerDbModel } from '../../models/CustomerDbModel'
 import { PhoneAuthService } from 'src/app/utils-components/phone-auth/phone-auth.service';
 
+
 @Component({
   selector: 'app-client-signup',
   templateUrl: './client-signup.component.html',
@@ -49,8 +50,8 @@ export class ClientSignupComponent implements OnInit {
     })
 
     this.forms['phoneAuth'] = new FormGroup({
-      phoneIsValid: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(3)]
+      phone: new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)]
       })
     })
 
@@ -92,7 +93,7 @@ export class ClientSignupComponent implements OnInit {
         return
     }
 
-    const { phoneNumber, countryCode } = this.phoneAuthService.getPhoneNumberAndCountryCode()
+    // const { phoneNumber, countryCode } = this.phoneAuthService.getPhoneNumberAndCountryCode()
 
 
 
@@ -101,8 +102,8 @@ export class ClientSignupComponent implements OnInit {
       lastName: this.forms['personalInfo'].get('lastName').value,
       city: this.forms['personalInfo'].get('city').value,
       gender: this.forms['personalInfo'].get('gender').value,
-      phone: phoneNumber,
-      countryCode,
+      phone: this.forms['phoneAuth'].get('phone').value,
+      countryCode: "+972",
       password: this.forms['password'].get('password').value
     }
 

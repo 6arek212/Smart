@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogMessageComponent } from '../../utils-components/dialog-message/dialog-message.component';
 import { isScrolledIntoView } from '../../utils-components/jqueryUtils'
 import * as $ from "jquery";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-page',
@@ -11,6 +12,7 @@ import * as $ from "jquery";
 })
 export class MainPageComponent implements OnInit {
   show = true
+  url = environment.url
 
   constructor(private dilaog: MatDialog) {
 
@@ -37,17 +39,17 @@ export class MainPageComponent implements OnInit {
     const video = document.getElementById('video') as HTMLVideoElement
     const isInView = isScrolledIntoView(video)
 
-    if (isInView && video.muted) {
-      video.controls = true
-      video.muted = false
-      video.currentTime = 0
-      $('#video').animate({ volume: 1}, 500);
-    }
-    else if (!isInView && !video.muted) {
-      $('#video').animate({ volume: 0}, 500);
-      video.controls = false
-      video.muted = true
-    }
+    // if (isInView && video.muted) {
+    //   video.controls = true
+    //   video.muted = false
+    //   video.currentTime = 0
+    //   $('#video').animate({ volume: 1}, 500);
+    // }
+    // else if (!isInView && !video.muted) {
+    //   $('#video').animate({ volume: 0}, 500);
+    //   video.controls = false
+    //   video.muted = true
+    // }
   }
 
 

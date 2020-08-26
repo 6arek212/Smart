@@ -4,9 +4,10 @@
   min-height: 100%;
   width: 100%;
   background: linear-gradient(
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 8)
+      to right,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, .9)
     ),
     url("../../../assets/img/client-bg.png");
   background-position: top center;
@@ -149,16 +150,16 @@ h3 {
 
 .section-2 video{
   width: 100%;
-  padding: 0;
-  margin: 0;
-  margin: 0 auto;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, .7);
-  border-radius: 12px;
+  height: 100%;
+  margin: auto;
+  /* box-shadow: 5px 5px 10px rgba(0, 0, 0, .7);
+  border-radius: 12px; */
 }
 
 .section-2 .video-container{
   width: 50%;
   margin: auto;
+
 }
 
 
