@@ -79,6 +79,7 @@ export class RequestsListComponent implements OnInit {
     if (filter === 'all')
       filter = null
 
+      this.isLoading = true
     this.form.updateValueAndValidity()
     this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search, this.form.value.date)
   }
@@ -89,14 +90,8 @@ export class RequestsListComponent implements OnInit {
     var filter = this.form.value.filter
     if (filter === 'all')
       filter = null
-
-
-    const mDate = (this.form.value.date as Date).toString()
-
-    console.log(mDate);
-
-
-    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search,mDate)
+    this.isLoading = true
+    this.requestService.getRequests(this.currentPage, this.pageSize, filter, this.form.value.search, this.form.value.date)
   }
 
 
