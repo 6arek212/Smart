@@ -3,11 +3,12 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { CitiesService } from 'src/app/globalServices/cities.service';
 import { Subscription } from 'rxjs';
-import { selectInput, nameCheck, matchPassword } from '../../utils-components/validators'
+import { selectInput, nameCheck, matchPassword ,phoneNumber} from '../../utils-components/validators'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ClientAuthService } from '../services/client-auth.service';
 import { CustomerDbModel } from '../../models/CustomerDbModel'
 import { PhoneAuthService } from 'src/app/utils-components/phone-auth/phone-auth.service';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class ClientSignupComponent implements OnInit {
 
     this.forms['phoneAuth'] = new FormGroup({
       phone: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)]
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)],
+        asyncValidators:[phoneNumber]
       })
     })
 
@@ -85,6 +87,31 @@ export class ClientSignupComponent implements OnInit {
     matchPassword(this.forms['password'].controls.password, this.forms['password'].controls.verifyPassword);
     (this.forms['password'].controls.verifyPassword as FormControl).markAsTouched()
   }
+
+
+
+  checkPhoneNumber(steper: MatHorizontalStepper) {
+    if (this.forms['phoneAuth'].invalid)
+      return
+    console.log(this.forms['phoneAuth'].value.phone);
+
+    const form = this.forms['phoneAuth'] as FormGroup
+
+    this.phoneAuthService.checkIfInUse(this.forms['phoneAuth'].value.phone).subscribe(res => {
+      form.controls.phone.setErrors(null)
+      form.updateValueAndValidity()
+      console.log(res,form);
+      steper.next()
+    }, err => {
+      console.log(err);
+      switch (err.status) {
+        case 401:
+          form.controls.phone.setErrors({ inUse: true })
+          break
+      }
+    })
+  }
+
 
 
   onSingUp() {

@@ -39,9 +39,9 @@ export class PhoneAuthService {
     return this.isVerifiedListener.asObservable()
   }
 
-  reset(){
-    this.phoneAuthId=null
-    this.isVerified=false
+  reset() {
+    this.phoneAuthId = null
+    this.isVerified = false
     this.isVerifiedListener.next(false)
   }
 
@@ -71,4 +71,8 @@ export class PhoneAuthService {
     })
   }
 
+
+  checkIfInUse(phone: string) {
+    return this.http.post<{ message: string }>(BASE_URL + 'phoneAuth/checkPhoneNumber', { phone: phone })
+  }
 }

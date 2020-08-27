@@ -58,7 +58,7 @@
 
           <div class="input-container">
             <p>מספר טלפון</p>
-            <input formControlName="phone" type="text">
+            <input formControlName="phone" type="tel">
             <app-normal-input-error *ngIf="forms['phoneAuth'].get('phone').touched" name="מספר טלפון"
               [errors]="forms['phoneAuth'].get('phone').errors"></app-normal-input-error>
           </div>
@@ -66,7 +66,7 @@
 
           <div>
             <button mat-button matStepperPrevious>אחורה</button>
-            <button class="green-button" matStepperNext>הבא</button>
+            <button class="green-button" (click)="checkPhoneNumber(stepper)">הבא</button>
           </div>
 
 
@@ -77,21 +77,22 @@
 
 
       <mat-step [stepControl]="forms['password']">
-        <form  [formGroup]="forms['password']">
+        <form [formGroup]="forms['password']">
           <ng-template matStepLabel>סיסמה</ng-template>
 
           <div class="input-container">
             <p>كلمة السر</p>
-            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"  type="password"
-            formControlName="password">
+            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" type="password"
+              formControlName="password">
             <app-normal-input-error *ngIf="forms['password'].get('password').touched" name="סיסמה"
-            [errors]="forms['password'].get('password').errors"></app-normal-input-error>
+              [errors]="forms['password'].get('password').errors"></app-normal-input-error>
           </div>
           <div class="input-container">
             <p>تأكيد كلمة السر</p>
-            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" (change)="checkPasswordMatch()" type="password" formControlName="verifyPassword" >
+            <input placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              (change)="checkPasswordMatch()" type="password" formControlName="verifyPassword">
             <app-normal-input-error *ngIf="forms['password'].get('verifyPassword').touched" name="אימות סיסמה"
-            [errors]="forms['password'].get('verifyPassword').errors"></app-normal-input-error>
+              [errors]="forms['password'].get('verifyPassword').errors"></app-normal-input-error>
           </div>
 
 

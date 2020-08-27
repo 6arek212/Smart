@@ -15,6 +15,26 @@ router.get('', async (req, res, next) => {
 })
 
 
+router.post('/checkPhoneNumber', (req, res, next) => {
+
+  const phone = req.body.phone
+  if (!phone)
+    return res.status(404).json({
+      message: 'No phone number provided'
+    })
+
+
+  Customer.findOne({ 'phone': phone })
+    .then(result => {
+      if (!result)
+        return res.status(200).json({ message: 'phone number is uniqe' })
+      res.status(401).json({ message: 'phone number is in use' })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+})
+
 
 
 
