@@ -99,9 +99,7 @@ const getPdf = async (receipt, name) => {
 
   const browser = await puppeteer.launch({
     headless: false,
-    args: ["--no-sandbox"],
-    ignoreDefaultArgs: ['--disable-extensions'],
-    executablePath: '/usr/bin/chromium-browser'
+
   });
   const page = await browser.newPage();
   await page.setContent(content)
