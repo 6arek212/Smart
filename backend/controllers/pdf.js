@@ -43,53 +43,75 @@ function numberWithCommas(x) {
 const getPrice = async (products) => {
   let newPrice = 0
   for (let i = 0; i < products.length; i++) {
-    newPrice +=  (products[i].price*products[i])
+    newPrice += (products[i].price * products[i].amount)
   }
   return newPrice
 }
 
 
-exports.getReceipt = async (req, res, next) => {
 
-  if (req.body.products == null || req.body.products.length == 0)
-    return res.status(402).json({
-      message: 'no products found'
+
+
+
+
+
+
+exports.getReceipt = async (req, res, next) => {
+  let docId
+  try {
+
+    if (req.body.products == null || req.body.products.length == 0)
+      return res.status(402).json({
+        message: 'no products found'
+      })
+
+    const price = await getPrice(req.body.products)
+
+    const receipt = {
+      fullName: req.body.fullName,
+      idNumber: req.body.idNumber,
+      phoneNumber: req.body.phoneNumber,
+      address: req.body.address,
+      products: req.body.products,
+      price: price,
+      notes: req.body.notes
+    }
+
+
+    const receiptsNum = await numOf.findOneAndUpdate({ name: 'Receipts' }, { $inc: { 'value': 1 } })
+    const id = receiptsNum.value
+    receipt.id = id
+    docId = id
+    console.log('my id ', receipt);
+
+
+    const name = (new Date()).getTime() + '.pdf'
+    const stram = fss.createReadStream(await getPdf(receipt, name))
+    await stram.pipe(res)
+
+
+    const storeReceipt = new Receipt({
+      ...receipt,
+      fileName: name,
+      id: id
     })
 
-  const price = await getPrice(req.body.products)
-
-  const receipt = {
-    fullName: req.body.fullName,
-    idNumber: req.body.idNumber,
-    phoneNumber: req.body.phoneNumber,
-    address: req.body.address,
-    products: req.body.products,
-    price: price,
-    notes: req.body.notes
+    await storeReceipt.save()
   }
-
-
-  const receiptsNum = await numOf.findOneAndUpdate({ name: 'Receipts' }, { $inc: { 'value': 1 } })
-  const id = receiptsNum.value
-  receipt.id = id
-
-  console.log('my id ', receipt);
-
-
-  const name = (new Date()).getTime() + '.pdf'
-  const stram = fss.createReadStream(await getPdf(receipt, name))
-  await stram.pipe(res)
-
-
-  const storeReceipt = new Receipt({
-    ...receipt,
-    fileName: name,
-    id: id
-  })
-
-  await storeReceipt.save()
-
+  catch (err) {
+    if (docId != null)
+      await numOf.findOneAndUpdate({ name: 'Receipts' }, { $inc: { 'value': -1 } })
+      res.status(500).json({
+        message:'error while getting receipt'
+      })
+  }
 }
+
+
+
+
+
+
 
 
 
