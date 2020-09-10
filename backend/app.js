@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const moment = require('moment');
 const geoip = require('geoip-lite');
-const fs=require('fs')
+const fs = require('fs')
 
 
 const Request = require('./models/request')
@@ -126,7 +126,8 @@ app.get('/', (req, res, next) => {
     location: geo
   }).then(result => {
     NumOf.updateOne({ name: 'Visitors' }, { $inc: { 'value': 1 } }).exec()
-    res.sendFile(html + '/index.html')
+    const stram = fs.createReadStream(html + '/index.html')
+    stram.pipe(res)
   })
     .catch(err => console.log(err))
 
@@ -134,7 +135,7 @@ app.get('/', (req, res, next) => {
 app.use(express.static(html));
 
 app.get('/*', (req, res, next) => {
-  const stram = fs.createReadStream(fileName)
+  const stram = fs.createReadStream(html + '/index.html')
   stram.pipe(res)
 })
 
