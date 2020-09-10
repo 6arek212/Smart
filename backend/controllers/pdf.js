@@ -1,4 +1,3 @@
-const PDFDocument = require('pdfkit');
 const fs = require('fs-extra');
 const path = require('path')
 const html = path.join(__dirname, "../", 'pdf/')
