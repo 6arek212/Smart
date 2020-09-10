@@ -43,7 +43,7 @@ function numberWithCommas(x) {
 const getPrice = async (products) => {
   let newPrice = 0
   for (let i = 0; i < products.length; i++) {
-    newPrice +=  (products[i].price*products[i].amount)
+    newPrice +=  (products[i].price*products[i])
   }
   return newPrice
 }
@@ -97,10 +97,7 @@ const getPdf = async (receipt, name) => {
   const fileName = html + name
   const content = await compile('recipt', receipt)
 
-  const browser = await puppeteer.launch({
-    headless: false,
-
-  });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.setContent(content)
   await page.pdf({
