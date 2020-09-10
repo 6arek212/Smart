@@ -69,7 +69,8 @@ import { EditPhoneDialogComponent } from './utils-components/edit-phone-dialog/e
 import { ForgotPasswordComponent } from './client/forgot-password/forgot-password.component';
 import { MessagesComponent } from './utils-components/messages/messages.component';
 import {MatIconModule} from '@angular/material/icon';
-import { RequestComponent } from './admin-components/dashboard/request/request.component'
+import { RequestComponent } from './admin-components/dashboard/request/request.component';
+import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/receipt-form.component'
 
 
 @NgModule({
@@ -108,6 +109,7 @@ import { RequestComponent } from './admin-components/dashboard/request/request.c
     ForgotPasswordComponent,
     MessagesComponent,
     RequestComponent,
+    ReceiptFormComponent,
 
   ],
   imports: [

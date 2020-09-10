@@ -3,8 +3,7 @@ const errorHandler = require('../utils/error')
 const sms = require('../utils/smsMessages')
 const https = require('https');
 
-let username = 'tarik212';
-let password = 'Tarik212';
+
 
 exports.sendMessage = (req, res, next) => {
   const { toAll, to, message } = req.body
@@ -36,43 +35,7 @@ exports.sendMessage = (req, res, next) => {
 
 
 
-
-
 exports.ss = (req, res, next) => {
 
-  let postData = JSON.stringify({
-    'to': ['+9720525145565'],
-    'body': 'Hello World!'
-  });
-
-  let options = {
-    hostname: 'api.bulksms.com',
-    port: 443,
-    path: '/v1/messages',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': postData.length,
-      'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64')
-    }
-  };
-
-  let request = https.request(options, (resp) => {
-    console.log('statusCode:', resp.statusCode);
-    let data = '';
-    resp.on('data', (chunk) => {
-      data += chunk;
-    });
-    resp.on('end', () => {
-      console.log("Response:", data);
-    });
-  });
-
-  request.on('error', (e) => {
-    console.error(e);
-  });
-
-  request.write(postData);
-  request.end();
 
 }

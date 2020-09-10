@@ -15,22 +15,31 @@ router.get('/numOf', (req, res, next) => {
 
 router.get('/numOfObject', (req, res, next) => {
   NumOf.find().select('value name')
-    .then(result => {
-      res.status(200).json(result)
+    .then(results => {
+      let obj = {}
+      for (result in results) {
+        obj[result.name] = obj[result.value]
+      }
+      res.status(200).json(obj)
     })
 })
 
 
 
 router.post('', (req, res, next) => {
+  // NumOf.create({
+  //   name: "Customers"
+  // })
+  // NumOf.create({
+  //   name: "Visitors"
+  // })
+  // NumOf.create({
+  //   name: "Requests"
+  // })
+
   NumOf.create({
-    name:"Customers"
-  })
-  NumOf.create({
-    name:"Visitors"
-  })
-  NumOf.create({
-    name:"Requests"
+    name: "Receipts",
+    value: 1000
   })
 })
 

@@ -15,13 +15,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(error);
+
         let errorMsg = "قم بفحص اتصال الانترنت !"
         if (error.error.message) {
           errorMsg = error.error.message
         }
         console.log(this.dialog.openDialogs);
 
-        if (this.dialog.openDialogs.length <2)
+        if (this.dialog.openDialogs.length < 2)
           this.dialog.open(DialogMessageComponent, { data: { title: 'خطاء', message: errorMsg } })
         return throwError(error)
       })

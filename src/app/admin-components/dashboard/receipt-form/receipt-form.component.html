@@ -1,0 +1,133 @@
+<div class="main-container">
+
+
+
+  <header class="dash-board-header">
+    <h1>חשבניות</h1>
+  </header>
+
+
+  <div class="dashboard-card">
+    <div class="card-header">
+      <h3>הצגת בקשות</h3>
+    </div>
+    <div class="forms-container">
+      <form class="info-container" [formGroup]="form">
+
+        <mat-form-field appearance="fill">
+          <mat-label>שם מלא</mat-label>
+          <input formControlName="fullName" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="form.get('fullName').touched" name="שם מלא"
+        [errors]="form.get('fullName').errors"></app-normal-input-error>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>ת"ז</mat-label>
+          <input formControlName="idNumber" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="form.get('idNumber').touched" name="ת.ז"
+        [errors]="form.get('idNumber').errors"></app-normal-input-error>
+
+        <mat-form-field appearance="fill">
+          <mat-label>מספר טלפון</mat-label>
+          <input formControlName="phoneNumber" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="form.get('phoneNumber').touched" name="מספר טלפון"
+        [errors]="form.get('phoneNumber').errors"></app-normal-input-error>
+
+        <mat-form-field appearance="fill">
+          <mat-label>כתובת</mat-label>
+          <input formControlName="address" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="form.get('address').touched" name="כתובת"
+        [errors]="form.get('address').errors"></app-normal-input-error>
+
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>הערות</mat-label>
+          <textarea formControlName="notes" cols="40" rows="10" maxlength="400" matInput></textarea>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="form.get('notes').touched" name="הערות"
+        [errors]="form.get('notes').errors"></app-normal-input-error>
+
+
+        <button class="btn btn-success" (click)="getReceipt()">שלח</button>
+
+      </form>
+
+
+      <div class="spacer"></div>
+
+
+      <form class="product-form" [formGroup]="productForm">
+        <mat-form-field appearance="fill">
+          <mat-label>שם מוצר</mat-label>
+          <input formControlName="product" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="productForm.get('product').touched" name="מוצר"
+        [errors]="productForm.get('product').errors"></app-normal-input-error>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>מחיר</mat-label>
+          <input formControlName="price" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="productForm.get('price').touched" name="מחיר"
+              [errors]="productForm.get('price').errors"></app-normal-input-error>
+
+
+
+        <mat-form-field appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
+          <mat-label>תשלום</mat-label>
+          <mat-select formControlName="payment" value="-1">
+            <mat-option value="-1">בחר</mat-option>
+            <mat-option value="cash">מזומן</mat-option>
+            <mat-option value="credit">כרטיס אשראי</mat-option>
+          </mat-select>
+          <app-normal-input-error *ngIf="productForm.get('payment').touched" name="תשלום"
+              [errors]="productForm.get('payment').errors"></app-normal-input-error>
+
+        </mat-form-field>
+
+        <button class="btn btn-success" (click)="addProduct()">{{status?'עדכן':'הוסף'}}</button>
+
+
+        <div *ngFor="let pr of products">
+          <div>
+
+
+            <div class="product">
+              <div>
+                <p>שם מוצר:</p>
+                <span>{{pr.name}}</span>
+              </div>
+
+              <div>
+                <p>תשלום:</p>
+                <span>{{pr.payment=='credit'?'כרטיס אשראי':'מזומן'}}</span>
+              </div>
+
+              <div>
+                <p>מחיר:</p>
+                <span>{{pr.price}}</span>
+              </div>
+
+
+            </div>
+            <button class="btn btn-primary" (click)="updateProduct(pr)">עדכן</button>
+            <button class="btn btn-danger" (click)="removeProduct(pr)">הסר</button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+
+
+  </div>
+
+
+</div>

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const moment = require('moment');
 const geoip = require('geoip-lite');
+const fs=require('fs')
 
 
 const Request = require('./models/request')
@@ -25,7 +26,7 @@ const analyticsRoutes = require('./routes/analytics')
 const forgotPassword = require('./routes/forgotPassword')
 const notificationsRouts = require('./routes/notifications')
 const fcmRoutes = require('./routes/fcm')
-
+const pdfRoutes = require('./routes/pdf')
 const statisticRout = require('./routes/statistic')
 const phoneAuth = require('./routes/phoneNumberAuth')
 
@@ -46,6 +47,9 @@ mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster
     console.log('Connection to DataBase failed', err);
 
   })
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 // mongoose.set('debug', true);
 
@@ -72,6 +76,7 @@ const nightJobs = require('./routes/nightJobs')
 
 
 app.use(express.static(__dirname + '/images'));
+app.use(express.static(__dirname + '/pdf'));
 app.use(express.static(__dirname + '/videos'));
 
 
@@ -90,7 +95,7 @@ app.use('/api/phoneAuth', phoneAuth)
 app.use('/api/notifications', notificationsRouts)
 app.use('/api/forgotPassword', forgotPassword)
 app.use('/api/fcm', fcmRoutes)
-
+app.use('/api/pdf', pdfRoutes)
 
 
 
@@ -102,9 +107,9 @@ app.get('/', (req, res, next) => {
   m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
   var ip = req.headers['x-forwarded-for'] ||
-  req.connection.remoteAddress ||
-  req.socket.remoteAddress ||
-  (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    (req.connection.socket ? req.connection.socket.remoteAddress : null);
 
   //var ip = req.headers['x-real-ip'];
   var geo = geoip.lookup(ip)
@@ -129,7 +134,8 @@ app.get('/', (req, res, next) => {
 app.use(express.static(html));
 
 app.get('/*', (req, res, next) => {
-  res.sendFile(html + '/index.html')
+  const stram = fs.createReadStream(fileName)
+  stram.pipe(res)
 })
 
 

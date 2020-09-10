@@ -1,0 +1,49 @@
+mat-form-field{
+  display: block;
+  text-align: start;
+}
+
+
+
+
+
+.forms-container{
+  display: flex;
+  padding: 2rem;
+}
+
+.info-container{
+  flex-basis: 30%;
+}
+
+
+.product-form{
+  flex-basis: 45%;
+}
+
+
+.product{
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, .4);
+  margin-top: 1rem;
+  padding: 1rem;
+  justify-content: space-between;
+  background: #f9f9f9;
+}
+
+
+
+.product div{
+  display: flex;
+  flex-direction: row;
+}
+
+.product div p{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.product div span{
+  margin-right: .5rem;
+  font-size: .9rem;
+}

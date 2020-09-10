@@ -1,10 +1,10 @@
-exports.notAuthorized = (err, req) => {
+exports.notAuthorized = (err, res=null) => {
   console.log(err);
-
-  req.status(401).json({
-    message: 'Not Authorized',
-    err
-  })
+  if (res)
+    res.status(401).json({
+      message: 'Not Authorized',
+      err
+    })
 
 }
 

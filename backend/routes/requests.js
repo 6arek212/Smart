@@ -20,7 +20,7 @@ router.post('/cancel', checkAuth, requestsControler.cancelRequest)
 
 router.patch('/:requestId', checkAuth, requestsControler.updateRequest)
 
-router.put('/:requestId', checkAuth, requestsControler.updateStatus)
+router.put('/:id', checkAuth, requestsControler.updateStatus)
 
 
 router.delete('/:requestId', adminAuth, requestsControler.deleteRequest)

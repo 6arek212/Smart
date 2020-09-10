@@ -1,14 +1,15 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
-const errorHandler=require('../utils/error')
+const errorHandler = require('../utils/error')
 const jwt = require('jsonwebtoken')
+const NumOf = require('../models/numOf')
 
 exports.loginUser = (req, res, next) => {
   let fetchedUser
 
 
-  if(!req.body.username){
-    errorHandler.errorMessage('username was not provided',401,res)
+  if (!req.body.username) {
+    errorHandler.errorMessage('username was not provided', 401, res)
   }
 
 
@@ -17,7 +18,7 @@ exports.loginUser = (req, res, next) => {
       if (!user) {
         return
       }
-      else{
+      else {
         fetchedUser = user
         return bcrypt.compare(req.body.password, user.password)
       }
@@ -27,7 +28,7 @@ exports.loginUser = (req, res, next) => {
         return res.status(401).json({
           message: 'Invalid authentication credentials !'
         })
-      }else{
+      } else {
         console.log(fetchedUser);
 
 
@@ -86,5 +87,42 @@ exports.signUp = (req, res, next) => {
             message: 'Invalid authentication credentials !'
           })
         })
+    })
+}
+
+
+
+
+exports.getUserData = (req, res, next) => {
+  const id = "5ea45adabd4ea01174086610"
+  // req.admin.adminId
+
+
+  let user
+
+  User.findOne({ _id: id })
+    .select('firstName lastName phone email')
+    .then(result => {
+      user = result
+      return NumOf.find().select('name value')
+    })
+    .then(results => {
+
+      let obj = {}
+      for (result in results) {
+        obj[result.name] = result.value
+      }
+      const numOf = results.reduce((a,b)=> (a[b.name.toLowerCase()]=b.value,a),{});
+
+
+      res.status(200).json({
+        ...user._doc,
+        ...numOf
+      })
+    })
+    .catch(err => {
+      res.status(501).json({
+        message: 'Error '+err
+      })
     })
 }

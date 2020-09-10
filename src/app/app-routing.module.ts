@@ -22,6 +22,7 @@ import { CustomersComponent } from './admin-components/dashboard/customers/custo
 import { RequestsListComponent } from './admin-components/dashboard/requests-list/requests-list.component';
 import { InfoComponent } from './admin-components/dashboard/info/info.component';
 import { ForgotPasswordComponent } from './client/forgot-password/forgot-password.component';
+import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/receipt-form.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
           { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
           { path: 'requests', component: RequestsListComponent, canActivate: [AuthGuard] },
           { path: 'info', component: InfoComponent, canActivate: [AuthGuard] },
-
+          { path: 'receipt', component: ReceiptFormComponent, canActivate: [AuthGuard] },
         ]
       },
       { path: 'login', pathMatch: 'full', component: LoginComponent }

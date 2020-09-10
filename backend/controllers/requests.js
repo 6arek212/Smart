@@ -340,13 +340,15 @@ exports.updateRequest = async (req, res, next) => {
 exports.updateStatus = (req, res, next) => {
   const id = req.params.id
   const status = req.body.status
-  console.log(status);
+  console.log(status,id);
 
   Request.findOneAndUpdate({ _id: id }, { $set: { status: status } })
-    .then(result => {
+    .then(request => {
+      Customer.updateOne({ '_id': request.customer }, { $inc: { 'numOfDoneRequests': 1 } }).exec()
       res.status(200).json({
         message: 'Request Status Updated Successfuly',
-        result
+        request
       })
+     // smsMessage.sendMessage('طلبك قد تم  ' + request.device.model + ' ' + request.title + '  شكرا لاختيارك سمارت فون', request.customer.phone)
     }).catch(err => errorHandler.serverError(err, res))
 }
