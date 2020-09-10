@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const Product = mongoose.Schema({
   name: String,
   price: Number,
-  payment: String
+  payment: String,
+  amount: Number
 })
 
 const receiptSchema = mongoose.Schema({

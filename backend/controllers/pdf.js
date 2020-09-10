@@ -43,7 +43,7 @@ function numberWithCommas(x) {
 const getPrice = async (products) => {
   let newPrice = 0
   for (let i = 0; i < products.length; i++) {
-    newPrice += + products[i].price
+    newPrice += (products[i].price * products[i].amount)
   }
   return newPrice
 }

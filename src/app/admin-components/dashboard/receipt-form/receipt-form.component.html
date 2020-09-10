@@ -16,41 +16,41 @@
 
         <mat-form-field appearance="fill">
           <mat-label>שם מלא</mat-label>
-          <input formControlName="fullName" matInput>
+          <input formControlName="fullName" type="text" matInput>
         </mat-form-field>
         <app-normal-input-error *ngIf="form.get('fullName').touched" name="שם מלא"
-        [errors]="form.get('fullName').errors"></app-normal-input-error>
+          [errors]="form.get('fullName').errors"></app-normal-input-error>
 
 
         <mat-form-field appearance="fill">
           <mat-label>ת"ז</mat-label>
-          <input formControlName="idNumber" matInput>
+          <input formControlName="idNumber" type="text" matInput>
         </mat-form-field>
-        <app-normal-input-error *ngIf="form.get('idNumber').touched" name="ת.ז"
-        [errors]="form.get('idNumber').errors"></app-normal-input-error>
+        <app-normal-input-error *ngIf="form.get('idNumber').touched" name="ת.ז" [errors]="form.get('idNumber').errors">
+        </app-normal-input-error>
 
         <mat-form-field appearance="fill">
           <mat-label>מספר טלפון</mat-label>
-          <input formControlName="phoneNumber" matInput>
+          <input formControlName="phoneNumber" type="tel" matInput>
         </mat-form-field>
         <app-normal-input-error *ngIf="form.get('phoneNumber').touched" name="מספר טלפון"
-        [errors]="form.get('phoneNumber').errors"></app-normal-input-error>
+          [errors]="form.get('phoneNumber').errors"></app-normal-input-error>
 
         <mat-form-field appearance="fill">
           <mat-label>כתובת</mat-label>
           <input formControlName="address" matInput>
         </mat-form-field>
-        <app-normal-input-error *ngIf="form.get('address').touched" name="כתובת"
-        [errors]="form.get('address').errors"></app-normal-input-error>
+        <app-normal-input-error *ngIf="form.get('address').touched" name="כתובת" [errors]="form.get('address').errors">
+        </app-normal-input-error>
 
 
 
         <mat-form-field appearance="fill">
           <mat-label>הערות</mat-label>
-          <textarea formControlName="notes" cols="40" rows="10" maxlength="400" matInput></textarea>
+          <textarea formControlName="notes" type="text" cols="40" rows="10" maxlength="400" matInput></textarea>
         </mat-form-field>
-        <app-normal-input-error *ngIf="form.get('notes').touched" name="הערות"
-        [errors]="form.get('notes').errors"></app-normal-input-error>
+        <app-normal-input-error *ngIf="form.get('notes').touched" name="הערות" [errors]="form.get('notes').errors">
+        </app-normal-input-error>
 
 
         <button class="btn btn-success" (click)="getReceipt()">שלח</button>
@@ -64,19 +64,28 @@
       <form class="product-form" [formGroup]="productForm">
         <mat-form-field appearance="fill">
           <mat-label>שם מוצר</mat-label>
-          <input formControlName="product" matInput>
+          <input formControlName="product" type="text" matInput>
         </mat-form-field>
         <app-normal-input-error *ngIf="productForm.get('product').touched" name="מוצר"
-        [errors]="productForm.get('product').errors"></app-normal-input-error>
+          [errors]="productForm.get('product').errors"></app-normal-input-error>
 
 
         <mat-form-field appearance="fill">
           <mat-label>מחיר</mat-label>
-          <input formControlName="price" matInput>
+          <input formControlName="price" type="number" matInput>
         </mat-form-field>
         <app-normal-input-error *ngIf="productForm.get('price').touched" name="מחיר"
-              [errors]="productForm.get('price').errors"></app-normal-input-error>
+          [errors]="productForm.get('price').errors"></app-normal-input-error>
 
+
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>כמות</mat-label>
+          <input formControlName="amount" type="number" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="productForm.get('amount').touched" name="כמות"
+          [errors]="productForm.get('amount').errors"></app-normal-input-error>
 
 
         <mat-form-field appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
@@ -87,7 +96,7 @@
             <mat-option value="credit">כרטיס אשראי</mat-option>
           </mat-select>
           <app-normal-input-error *ngIf="productForm.get('payment').touched" name="תשלום"
-              [errors]="productForm.get('payment').errors"></app-normal-input-error>
+            [errors]="productForm.get('payment').errors"></app-normal-input-error>
 
         </mat-form-field>
 

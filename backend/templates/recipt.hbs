@@ -235,6 +235,7 @@
         <thead>
           <th>אמצעי תשלום</th>
           <th>שם פריט</th>
+          <th>כמות</th>
           <th>סכום</th>
         </thead>
 
@@ -243,6 +244,7 @@
         <tr>
           <td>{{changePayment pr.payment}}</td>
           <td>{{pr.name}}</td>
+           <td>{{pr.amount}} יח'</td>
           <td>{{numberWithCommas pr.price}}</td>
         </tr>
         {{/each}}

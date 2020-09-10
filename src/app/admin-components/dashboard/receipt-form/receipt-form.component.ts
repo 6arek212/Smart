@@ -34,9 +34,9 @@ export class ReceiptFormComponent implements OnInit {
     this.productForm = new FormGroup({
       'payment': new FormControl('-1', { asyncValidators: [selectInput] }),
       'product': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(2)] }),
-      'price': new FormControl(null, { validators: [Validators.required, Validators.max(6000), Validators.min(1)] })
+      'price': new FormControl(null, { validators: [Validators.required, Validators.max(6000), Validators.min(1)] }),
+      'amount': new FormControl(null, { validators: [Validators.required, Validators.max(10), Validators.min(1)] })
     })
-
   }
 
 
@@ -49,7 +49,8 @@ export class ReceiptFormComponent implements OnInit {
       const pr: Product = {
         name: this.productForm.value.product,
         price: this.productForm.value.price,
-        payment: this.productForm.value.payment
+        payment: this.productForm.value.payment,
+        amount: this.productForm.value.amount
       }
       this.products[index] = pr
       this.status = null
@@ -59,7 +60,8 @@ export class ReceiptFormComponent implements OnInit {
     const pr: Product = {
       name: this.productForm.value.product,
       price: this.productForm.value.price,
-      payment: this.productForm.value.payment
+      payment: this.productForm.value.payment,
+      amount: this.productForm.value.amount
     }
     this.products.push(pr)
     console.log(this.products);
