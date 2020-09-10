@@ -103,13 +103,13 @@ const getPdf = async (receipt, name) => {
     ignoreDefaultArgs: ['--disable-extensions'],
     executablePath: '/usr/bin/chromium-browser'
   });
-  const page = await browser.newPage();
-  await page.setContent(content)
-  await page.pdf({
+  const page = await browser.newPage({
     path: fileName,
     format: 'A4',
     printBackground: true
-  })
+  });
+  await page.setContent(content)
+  await page.pdf()
 
   await browser.close();
   return fileName
