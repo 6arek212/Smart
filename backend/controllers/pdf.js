@@ -43,7 +43,7 @@ function numberWithCommas(x) {
 const getPrice = async (products) => {
   let newPrice = 0
   for (let i = 0; i < products.length; i++) {
-    newPrice += (products[i].price * products[i].amount)
+    newPrice +=  (products[i].price*products[i].amount)
   }
   return newPrice
 }
@@ -103,13 +103,13 @@ const getPdf = async (receipt, name) => {
     ignoreDefaultArgs: ['--disable-extensions'],
     executablePath: '/usr/bin/chromium-browser'
   });
-  const page = await browser.newPage({
+  const page = await browser.newPage();
+  await page.setContent(content)
+  await page.pdf({
     path: fileName,
     format: 'A4',
     printBackground: true
-  });
-  await page.setContent(content)
-  await page.pdf()
+  })
 
   await browser.close();
   return fileName
