@@ -53,7 +53,12 @@
         </app-normal-input-error>
 
 
-        <button class="btn btn-success" (click)="getReceipt()">שלח</button>
+        <div *ngIf="isLoading" class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+
+
+        <button *ngIf="!isLoading" class="btn btn-success" (click)="getReceipt()">שלח</button>
 
       </form>
 

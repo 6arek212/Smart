@@ -18,6 +18,7 @@ export class ReceiptFormComponent implements OnInit {
   productForm: FormGroup
   products: Product[] = []
   status = null
+  isLoading = false
 
   constructor(private receiptService: ReceiptService) { }
 
@@ -86,6 +87,7 @@ export class ReceiptFormComponent implements OnInit {
   getReceipt() {
     if (this.form.invalid)
       return
+    this.isLoading = true
 
     const reciept: Receipt = {
       idNumber: this.form.value.idNumber,
@@ -97,8 +99,10 @@ export class ReceiptFormComponent implements OnInit {
     }
     this.receiptService.getReceipt(reciept).subscribe(res => {
       this.downloadFile(res)
+      this.isLoading = false
     }, err => {
       console.log(err);
+      this.isLoading = false
     })
   }
 

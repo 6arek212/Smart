@@ -82,7 +82,6 @@ exports.getReceipt = async (req, res, next) => {
     const id = receiptsNum.value
     receipt.id = id
     docId = id
-    console.log('my id ', receipt);
 
 
     const name = (new Date()).getTime() + '.pdf'
@@ -119,12 +118,7 @@ const getPdf = async (receipt, name) => {
   const fileName = html + name
   const content = await compile('recipt', receipt)
 
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: ["--no-sandbox"],
-    ignoreDefaultArgs: ['--disable-extensions'],
-    executablePath: '/usr/bin/chromium-browser'
-  });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.setContent(content)
   await page.pdf({
