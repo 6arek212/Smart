@@ -10,7 +10,7 @@ const errorHandler = require('../utils/error')
 const numOf = require('../models/numOf')
 
 const compile = async function (templateName, data) {
-  const filePath = path.join(__dirname, '../', 'templates/', `${templateName}.hbs/`)
+  const filePath = path.join(__dirname, '../', 'templates/', `${templateName}.hbs`)
   const htmlFile = await fs.readFile(filePath, 'utf-8')
   return hbs.compile(htmlFile)(data)
 }
