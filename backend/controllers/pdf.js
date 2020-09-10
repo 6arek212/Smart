@@ -100,9 +100,10 @@ exports.getReceipt = async (req, res, next) => {
   catch (err) {
     if (docId != null)
       await numOf.findOneAndUpdate({ name: 'Receipts' }, { $inc: { 'value': -1 } })
-      res.status(500).json({
-        message:'error while getting receipt'
-      })
+    res.status(500).json({
+      message: 'error while getting receipt'
+    })
+    console.log('err ', err);
   }
 }
 
