@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { ReceiptService } from 'src/app/globalServices/receipt.service';
 import { Receipt } from 'src/app/models/Receipt';
 import { Product } from 'src/app/models/Product';
 import { selectInput } from '../../../utils-components/validators'
+import { Subscription } from 'rxjs';
+import { Loading, mError, Success } from 'src/app/DataState';
 
 @Component({
   selector: 'app-receipt-form',
@@ -18,11 +20,19 @@ export class ReceiptFormComponent implements OnInit {
   productForm: FormGroup
   products: Product[] = []
   status = null
-  isLoading = false
+  isLoading = []
+  receiptsSub: Subscription
+  receipts
 
   constructor(private receiptService: ReceiptService) { }
 
   ngOnInit(): void {
+    this.isLoading["form1"] = false
+    this.isLoading["form2"] = true
+
+    this.receiptsListener()
+    this.receiptService.getAllReceipts()
+
     this.form = new FormGroup({
       'fullName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(2)] }),
       'idNumber': new FormControl(null, { validators: [Validators.maxLength(20)] }),
@@ -84,10 +94,10 @@ export class ReceiptFormComponent implements OnInit {
   }
 
 
-  getReceipt() {
+  createReceipt() {
     if (this.form.invalid)
       return
-    this.isLoading = true
+    this.isLoading['form1'] = true
 
     const reciept: Receipt = {
       idNumber: this.form.value.idNumber,
@@ -97,12 +107,13 @@ export class ReceiptFormComponent implements OnInit {
       products: this.products,
       notes: this.form.value.notes
     }
-    this.receiptService.getReceipt(reciept).subscribe(res => {
+    this.receiptService.createReceipt(reciept).subscribe(res => {
       this.downloadFile(res)
-      this.isLoading = false
+      this.receiptService.getAllReceipts()
+      this.isLoading['form1'] = false
     }, err => {
       console.log(err);
-      this.isLoading = false
+      this.isLoading['form1'] = false
     })
   }
 
@@ -115,4 +126,42 @@ export class ReceiptFormComponent implements OnInit {
   }
 
 
+
+
+  receiptsListener() {
+    this.receiptsSub = this.receiptService.getReceiptListener().subscribe(res => {
+      console.log(res);
+
+      if (res instanceof Success) {
+        this.receipts = res.data
+        this.isLoading['form2'] = false
+        console.log(this.receipts);
+
+      } else if (res instanceof Loading) {
+        this.isLoading['form2'] = true
+
+      } else if (res instanceof mError) {
+        this.isLoading['form2'] = false
+      }
+    })
+  }
+
+  getReceipt(fileName: string) {
+    this.receiptService.getReceipt(fileName).subscribe(res => {
+      console.log(res);
+      this.downloadFile(res)
+    })
+  }
+
+
+
+  ngOnDestroy(): void {
+    this.receiptsSub.unsubscribe()
+  }
+
+
+  getReceipts(form: NgForm) {
+    console.log(form);
+    this.receiptService.getAllReceipts(form.value.search)
+  }
 }

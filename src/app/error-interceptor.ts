@@ -16,14 +16,21 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
 
-        let errorMsg = "قم بفحص اتصال الانترنت !"
+        let errorMsg = "הרעה שגיאה !"
+
+        switch (error.status) {
+          case 404:
+            errorMsg='לא נמצא'
+        }
+
+
         if (error.error.message) {
           errorMsg = error.error.message
         }
         console.log(this.dialog.openDialogs);
 
-        if (this.dialog.openDialogs.length < 2)
-          this.dialog.open(DialogMessageComponent, { data: { title: 'خطاء', message: errorMsg } })
+        if (this.dialog.openDialogs.length == 0)
+          this.dialog.open(DialogMessageComponent, { data: { title: 'שגיאה', message: errorMsg } })
         return throwError(error)
       })
     )

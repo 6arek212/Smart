@@ -1,67 +1,99 @@
-mat-form-field{
+mat-form-field {
   display: block;
   text-align: start;
 }
 
-
-
-
-
-.forms-container{
+.forms-container {
   display: flex;
   padding: 2rem;
 }
 
-.info-container{
+.info-container {
   flex-basis: 30%;
   display: flex;
   flex-direction: column;
 }
 
-
-
-.spinner-border{
+.spinner-border {
   justify-self: center;
   align-self: center;
 }
 
-
-
-.product-form{
+.product-form {
   flex-basis: 45%;
 }
 
-
-.product{
+.product {
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, .4);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   margin-top: 1rem;
   padding: 1rem;
   justify-content: space-between;
   background: #f9f9f9;
 }
 
-
-
-.product div{
+.product div {
   display: flex;
   flex-direction: row;
 }
 
-.product div p{
+.product div p {
   font-size: 1rem;
   font-weight: bold;
 }
 
-.product div span{
-  margin-right: .5rem;
-  font-size: .9rem;
+.product div span {
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
 }
 
-
-.btn-success{
+.btn-success {
   width: 100%;
 }
 
+.receipts-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #f9f9f9;
+  transition: 0.5s background ease-in;
+  border-bottom: 1px solid rgba(0, 0, 0, .4);
+  margin-top: .4rem;
+}
+
+.receipts-container:hover {
+  background: #f0ebeb;
+}
+
+.receipts-container img:hover {
+  cursor: pointer;
+}
+
+.receipts-container .pdf-logo {
+  width: 30px;
+  height: 30px;
+  background: url("../../../../assets/img/pdf-logo.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
 
 
+
+.receipts-form{
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.receipts-form button{
+  margin-right: 1rem;
+}
+
+
+.no-receipts{
+  text-align: center;
+  padding: 1rem;
+}

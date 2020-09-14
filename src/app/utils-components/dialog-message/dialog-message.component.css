@@ -11,5 +11,6 @@
 
 
 .dialog-container{
-
+  width: 40vw;
+  min-height: 30%;
 }

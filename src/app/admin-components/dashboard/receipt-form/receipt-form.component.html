@@ -53,12 +53,12 @@
         </app-normal-input-error>
 
 
-        <div *ngIf="isLoading" class="spinner-border" role="status">
+        <div *ngIf="isLoading['form1']" class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
         </div>
 
 
-        <button *ngIf="!isLoading" class="btn btn-success" (click)="getReceipt()">שלח</button>
+        <button *ngIf="!isLoading['form1']" class="btn btn-success" (click)="createReceipt()">שלח</button>
 
       </form>
 
@@ -138,10 +138,48 @@
       </form>
     </div>
 
+  </div>
 
+
+
+  <div class="dashboard-card">
+    <div class="card-header">
+      <h3>חשבוניות</h3>
+    </div>
+
+
+    <form class="receipts-form" #searchForm='ngForm' (submit)="getReceipts(searchForm)">
+      <mat-form-field appearance="fill">
+        <mat-label>מספר חשבונית</mat-label>
+        <input type="text" matInput ngModel name="search" #search="ngModel">
+      </mat-form-field>
+      <button class="btn btn-primary">חפש</button>
+    </form>
+
+
+    <div class="receipts-container" *ngFor="let res of receipts">
+
+      <p>מספר חשבונית: {{res.id}}</p>
+
+      <p>שם מלא : {{res.fullName}}</p>
+
+      <div class="pdf-logo" (click)="getReceipt(res.fileName)"></div>
+    </div>
+
+
+    <div *ngIf="isLoading['form2']" class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <div class="no-receipts" *ngIf="!receipts || receipts.length==0">
+      <p>אין חשבוניות</p>
+    </div>
 
 
   </div>
+
+
+
 
 
 </div>

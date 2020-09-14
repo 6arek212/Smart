@@ -3,9 +3,11 @@ const pdf = require('../controllers/pdf')
 
 
 
-router.post('', pdf.getReceipt)
+router.post('', pdf.createReceipt)
 
+router.get('/:fileName', pdf.getReceipt)
 
+router.post('/getAll', pdf.getAllReceipts)
 
 
 

@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path')
-const html = path.join(__dirname, "../", 'pdf/')
+const html = path.join(__dirname, "../../", 'pdf/')
 const puppeteer = require('puppeteer')
 const hbs = require('handlebars')
 const moment = require('moment-timezone')
@@ -56,7 +56,7 @@ const getPrice = async (products) => {
 
 
 
-exports.getReceipt = async (req, res, next) => {
+exports.createReceipt = async (req, res, next) => {
   let docId
   try {
 
@@ -84,7 +84,7 @@ exports.getReceipt = async (req, res, next) => {
     docId = id
 
 
-    const name = (new Date()).getTime() + '.pdf'
+    const name = (new Date()).getTime()
     const stram = fss.createReadStream(await getPdf(receipt, name))
     await stram.pipe(res)
 
@@ -116,7 +116,7 @@ exports.getReceipt = async (req, res, next) => {
 
 
 const getPdf = async (receipt, name) => {
-  const fileName = html + name
+  const fileName = html + name + '.pdf'
   const content = await compile('recipt', receipt)
 
   const browser = await puppeteer.launch();
@@ -133,3 +133,52 @@ const getPdf = async (receipt, name) => {
 }
 
 
+
+
+
+exports.getAllReceipts = (req, res, next) => {
+  const id = req.body.id
+  const query = Receipt.find()
+
+  console.log(id);
+
+
+
+  if (id != null && id.length != 0) {
+    query.find({ id: id })
+  }
+
+
+
+  query
+    .sort({ createdAt: 'desc' })
+    .select('fileName fullName id')
+    .then(docs => {
+      res.status(200).json({
+        message: 'fetched receipts success',
+        receipts: docs
+      })
+    })
+    .catch(err => console.log(err))
+}
+
+
+
+
+
+
+
+exports.getReceipt = (req, res, next) => {
+  const fileName = req.params.fileName + '.pdf'
+  console.log(html + fileName + '.pdf------');
+
+  if (fss.existsSync(html + fileName)) {
+    const stram = fss.createReadStream(html + fileName)
+    stram.pipe(res)
+    return
+  }
+  res.status(404).json({
+    message: 'file not found'
+  })
+
+}
