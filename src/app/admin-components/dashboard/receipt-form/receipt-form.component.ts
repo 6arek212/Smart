@@ -110,6 +110,9 @@ export class ReceiptFormComponent implements OnInit {
     this.receiptService.createReceipt(reciept).subscribe(res => {
       this.downloadFile(res)
       this.receiptService.getAllReceipts()
+      this.form.reset()
+      this.productForm.reset()
+      this.products = []
       this.isLoading['form1'] = false
     }, err => {
       console.log(err);
