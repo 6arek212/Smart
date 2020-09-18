@@ -142,7 +142,7 @@
           </div>
         </div>
 
-        <form #companyForm="ngForm" (submit)="onAddingCompany(companyForm)">
+        <form #companyForm="ngForm" >
           <mat-form-field appearance="fill">
             <mat-label>שם חברה</mat-label>
             <input name="company" ngModel matInput>
@@ -159,7 +159,7 @@
           </mat-form-field>
 
           <div class="action-buttons">
-            <button class="btn btn-success">הוסף</button>
+            <button class="btn btn-success" (click)="onAddingCompany(companyForm)">הוסף</button>
             <button class="btn btn-danger">מחק</button>
           </div>
 

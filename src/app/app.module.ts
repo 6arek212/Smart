@@ -58,7 +58,6 @@ import { ClientProfileComponent } from './client/client-dashboard-main/client-pr
 import { ClientDashboardMainComponent } from './client/client-dashboard-main/client-dashboard-main.component';
 import { CustomersComponent } from './admin-components/dashboard/customers/customers.component';
 import { RequestsListComponent } from './admin-components/dashboard/requests-list/requests-list.component';
-import { ClassDirectiveDirective } from './directives/class-directive.directive';
 import { BootstrapDialogComponent } from './utils-components/bootstrap-dialog/bootstrap-dialog.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EditCustomerDialogComponent } from './utils-components/edit-customer-dialog/edit-customer-dialog.component';
@@ -70,7 +69,9 @@ import { ForgotPasswordComponent } from './client/forgot-password/forgot-passwor
 import { MessagesComponent } from './utils-components/messages/messages.component';
 import {MatIconModule} from '@angular/material/icon';
 import { RequestComponent } from './admin-components/dashboard/request/request.component';
-import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/receipt-form.component'
+import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/receipt-form.component';
+import { CardDataComponent } from './card-data/card-data.component';
+import { CounterDirective } from './directives/counter.directive'
 
 
 @NgModule({
@@ -101,7 +102,6 @@ import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/
     ClientProfileComponent,
     ClientDashboardMainComponent,
     CustomersComponent,
-    ClassDirectiveDirective,
     BootstrapDialogComponent,
     EditCustomerDialogComponent,
     InfoComponent,
@@ -110,6 +110,8 @@ import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/
     MessagesComponent,
     RequestComponent,
     ReceiptFormComponent,
+    CardDataComponent,
+    CounterDirective,
 
   ],
   imports: [

@@ -32,5 +32,4 @@ export class CompaniesService {
     return this.http.post<{ message: string }>(BACKEND_URL, {name})
   }
 
-
 }

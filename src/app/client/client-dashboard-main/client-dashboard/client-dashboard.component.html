@@ -1,16 +1,16 @@
-<div class="main-container">
+<div class="main-container" @fade>
 
 
 
   <header class="dash-board-header">
-    <h1>الرئيسة</h1>
+    <h1>ראשי</h1>
   </header>
 
   <div class="cards-container">
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>معلومات عامة</h3>
+        <h3>מידע כללי</h3>
       </div>
 
       <div class="chart">
@@ -23,12 +23,12 @@
 
     <div class="dashboard-card">
       <div class="card-header">
-        <h3>طلباتي</h3>
+        <h3>הבקשות שלי</h3>
       </div>
 
 
       <div *ngIf="requests && requests.length==0" class="center-container">
-        <p>لا يوجد لديك طلبات </p>
+        <p>אין לך בקשות</p>
       </div>
 
       <div *ngIf="isLoading['requests']" class="center-container">
@@ -45,7 +45,7 @@
               <div class="expansion-header">
 
                 <div class="header">
-                  <p>عنوان الطلب :</p>
+                  <p>כותרת הבקשה : </p>
                   <p>{{request.title}}</p>
                 </div>
 
@@ -55,9 +55,9 @@
                   <div class="status" [ngStyle]="statusHandler(request.status)">
                   </div>
                   <div>
-                    <span *ngIf="request.status=='DONE'">تم</span>
-                    <span *ngIf="request.status=='IN-PROGRESS'">قيد التنفيذ</span>
-                    <span *ngIf="request.status=='CANCEL'">تم الالغاء</span>
+                    <span *ngIf="request.status=='DONE'">מוכן</span>
+                    <span *ngIf="request.status=='IN-PROGRESS'">בטיפול</span>
+                    <span *ngIf="request.status=='CANCEL'">בוטל</span>
                   </div>
                 </div>
               </div>
@@ -69,32 +69,32 @@
             <div class="panel-data">
 
               <div class="panel-info">
-                <p>البلدة</p>
+                <p>עיר</p>
                 <p>{{request.city.name}}</p>
               </div>
 
               <div *ngIf="request.issue" class="panel-info">
-                <p>المشكلة</p>
+                <p>בעיה</p>
                 <p>{{request.issue?.name}}</p>
               </div>
 
               <div *ngIf="request.otherIssue" class="panel-info">
-                <p>مشكلة اخرى</p>
+                <p>בעיה אחרת</p>
                 <p>{{request.otherIssue}}</p>
               </div>
 
               <div class="panel-info">
-                <p>نوع الجهاز</p>
+                <p>סוג המכשיר</p>
                 <p>{{request.device.model}}</p>
               </div>
 
               <div class="panel-info">
-                <p>الشركة</p>
+                <p>חברה</p>
                 <p>{{request.company.name}}</p>
 
               </div>
               <div class="panel-info">
-                <p>مكان التواجد</p>
+                <p>איפה נמצא</p>
                 <p>{{request.whereAbout}}</p>
               </div>
             </div>
@@ -104,8 +104,8 @@
               <p>{{fullDateFormat(request.createdAt)}}</p>
             </div>
             <mat-action-row *ngIf="request.status!=='DONE'">
-              <a mat-raised-button color="primary"  *ngIf="request.status!=='CANCEL'" [routerLink]="['/client/editRequest',request._id]">تعديل</a>
-              <button mat-raised-button color="warn" (click)="onCancelRequest(request)">الغاء</button>
+              <a mat-raised-button color="primary"  *ngIf="request.status!=='CANCEL'" [routerLink]="['/client/editRequest',request._id]">עריכה</a>
+              <button mat-raised-button color="warn" (click)="onCancelRequest(request)">בטל</button>
 
             </mat-action-row>
 

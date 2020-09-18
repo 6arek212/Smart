@@ -255,6 +255,24 @@ exports.updateRequest = async (req, res, next) => {
   const request = await Request.findOne({ '_id': requestId })
 
 
+
+  if (updateOps['status']) {
+    if (!request)
+      return errorHandler.errorMessage('request not found', 404, res)
+    else {
+      if (request.status === updateOps['status']) {
+        delete updateOps['status']
+      }
+
+      if(request.status=='DONE'){
+        return errorHandler.errorMessage('request is finished', 505, res)
+      }
+    }
+  }
+
+
+
+
   //check if the company is for the device that picked
 
   if (updateOps['company']) {
@@ -268,15 +286,7 @@ exports.updateRequest = async (req, res, next) => {
     }
   }
 
-  if (updateOps['status']) {
-    if (!request)
-      return errorHandler.errorMessage('request not found', 404, res)
-    else {
-      if (request.status === updateOps['status']) {
-        delete updateOps['status']
-      }
-    }
-  }
+
 
   if (updateOps['otherIssue']) {
     updateOps['issue'] = null

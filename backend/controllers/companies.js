@@ -19,7 +19,7 @@ exports.getComapnies=(req, res, next) => {
 exports.addCompany=(req, res, next) => {
 
   const company = new Company({
-    name:req.body.name
+    name:req.body.name.toUpperCase()
   })
 
 

@@ -45,10 +45,10 @@ export class ClientInfoService {
           data: Object.keys(res.data).map(name => {
             let newName
             if (name == 'numOfRequests') {
-              newName = 'الطلبات'
+              newName = 'בקשות'
             }
             else if (name == 'numOfDoneRequests') {
-              newName = 'طلبات تمت'
+              newName = 'בקשות מוכנות'
             }
 
             return { name: newName, value: res.data[name] }

@@ -20,7 +20,6 @@
       <form [formGroup]="form" >
 
 
-        <button class="btn btn-info add-request"> + הוסף בקשה</button>
 
 
 
@@ -71,7 +70,7 @@
       </form>
 
       <div *ngIf="requests && requests.length==0" class="center-container">
-        <p>لا يوجد طلبات </p>
+        <p>אין בקשות</p>
       </div>
 
       <div *ngIf="isLoading" class="center-container">

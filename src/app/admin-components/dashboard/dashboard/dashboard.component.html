@@ -16,9 +16,11 @@
       </div>
 
       <div class="card-content">
+        <app-card-data [data]="single"></app-card-data>
+
         <div class="chart">
-          <ngx-charts-number-card [scheme]="colorScheme" [results]="single" [cardColor]="cardColor">
-          </ngx-charts-number-card>
+          <!-- <ngx-charts-number-card [scheme]="colorScheme" [results]="single" [cardColor]="cardColor">
+          </ngx-charts-number-card> -->
         </div>
       </div>
     </div>
@@ -33,10 +35,10 @@
 
       <div class="card-content">
         <div class="chart">
-          <ngx-charts-line-chart  [scheme]="colorScheme" [legend]="legend"
-            [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis"
-            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
-            [roundDomains]='true' [timeline]="timeline" [results]="staticsRecord"  legendTitle="מידע">
+          <ngx-charts-line-chart [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" [roundDomains]='true' [timeline]="timeline" [results]="staticsRecord"
+            legendTitle="מידע">
           </ngx-charts-line-chart>
         </div>
       </div>
@@ -52,7 +54,7 @@
 
       <div class="card-content">
         <div class="chart">
-          <ngx-charts-pie-grid  [scheme]="colorScheme" [results]="single">
+          <ngx-charts-pie-grid [scheme]="colorScheme" [results]="single">
           </ngx-charts-pie-grid>
         </div>
       </div>

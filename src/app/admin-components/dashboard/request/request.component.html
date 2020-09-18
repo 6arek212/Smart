@@ -95,7 +95,7 @@
   </div>
 
 
-  <div class="actions">
+  <div class="actions" *ngIf="request.status!='DONE'">
     <button class="btn btn-danger" (click)="onDeletingRequest(request)">מחק</button>
     <button class="btn btn-success" (click)="onUpdatingStatus(request)">לסיום בקשרה</button>
   </div>

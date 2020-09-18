@@ -4,6 +4,7 @@ const errorHandler = require('../utils/error')
 exports.getDevices = (req, res, next) => {
   Device.find()
     .populate('company')
+    .sort({released:'desc'})
     .then(result => {
       if (!result || result.length == 0)
         errorHandler.errorMessage('No devices found', 404, res)
@@ -23,6 +24,7 @@ exports.getDeviceByCompany = (req, res, next) => {
 
   Device.find({ company: companyId })
     .populate('company')
+    .sort({released:'desc'})
     .then(devices => {
       res.status(201).json({
         message: 'Device Fetched Successfuly',

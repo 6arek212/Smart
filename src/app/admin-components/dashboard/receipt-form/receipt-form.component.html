@@ -12,6 +12,90 @@
       <h3>הצגת בקשות</h3>
     </div>
     <div class="forms-container">
+
+
+      <form class="product-form" [formGroup]="productForm">
+        <mat-form-field appearance="fill">
+          <mat-label>שם מוצר</mat-label>
+          <input formControlName="product" type="text" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="productForm.get('product').touched" name="מוצר"
+          [errors]="productForm.get('product').errors"></app-normal-input-error>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>מחיר</mat-label>
+          <input formControlName="price" type="number" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="productForm.get('price').touched" name="מחיר"
+          [errors]="productForm.get('price').errors"></app-normal-input-error>
+
+
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>כמות</mat-label>
+          <input formControlName="amount" type="number" matInput>
+        </mat-form-field>
+        <app-normal-input-error *ngIf="productForm.get('amount').touched" name="כמות"
+          [errors]="productForm.get('amount').errors"></app-normal-input-error>
+
+
+        <mat-form-field appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
+          <mat-label>תשלום</mat-label>
+          <mat-select formControlName="payment" value="-1">
+            <mat-option value="-1">בחר</mat-option>
+            <mat-option value="cash">מזומן</mat-option>
+            <mat-option value="credit">כרטיס אשראי</mat-option>
+          </mat-select>
+          <app-normal-input-error *ngIf="productForm.get('payment').touched" name="תשלום"
+            [errors]="productForm.get('payment').errors"></app-normal-input-error>
+
+        </mat-form-field>
+
+        <button class="btn btn-success" (click)="addProduct()">{{status?'עדכן פריט':'הוסף פריט'}}</button>
+
+
+        <div *ngFor="let pr of products">
+          <div>
+
+
+            <div class="product">
+              <div>
+                <p>שם מוצר:</p>
+                <span>{{pr.name}}</span>
+              </div>
+
+              <div>
+                <p>תשלום:</p>
+                <span>{{pr.payment=='credit'?'כרטיס אשראי':'מזומן'}}</span>
+              </div>
+
+              <div>
+                <p>כמות:</p>
+                <span>{{pr.amount}}</span>
+              </div>
+
+              <div>
+                <p>מחיר:</p>
+                <span>{{pr.price}}</span>
+              </div>
+
+
+            </div>
+            <button class="btn btn-primary" (click)="updateProduct(pr)">עדכן</button>
+            <button class="btn btn-danger" (click)="removeProduct(pr)">הסר</button>
+
+          </div>
+        </div>
+      </form>
+
+
+
+
+
+
+
       <form class="info-container" [formGroup]="form">
 
         <mat-form-field appearance="fill">
@@ -62,80 +146,6 @@
 
       </form>
 
-
-      <div class="spacer"></div>
-
-
-      <form class="product-form" [formGroup]="productForm">
-        <mat-form-field appearance="fill">
-          <mat-label>שם מוצר</mat-label>
-          <input formControlName="product" type="text" matInput>
-        </mat-form-field>
-        <app-normal-input-error *ngIf="productForm.get('product').touched" name="מוצר"
-          [errors]="productForm.get('product').errors"></app-normal-input-error>
-
-
-        <mat-form-field appearance="fill">
-          <mat-label>מחיר</mat-label>
-          <input formControlName="price" type="number" matInput>
-        </mat-form-field>
-        <app-normal-input-error *ngIf="productForm.get('price').touched" name="מחיר"
-          [errors]="productForm.get('price').errors"></app-normal-input-error>
-
-
-
-
-        <mat-form-field appearance="fill">
-          <mat-label>כמות</mat-label>
-          <input formControlName="amount" type="number" matInput>
-        </mat-form-field>
-        <app-normal-input-error *ngIf="productForm.get('amount').touched" name="כמות"
-          [errors]="productForm.get('amount').errors"></app-normal-input-error>
-
-
-        <mat-form-field appearance="fill" [hideRequiredMarker]="false" [floatLabel]="true">
-          <mat-label>תשלום</mat-label>
-          <mat-select formControlName="payment" value="-1">
-            <mat-option value="-1">בחר</mat-option>
-            <mat-option value="cash">מזומן</mat-option>
-            <mat-option value="credit">כרטיס אשראי</mat-option>
-          </mat-select>
-          <app-normal-input-error *ngIf="productForm.get('payment').touched" name="תשלום"
-            [errors]="productForm.get('payment').errors"></app-normal-input-error>
-
-        </mat-form-field>
-
-        <button class="btn btn-success" (click)="addProduct()">{{status?'עדכן':'הוסף'}}</button>
-
-
-        <div *ngFor="let pr of products">
-          <div>
-
-
-            <div class="product">
-              <div>
-                <p>שם מוצר:</p>
-                <span>{{pr.name}}</span>
-              </div>
-
-              <div>
-                <p>תשלום:</p>
-                <span>{{pr.payment=='credit'?'כרטיס אשראי':'מזומן'}}</span>
-              </div>
-
-              <div>
-                <p>מחיר:</p>
-                <span>{{pr.price}}</span>
-              </div>
-
-
-            </div>
-            <button class="btn btn-primary" (click)="updateProduct(pr)">עדכן</button>
-            <button class="btn btn-danger" (click)="removeProduct(pr)">הסר</button>
-
-          </div>
-        </div>
-      </form>
     </div>
 
   </div>

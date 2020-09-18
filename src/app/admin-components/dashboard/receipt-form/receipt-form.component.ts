@@ -38,13 +38,13 @@ export class ReceiptFormComponent implements OnInit {
       'idNumber': new FormControl(null, { validators: [Validators.maxLength(20)] }),
       'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.maxLength(14), Validators.minLength(6)] }),
       'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(2)] }),
-      'notes': new FormControl(null, { validators: [Validators.required] })
+      'notes': new FormControl(null)
 
     })
 
     this.productForm = new FormGroup({
       'payment': new FormControl('-1', { asyncValidators: [selectInput] }),
-      'product': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(2)] }),
+      'product': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50), Validators.minLength(2)] }),
       'price': new FormControl(null, { validators: [Validators.required, Validators.max(6000), Validators.min(1)] }),
       'amount': new FormControl(null, { validators: [Validators.required, Validators.max(10), Validators.min(1)] })
     })
