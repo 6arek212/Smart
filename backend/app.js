@@ -36,10 +36,8 @@ moment.locale('Asia/Hebron')
 
 
 
-//mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority",
 
-//mongodb+srv://tarik:<password>@cluster0.4zqbh.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority
-mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0.4zqbh.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0.adpdz.mongodb.net/smartphone?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => {
     console.log('connected to the DB');
