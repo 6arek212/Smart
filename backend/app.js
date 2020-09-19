@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const moment = require('moment');
 const geoip = require('geoip-lite');
 const fs = require('fs')
-
+const path=require('path')
 
 const Request = require('./models/request')
 const Customer = require('./models/customer')
@@ -36,9 +36,10 @@ moment.locale('Asia/Hebron')
 
 
 
-// local :   mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-4zqbh.gcp.mongodb.net/test?retryWrites=true&w=majority
-//mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority
-mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority",
+//mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0-adpdz.mongodb.net/test?retryWrites=true&w=majority",
+
+//mongodb+srv://tarik:<password>@cluster0.4zqbh.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority
+mongoose.connect("mongodb+srv://tarik:" + process.env.MONGO_ATLAS_PW + "@cluster0.4zqbh.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => {
     console.log('connected to the DB');
@@ -76,6 +77,7 @@ const nightJobs = require('./routes/nightJobs')
 
 
 app.use(express.static(__dirname + '/images'));
+app.use("/devices",express.static(path.join("images/devices")));
 app.use(express.static(__dirname + '/pdf'));
 app.use(express.static(__dirname + '/videos'));
 

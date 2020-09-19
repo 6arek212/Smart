@@ -71,7 +71,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { RequestComponent } from './admin-components/dashboard/request/request.component';
 import { ReceiptFormComponent } from './admin-components/dashboard/receipt-form/receipt-form.component';
 import { CardDataComponent } from './card-data/card-data.component';
-import { CounterDirective } from './directives/counter.directive'
+import { CounterDirective } from './directives/counter.directive';
+import { DevicesManageComponent } from './admin-components/dashboard/info/devices-manage/devices-manage.component'
 
 
 @NgModule({
@@ -112,6 +113,7 @@ import { CounterDirective } from './directives/counter.directive'
     ReceiptFormComponent,
     CardDataComponent,
     CounterDirective,
+    DevicesManageComponent,
 
   ],
   imports: [

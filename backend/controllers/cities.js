@@ -4,9 +4,6 @@ const errorHandler = require('../utils/error')
 exports.getCities = (req, res, next) => {
 
   City.find().select('name').then(cities => {
-    if (!cities || cities.length == 0)
-      return errorHandler.errorMessage('No cities', 404, res)
-
     res.status(200).json({
       message: 'Cities fetched successfuly',
       cities
@@ -18,9 +15,6 @@ exports.getCities = (req, res, next) => {
 
 exports.getAdminCities = (req, res, next) => {
   City.find().then(cities => {
-    if (!cities)
-      return errorHandler.errorMessage('No cities', 404, res)
-
     res.status(200).json({
       message: 'Cities fetched successfuly',
       cities

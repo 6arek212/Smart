@@ -13,28 +13,23 @@ import { Subscription } from 'rxjs';
   providers: [DevicesService, CompaniesService, IssuesService, CitiesService]
 })
 export class InfoComponent implements OnInit {
-  minDate: Date;
-  maxDate: Date;
+
 
   cities
   private citiesSub: Subscription
   companies
   private companiesSub: Subscription
-  devices
-  private deviceSub: Subscription
+
   issues
   private issuesSub: Subscription
 
-  imagePreview: string
   isLoading = false
 
 
-  constructor(private cityService: CitiesService, private issueService: IssuesService, private comapnyService: CompaniesService,
-    private deviceService: DevicesService) { }
+  constructor(private cityService: CitiesService, private issueService: IssuesService, private comapnyService: CompaniesService) { }
 
   ngOnInit(): void {
-    this.maxDate = new Date();
-    this.minDate = new Date('2005')
+
 
     this.cityService.getCites()
     this.citiesSub = this.cityService.getCitiesListener().subscribe(cities => {
@@ -44,7 +39,6 @@ export class InfoComponent implements OnInit {
     this.comapnyService.getCompanies()
     this.companiesSub = this.comapnyService.getCompaniesListener().subscribe(companies => {
       this.companies = companies
-      this.devices = null
     })
 
     this.issueService.getIssues()
@@ -53,10 +47,7 @@ export class InfoComponent implements OnInit {
     })
 
 
-    this.deviceService.getDevices()
-    this.deviceSub = this.deviceService.getDevicesListener().subscribe(devices => {
-      this.devices = devices
-    })
+
   }
 
 
@@ -107,30 +98,14 @@ export class InfoComponent implements OnInit {
   }
 
 
-  onAddingDevice(form: NgForm) {
-    const { company, released, model } = form.value
-    this.deviceService.addDevice(model, released, company).subscribe(res => {
-      console.log(res);
-      this.deviceService.getDevices()
-    })
-  }
 
 
-  onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0]
 
-    const reader = new FileReader()
-    reader.onload = () => {
-      this.imagePreview = reader.result as string
-    }
-    reader.readAsDataURL(file)
-  }
 
 
   ngOnDestroy(): void {
     this.citiesSub?.unsubscribe()
     this.companiesSub?.unsubscribe()
-    this.deviceSub?.unsubscribe()
     this.issuesSub?.unsubscribe()
   }
 

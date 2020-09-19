@@ -18,17 +18,10 @@ exports.addIssue = (req, res, next) => {
 
 exports.getIssues = (req, res, next) => {
   Issue.find().select('name').then(issues => {
-
-    if (!issues || issues.length === 0)
-      return res.status(404).json({
-        message: 'No issues found'
-      })
-    else {
       res.status(200).json({
         message: 'Successfuly fetched issues',
         issues
       })
-    }
   }).catch(err => errorHandler.serverError(err, res))
 }
 

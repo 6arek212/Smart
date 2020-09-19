@@ -1,14 +1,13 @@
 const Device = require('../models/device')
 const errorHandler = require('../utils/error')
+const fs = require('fs')
+const path = require('path')
 
 exports.getDevices = (req, res, next) => {
   Device.find()
     .populate('company')
-    .sort({released:'desc'})
+    .sort({ released: 'desc' })
     .then(result => {
-      if (!result || result.length == 0)
-        errorHandler.errorMessage('No devices found', 404, res)
-
       res.status(201).json({
         message: 'Devices Fetched Successfuly',
         devices: result
@@ -24,7 +23,7 @@ exports.getDeviceByCompany = (req, res, next) => {
 
   Device.find({ company: companyId })
     .populate('company')
-    .sort({released:'desc'})
+    .sort({ released: 'desc' })
     .then(devices => {
       res.status(201).json({
         message: 'Device Fetched Successfuly',
@@ -37,12 +36,14 @@ exports.getDeviceByCompany = (req, res, next) => {
 
 }
 
-exports.addDevice = (req, res, next) => {
 
+
+exports.addDevice = (req, res, next) => {
   const device = new Device({
     model: req.body.model.toUpperCase(),
     company: req.body.company,
-    released: req.body.released
+    released: req.body.released,
+    image: req.file.filename
   })
 
 
@@ -53,6 +54,43 @@ exports.addDevice = (req, res, next) => {
         result
       })
     })
-    .catch(err => errorHandler.serverError(err,res))
+    .catch(err => errorHandler.serverError(err, res))
+
+}
+
+
+
+exports.updateDevice = (req, res, next) => {
+  const id = req.params.id
+  const device = {
+    model: req.body.model.toUpperCase(),
+    company: req.body.company,
+    released: req.body.released,
+  }
+
+  if (req.file) {
+    device.image = req.file.filename
+  }
+
+  console.log(device);
+
+  Device.findOneAndUpdate({ _id: id }, device)
+    .then(result => {
+      if (req.file) {
+        const p = path.join(__dirname,'../', 'images/', 'devices/')
+        console.log(p+result.image);
+        fs.unlink(p+result.image,(st)=>{
+          console.log('deleted file',st);
+        })
+      }
+
+      res.status(200).json({ message: 'updated successfully' })
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'error occured' })
+      console.log(err);
+    })
+
+
 
 }

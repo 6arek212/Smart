@@ -1,0 +1,31 @@
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem;
+}
+
+.image-preview img {
+  height: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin:1rem auto;
+}
+
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field{
+  text-align: start;
+
+}

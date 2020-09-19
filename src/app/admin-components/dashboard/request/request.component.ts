@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RequestComponent implements OnInit {
   @Input() request
-  url = environment.url
+  url = environment.url+'devices'
 
 
   constructor(private requestService: RequestsService, private dialog: MatDialog, private staticsService: StaticsService) {

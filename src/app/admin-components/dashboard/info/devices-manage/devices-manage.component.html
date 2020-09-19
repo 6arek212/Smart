@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>שם מכשיר</mat-label>
+    <input formControlName="model" matInput>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>בחר תאריך</mat-label>
+    <input formControlName="released" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>בחר</mat-label>
+    <mat-select formControlName="company">
+      <mat-option *ngFor="let company of companies" [value]="company._id">{{company.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+  <div>
+    <button mat-stroked-button type="button" (click)="filePicker.click()">בחר תמונה</button>
+    <input type="file" accept="image/x-png,image/gif,image/jpeg" #filePicker (change)="onImagePicked($event)">
+  </div>
+
+  <div class="image-preview" *ngIf="imagePreview!==''&& imagePreview ">
+    <img [src]="imagePreview">
+  </div>
+
+
+  <div class="action-buttons" *ngIf="!isLoading">
+    <button class="btn btn-success" type="button" (click)="onAddingDevice()">{{mode=='add'?'הוסף':'עדכן'}}</button>
+    <div class="spacer"></div>
+    <button class="btn btn-danger">מחק</button>
+  </div>
+
+  <div class="center-container" *ngIf="isLoading">
+    <div class="spinner-border text-success" role="status">
+      <span class="sr-only">טוען...</span>
+    </div>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>בחר</mat-label>
+    <mat-select formControlName="devices"  >
+      <mat-option *ngFor="let device of devices"  [value]="device">{{device.model}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button class="btn btn-primary" type="button" (click)="onUpdateMode()">עריכה</button>
+
+
+</form>
