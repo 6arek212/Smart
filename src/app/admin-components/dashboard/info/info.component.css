@@ -31,3 +31,18 @@
 .dashboard-card .card-content .action-buttons .btn-success{
   margin-left: 1rem;
 }
+
+
+input[type="file"]{
+  visibility: hidden;
+}
+
+
+.image-preview{
+  height: 5rem;
+  margin: 1rem;
+}
+
+.image-preview img{
+  height: 100%;
+}

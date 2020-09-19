@@ -42,7 +42,7 @@
 
 
   <div id="show-more" (click)="showMore(request._id)">
-    <a  >הצג מידע</a>
+    <a>הצג מידע</a>
     <img id="arrow" [class]="request._id" src="../../../../assets/img/down-arrow.png" alt="">
   </div>
 
@@ -95,7 +95,7 @@
   </div>
 
 
-  <div class="actions" *ngIf="request.status!='DONE'">
+  <div class="actions" *ngIf="request.status=='IN-PROGRESS'">
     <button class="btn btn-danger" (click)="onDeletingRequest(request)">מחק</button>
     <button class="btn btn-success" (click)="onUpdatingStatus(request)">לסיום בקשרה</button>
   </div>

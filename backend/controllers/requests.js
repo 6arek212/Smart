@@ -267,6 +267,10 @@ exports.updateRequest = async (req, res, next) => {
       if(request.status=='DONE'){
         return errorHandler.errorMessage('request is finished', 505, res)
       }
+
+      else if(request.status=='CANCEL'){
+        return errorHandler.errorMessage('request is canceled', 506, res)
+      }
     }
   }
 

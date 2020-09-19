@@ -25,6 +25,7 @@ export class InfoComponent implements OnInit {
   issues
   private issuesSub: Subscription
 
+  imagePreview: string
   isLoading = false
 
 
@@ -112,6 +113,17 @@ export class InfoComponent implements OnInit {
       console.log(res);
       this.deviceService.getDevices()
     })
+  }
+
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0]
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      this.imagePreview = reader.result as string
+    }
+    reader.readAsDataURL(file)
   }
 
 

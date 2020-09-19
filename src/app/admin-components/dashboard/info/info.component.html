@@ -142,7 +142,7 @@
           </div>
         </div>
 
-        <form #companyForm="ngForm" >
+        <form #companyForm="ngForm">
           <mat-form-field appearance="fill">
             <mat-label>שם חברה</mat-label>
             <input name="company" ngModel matInput>
@@ -197,7 +197,7 @@
           </div>
         </div>
 
-        <form #deviceForm="ngForm" (submit)="onAddingDevice(deviceForm)">
+        <form #deviceForm="ngForm">
           <mat-form-field appearance="fill">
             <mat-label>שם מכשיר</mat-label>
             <input name="model" ngModel matInput>
@@ -219,8 +219,20 @@
             </mat-select>
           </mat-form-field>
 
+
+
+          <div>
+            <button mat-stroked-button type="button" (click)="filePicker.click()">בחר תמונה</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
+          </div>
+
+          <div class="image-preview" *ngIf="imagePreview!==''&& imagePreview">
+            <img [src]="imagePreview">
+          </div>
+
+
           <div class="action-buttons">
-            <button class="btn btn-success">הוסף</button>
+            <button class="btn btn-success" (click)="onAddingDevice(deviceForm)">הוסף</button>
             <button class="btn btn-danger">מחק</button>
           </div>
 

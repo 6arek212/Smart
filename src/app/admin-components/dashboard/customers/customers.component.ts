@@ -46,16 +46,16 @@ export class CustomersComponent implements OnInit {
       this.page1 = this.currentPage
 
 
-        if (this.currentPage + 1 <= this.pagesNeeded)
-          this.page2 = this.currentPage + 1
-        else
-          this.page2 = null
+      if (this.currentPage + 1 <= this.pagesNeeded)
+        this.page2 = this.currentPage + 1
+      else
+        this.page2 = null
 
 
-        if (this.currentPage + 2 <= this.pagesNeeded)
-          this.page3 = this.currentPage + 2
-        else
-          this.page3 = null
+      if (this.currentPage + 2 <= this.pagesNeeded)
+        this.page3 = this.currentPage + 2
+      else
+        this.page3 = null
 
 
       this.isLoading = false
@@ -76,7 +76,8 @@ export class CustomersComponent implements OnInit {
   }
 
   calPagesNeeded() {
-    let pages = Math.round(this.totalCustomers / this.pageSize)
+    let pages = Math.ceil(this.totalCustomers / this.pageSize)
+
     this.pagesNeeded = pages
   }
 
