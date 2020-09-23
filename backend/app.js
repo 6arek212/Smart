@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const moment = require('moment');
 const geoip = require('geoip-lite');
 const fs = require('fs')
-const path=require('path')
+const path = require('path')
 
 const Request = require('./models/request')
 const Customer = require('./models/customer')
@@ -75,7 +75,7 @@ const nightJobs = require('./routes/nightJobs')
 
 
 app.use(express.static(__dirname + '/images'));
-app.use("/devices",express.static(path.join("images/devices")));
+app.use("/devices", express.static(path.join("images/devices")));
 app.use(express.static(__dirname + '/pdf'));
 app.use(express.static(__dirname + '/videos'));
 
@@ -126,8 +126,10 @@ app.get('/', (req, res, next) => {
     location: geo
   }).then(result => {
     NumOf.updateOne({ name: 'Visitors' }, { $inc: { 'value': 1 } }).exec()
-    const stram = fs.createReadStream(html + '/index.html')
-    stram.pipe(res)
+    const stream = fs.createReadStream(html + '/index.html')
+    stream
+      .pipe(res)
+      .on('end', res.end)
   })
     .catch(err => console.log(err))
 
@@ -135,8 +137,10 @@ app.get('/', (req, res, next) => {
 app.use(express.static(html));
 
 app.get('/*', (req, res, next) => {
-  const stram = fs.createReadStream(html + '/index.html')
-  stram.pipe(res)
+  const stream = fs.createReadStream(html + '/index.html')
+  stream
+    .pipe(res)
+    .on('end', res.end)
 })
 
 
